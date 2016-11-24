@@ -32,12 +32,12 @@
             this.panelJeu = new System.Windows.Forms.Panel();
             this.pictureBoxEntete = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.pictureBoxSon = new System.Windows.Forms.PictureBox();
             this.panelStatistique = new System.Windows.Forms.Panel();
             this.panelProchainBloc = new System.Windows.Forms.Panel();
             this.timerDescenteBloc = new System.Windows.Forms.Timer(this.components);
             this.boutonPersonnaliseOption = new ProjetTetrisSession1Tp3.BoutonPersonnalise();
             this.boutonPersonnaliseNouvellePartie = new ProjetTetrisSession1Tp3.BoutonPersonnalise();
-            this.pictureBoxSon = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEntete)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSon)).BeginInit();
@@ -51,6 +51,7 @@
             this.panelJeu.Name = "panelJeu";
             this.panelJeu.Size = new System.Drawing.Size(336, 616);
             this.panelJeu.TabIndex = 0;
+            this.panelJeu.Paint += new System.Windows.Forms.PaintEventHandler(this.panelJeu_Paint);
             // 
             // pictureBoxEntete
             // 
@@ -73,6 +74,15 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(199, 616);
             this.panel2.TabIndex = 2;
+            // 
+            // pictureBoxSon
+            // 
+            this.pictureBoxSon.BackColor = System.Drawing.Color.Silver;
+            this.pictureBoxSon.Location = new System.Drawing.Point(21, 579);
+            this.pictureBoxSon.Name = "pictureBoxSon";
+            this.pictureBoxSon.Size = new System.Drawing.Size(32, 32);
+            this.pictureBoxSon.TabIndex = 4;
+            this.pictureBoxSon.TabStop = false;
             // 
             // panelStatistique
             // 
@@ -118,15 +128,6 @@
             this.boutonPersonnaliseNouvellePartie.Text = "Nouvelle Partie";
             this.boutonPersonnaliseNouvellePartie.UseVisualStyleBackColor = false;
             // 
-            // pictureBoxSon
-            // 
-            this.pictureBoxSon.BackColor = System.Drawing.Color.Silver;
-            this.pictureBoxSon.Location = new System.Drawing.Point(21, 579);
-            this.pictureBoxSon.Name = "pictureBoxSon";
-            this.pictureBoxSon.Size = new System.Drawing.Size(32, 32);
-            this.pictureBoxSon.TabIndex = 4;
-            this.pictureBoxSon.TabStop = false;
-            // 
             // FormPrincipal
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -137,7 +138,7 @@
             this.DoubleBuffered = true;
             this.Name = "FormPrincipal";
             this.Text = "Tetris ";
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormPrincipal_KeyDown);
+            this.Load += new System.EventHandler(this.FormPrincipal_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEntete)).EndInit();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSon)).EndInit();
