@@ -36,6 +36,7 @@ namespace ProjetTetrisSession1Tp3
             BlocActifI = new int[4];
             BlocActifJ = new int[4];
         }
+        //Simon
         void DessinerJeu()
         {
             Graphics graphicsPanelJeu = panelJeu.CreateGraphics();
@@ -48,11 +49,12 @@ namespace ProjetTetrisSession1Tp3
             graphicsPanelJeu.Dispose();
             imageJeu.Dispose();
         }
+        //Simon
         private void timerDescenteBloc_Tick(object sender, EventArgs e)
         {
-            if (DeterminerSiLeBlocPeutDescendre())
+            if (DeterminerSiLeBlocPeutBouger(Deplacement.Down))
             {
-                DescendreBlocActif();
+                BougerBlocActif(Deplacement.Down);
             }
             else
             {
@@ -64,6 +66,7 @@ namespace ProjetTetrisSession1Tp3
             }
             DessinerJeu();
         }
+        //Simon
         protected override bool ProcessDialogKey(Keys keyData)
         {
             if (keyData == keysBougerADroite)
@@ -88,6 +91,7 @@ namespace ProjetTetrisSession1Tp3
             }
             return base.ProcessDialogKey(keyData);
         }
+        //Simon
         void DessinerFondJeu(Bitmap imageJeu)
         {
             Graphics graphicsImageJeu = Graphics.FromImage(imageJeu);
@@ -102,6 +106,7 @@ namespace ProjetTetrisSession1Tp3
             }
             graphicsImageJeu.Dispose();
         }
+        //Simon
         void DessinerLesBlocs(Bitmap imageJeu)
         {
             Graphics graphicsImageJeu = Graphics.FromImage(imageJeu);
@@ -272,38 +277,50 @@ namespace ProjetTetrisSession1Tp3
                     break;
             }
         }
+        //Simon
         TypeBloc ChoisirBlocAleatoirement()
         {
             return (TypeBloc)rnd.Next(2, (int)TypeBloc.Z + 1);
         }
-        bool DeterminerSiLeBlocPeutDescendre()
+        //Simon
+        bool DeterminerSiLeBlocPeutBouger(Deplacement direction)
         {
-            for(int i = 0; i < BlocActifI.Length; i++)
+            if(direction == Deplacement.Down)
             {
-                if(BlocActifI[i] + 1 >= tableauDeBlocs.GetLength(0) || tableauDeBlocs[BlocActifI[i] + 1, BlocActifJ[i]] == TypeBloc.Gelé)
+                for(int i = 0; i < BlocActifI.Length; i++)
                 {
-                    return false;
+                    if(BlocActifI[i] + 1 >= tableauDeBlocs.GetLength(0) || tableauDeBlocs[BlocActifI[i] + 1, BlocActifJ[i]] == TypeBloc.Gelé)
+                    {
+                        return false;
+                    }
                 }
             }
+            
             return true;
         }
-        void DescendreBlocActif()
+        //Simon
+        void BougerBlocActif(Deplacement direction)
         {
-            for(int i = 0; i < BlocActifI.Length;i++)
+            if(direction == Deplacement.Down)
             {
-                tableauDeBlocs[BlocActifI[i], BlocActifJ[i]] = TypeBloc.None;
-            }
-            for (int i = 0; i < BlocActifI.Length; i++)
-            {
-                BlocActifI[i]++;
-                tableauDeBlocs[BlocActifI[i], BlocActifJ[i]] = blocActif;
+                for(int i = 0; i < BlocActifI.Length;i++)
+                {
+                    tableauDeBlocs[BlocActifI[i], BlocActifJ[i]] = TypeBloc.None;
+                }
+                for (int i = 0; i < BlocActifI.Length; i++)
+                {
+                    BlocActifI[i]++;
+                    tableauDeBlocs[BlocActifI[i], BlocActifJ[i]] = blocActif;
+                }
             }
         }
+        //Simon
         void InitialiserJeu()
         {
             GenererBlocAleatoire();
             DessinerJeu();
         }
+        //Simon
         private void panelJeu_Paint(object sender, PaintEventArgs e)
         {
             InitialiserJeu();
