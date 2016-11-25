@@ -22,6 +22,9 @@ namespace ProjetTetrisSession1Tp3
         Keys keysTournerSensHoraire = Keys.Z;
         public int nbreLignes = 22;
         public int nbreColonnes = 12;
+        // 0: Gelé | 1: carré | 2: J | 3: L | 4: Ligne | 5: S | 6: T | 7: Z
+        public Bitmap[] imageBlocs = new Bitmap[] {Properties.Resources.Gele, Properties.Resources.carre, Properties.Resources.J, Properties.Resources.L,
+                                                   Properties.Resources.ligne, Properties.Resources.S, Properties.Resources.T, Properties.Resources.Z, };
         TypeBloc[,] tableauDeBlocs;
         int[] BlocActifI;
         int[] BlocActifJ;
@@ -117,28 +120,28 @@ namespace ProjetTetrisSession1Tp3
                     switch (tableauDeBlocs[i, j])
                     {
                         case TypeBloc.Carré:
-                            graphicsImageJeu.DrawImage(Properties.Resources.carre, grosseurDesBlocs * j, grosseurDesBlocs * i, grosseurDesBlocs, grosseurDesBlocs);
+                            graphicsImageJeu.DrawImage(imageBlocs[1], grosseurDesBlocs * j, grosseurDesBlocs * i, grosseurDesBlocs, grosseurDesBlocs);
                             break;
                         case TypeBloc.Gelé:
-                            graphicsImageJeu.DrawImage(Properties.Resources.Gele, grosseurDesBlocs * j, grosseurDesBlocs * i, grosseurDesBlocs, grosseurDesBlocs);
+                            graphicsImageJeu.DrawImage(imageBlocs[0], grosseurDesBlocs * j, grosseurDesBlocs * i, grosseurDesBlocs, grosseurDesBlocs);
                             break;
                         case TypeBloc.J:
-                            graphicsImageJeu.DrawImage(Properties.Resources.J, grosseurDesBlocs * j, grosseurDesBlocs * i, grosseurDesBlocs, grosseurDesBlocs);
+                            graphicsImageJeu.DrawImage(imageBlocs[2], grosseurDesBlocs * j, grosseurDesBlocs * i, grosseurDesBlocs, grosseurDesBlocs);
                             break;
                         case TypeBloc.L:
-                            graphicsImageJeu.DrawImage(Properties.Resources.L, grosseurDesBlocs * j, grosseurDesBlocs * i, grosseurDesBlocs, grosseurDesBlocs);
+                            graphicsImageJeu.DrawImage(imageBlocs[3], grosseurDesBlocs * j, grosseurDesBlocs * i, grosseurDesBlocs, grosseurDesBlocs);
                             break;
                         case TypeBloc.Ligne:
-                            graphicsImageJeu.DrawImage(Properties.Resources.ligne, grosseurDesBlocs * j, grosseurDesBlocs * i, grosseurDesBlocs, grosseurDesBlocs);
+                            graphicsImageJeu.DrawImage(imageBlocs[4], grosseurDesBlocs * j, grosseurDesBlocs * i, grosseurDesBlocs, grosseurDesBlocs);
                             break;
                         case TypeBloc.S:
-                            graphicsImageJeu.DrawImage(Properties.Resources.S, grosseurDesBlocs * j, grosseurDesBlocs * i, grosseurDesBlocs, grosseurDesBlocs);
+                            graphicsImageJeu.DrawImage(imageBlocs[5], grosseurDesBlocs * j, grosseurDesBlocs * i, grosseurDesBlocs, grosseurDesBlocs);
                             break;
                         case TypeBloc.T:
-                            graphicsImageJeu.DrawImage(Properties.Resources.T, grosseurDesBlocs * j, grosseurDesBlocs * i, grosseurDesBlocs, grosseurDesBlocs);
+                            graphicsImageJeu.DrawImage(imageBlocs[6], grosseurDesBlocs * j, grosseurDesBlocs * i, grosseurDesBlocs, grosseurDesBlocs);
                             break;
                         case TypeBloc.Z:
-                            graphicsImageJeu.DrawImage(Properties.Resources.Z, grosseurDesBlocs * j, grosseurDesBlocs * i, grosseurDesBlocs, grosseurDesBlocs);
+                            graphicsImageJeu.DrawImage(imageBlocs[7], grosseurDesBlocs * j, grosseurDesBlocs * i, grosseurDesBlocs, grosseurDesBlocs);
                             break;
                     }
                 }
