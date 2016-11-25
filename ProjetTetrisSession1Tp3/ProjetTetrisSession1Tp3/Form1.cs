@@ -69,9 +69,9 @@ namespace ProjetTetrisSession1Tp3
         //Simon
         protected override bool ProcessDialogKey(Keys keyData)
         {
-            if (keyData == keysBougerADroite)
+            if (keyData == keysBougerADroite && DeterminerSiLeBlocPeutBouger(Deplacement.Right))
             {
-                //Bouger à droite
+                BougerBlocActif(Deplacement.Right);
                 return true;
             }
             else if (keyData == keysBougerAGauche)
@@ -145,6 +145,7 @@ namespace ProjetTetrisSession1Tp3
             }
             graphicsImageJeu.Dispose();
         }
+        //Simon
         void GenererBlocAleatoire()
         {
             switch (ChoisirBlocAleatoirement())
@@ -295,6 +296,10 @@ namespace ProjetTetrisSession1Tp3
                     }
                 }
             }
+            else if(direction == Deplacement.Right)
+            {
+
+            }
             
             return true;
         }
@@ -312,6 +317,10 @@ namespace ProjetTetrisSession1Tp3
                     BlocActifI[i]++;
                     tableauDeBlocs[BlocActifI[i], BlocActifJ[i]] = blocActif;
                 }
+            }
+            else if(direction == Deplacement.Right)
+            {
+
             }
         }
         //Simon
