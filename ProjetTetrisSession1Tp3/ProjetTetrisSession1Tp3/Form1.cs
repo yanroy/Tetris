@@ -20,8 +20,8 @@ namespace ProjetTetrisSession1Tp3
         Keys keysBougerAGauche = Keys.Left;
         Keys keysTournerSensAntihoraire = Keys.X;
         Keys keysTournerSensHoraire = Keys.Z;
-        int nbreLignes = 22;
-        int nbreColonnes = 12;
+        public int nbreLignes = 22;
+        public int nbreColonnes = 12;
         TypeBloc[,] tableauDeBlocs;
         int[] BlocActifI;
         int[] BlocActifJ;
@@ -307,6 +307,11 @@ namespace ProjetTetrisSession1Tp3
         private void panelJeu_Paint(object sender, PaintEventArgs e)
         {
             InitialiserJeu();
+        }
+
+        private void boutonPersonnaliseOption_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

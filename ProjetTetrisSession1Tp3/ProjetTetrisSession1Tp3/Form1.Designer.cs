@@ -35,9 +35,9 @@
             this.pictureBoxSon = new System.Windows.Forms.PictureBox();
             this.panelStatistique = new System.Windows.Forms.Panel();
             this.panelProchainBloc = new System.Windows.Forms.Panel();
-            this.timerDescenteBloc = new System.Windows.Forms.Timer(this.components);
             this.boutonPersonnaliseOption = new ProjetTetrisSession1Tp3.BoutonPersonnalise();
             this.boutonPersonnaliseNouvellePartie = new ProjetTetrisSession1Tp3.BoutonPersonnalise();
+            this.timerDescenteBloc = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEntete)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSon)).BeginInit();
@@ -101,11 +101,6 @@
             this.panelProchainBloc.Size = new System.Drawing.Size(112, 112);
             this.panelProchainBloc.TabIndex = 2;
             // 
-            // timerDescenteBloc
-            // 
-            this.timerDescenteBloc.Enabled = true;
-            this.timerDescenteBloc.Tick += new System.EventHandler(this.timerDescenteBloc_Tick);
-            // 
             // boutonPersonnaliseOption
             // 
             this.boutonPersonnaliseOption.BackColor = System.Drawing.Color.ForestGreen;
@@ -116,6 +111,7 @@
             this.boutonPersonnaliseOption.TabIndex = 1;
             this.boutonPersonnaliseOption.Text = "Option";
             this.boutonPersonnaliseOption.UseVisualStyleBackColor = false;
+            this.boutonPersonnaliseOption.Click += new System.EventHandler(this.boutonPersonnaliseOption_Click);
             // 
             // boutonPersonnaliseNouvellePartie
             // 
@@ -127,6 +123,11 @@
             this.boutonPersonnaliseNouvellePartie.TabIndex = 0;
             this.boutonPersonnaliseNouvellePartie.Text = "Nouvelle Partie";
             this.boutonPersonnaliseNouvellePartie.UseVisualStyleBackColor = false;
+            // 
+            // timerDescenteBloc
+            // 
+            this.timerDescenteBloc.Enabled = true;
+            this.timerDescenteBloc.Tick += new System.EventHandler(this.timerDescenteBloc_Tick);
             // 
             // FormPrincipal
             // 
