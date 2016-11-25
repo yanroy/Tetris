@@ -74,9 +74,9 @@ namespace ProjetTetrisSession1Tp3
                 BougerBlocActif(Deplacement.Right);
                 return true;
             }
-            else if (keyData == keysBougerAGauche)
+            else if (keyData == keysBougerAGauche && DeterminerSiLeBlocPeutBouger(Deplacement.Left))
             {
-                //Bouger à gauche
+                BougerBlocActif(Deplacement.Left);
                 return true;
             }
             else if (keyData == keysTournerSensAntihoraire)
@@ -298,9 +298,24 @@ namespace ProjetTetrisSession1Tp3
             }
             else if(direction == Deplacement.Right)
             {
-
+                for(int i = 0; i < BlocActifJ.Length; i++)
+                {
+                    if (BlocActifJ[i] + 1 >= tableauDeBlocs.GetLength(1) || tableauDeBlocs[BlocActifI[i], BlocActifJ[i] + 1] == TypeBloc.Gelé)
+                    {
+                        return false;
+                    }
+                }
             }
-            
+            else if (direction == Deplacement.Left)
+            {
+                for (int i = 0; i < BlocActifJ.Length; i++)
+                {
+                    if (BlocActifJ[i] - 1 < 0 || tableauDeBlocs[BlocActifI[i], BlocActifJ[i] - 1] == TypeBloc.Gelé)
+                    {
+                        return false;
+                    }
+                }
+            }
             return true;
         }
         //Simon
@@ -320,7 +335,27 @@ namespace ProjetTetrisSession1Tp3
             }
             else if(direction == Deplacement.Right)
             {
-
+                for (int i = 0; i < BlocActifI.Length; i++)
+                {
+                    tableauDeBlocs[BlocActifI[i], BlocActifJ[i]] = TypeBloc.None;
+                }
+                for (int i = 0; i < BlocActifI.Length; i++)
+                {
+                    BlocActifJ[i]++;
+                    tableauDeBlocs[BlocActifI[i], BlocActifJ[i]] = blocActif;
+                }
+            }
+            else if (direction == Deplacement.Left)
+            {
+                for (int i = 0; i < BlocActifI.Length; i++)
+                {
+                    tableauDeBlocs[BlocActifI[i], BlocActifJ[i]] = TypeBloc.None;
+                }
+                for (int i = 0; i < BlocActifI.Length; i++)
+                {
+                    BlocActifJ[i]--;
+                    tableauDeBlocs[BlocActifI[i], BlocActifJ[i]] = blocActif;
+                }
             }
         }
         //Simon
