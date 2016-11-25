@@ -330,5 +330,12 @@ namespace ProjetTetrisSession1Tp3
         {
 
         }
+
+        // Yannick
+        bool DetectionDeFinDePartie()
+        {
+            bool partieEstFinnie = false;
+            return partieEstFinnie;
+        } 
     }
 }
