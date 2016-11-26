@@ -32,15 +32,12 @@
             this.panelJeu = new System.Windows.Forms.Panel();
             this.pictureBoxEntete = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.pictureBoxSon = new System.Windows.Forms.PictureBox();
-            this.panelStatistique = new System.Windows.Forms.Panel();
             this.panelProchainBloc = new System.Windows.Forms.Panel();
             this.boutonPersonnaliseOption = new ProjetTetrisSession1Tp3.BoutonPersonnalise();
             this.boutonPersonnaliseNouvellePartie = new ProjetTetrisSession1Tp3.BoutonPersonnalise();
             this.timerDescenteBloc = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEntete)).BeginInit();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSon)).BeginInit();
             this.SuspendLayout();
             // 
             // panelJeu
@@ -51,7 +48,6 @@
             this.panelJeu.Name = "panelJeu";
             this.panelJeu.Size = new System.Drawing.Size(336, 616);
             this.panelJeu.TabIndex = 0;
-            this.panelJeu.Paint += new System.Windows.Forms.PaintEventHandler(this.panelJeu_Paint);
             // 
             // pictureBoxEntete
             // 
@@ -65,8 +61,6 @@
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.pictureBoxSon);
-            this.panel2.Controls.Add(this.panelStatistique);
             this.panel2.Controls.Add(this.panelProchainBloc);
             this.panel2.Controls.Add(this.boutonPersonnaliseOption);
             this.panel2.Controls.Add(this.boutonPersonnaliseNouvellePartie);
@@ -74,23 +68,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(199, 616);
             this.panel2.TabIndex = 2;
-            // 
-            // pictureBoxSon
-            // 
-            this.pictureBoxSon.BackColor = System.Drawing.Color.Silver;
-            this.pictureBoxSon.Location = new System.Drawing.Point(21, 579);
-            this.pictureBoxSon.Name = "pictureBoxSon";
-            this.pictureBoxSon.Size = new System.Drawing.Size(32, 32);
-            this.pictureBoxSon.TabIndex = 4;
-            this.pictureBoxSon.TabStop = false;
-            // 
-            // panelStatistique
-            // 
-            this.panelStatistique.BackColor = System.Drawing.Color.DarkGoldenrod;
-            this.panelStatistique.Location = new System.Drawing.Point(21, 398);
-            this.panelStatistique.Name = "panelStatistique";
-            this.panelStatistique.Size = new System.Drawing.Size(150, 175);
-            this.panelStatistique.TabIndex = 3;
             // 
             // panelProchainBloc
             // 
@@ -142,7 +119,6 @@
             this.Load += new System.EventHandler(this.FormPrincipal_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEntete)).EndInit();
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSon)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -153,11 +129,9 @@
         private System.Windows.Forms.PictureBox pictureBoxEntete;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panelProchainBloc;
-        private System.Windows.Forms.Panel panelStatistique;
         private System.Windows.Forms.Timer timerDescenteBloc;
         private BoutonPersonnalise boutonPersonnaliseOption;
         private BoutonPersonnalise boutonPersonnaliseNouvellePartie;
-        private System.Windows.Forms.PictureBox pictureBoxSon;
     }
 }
 
