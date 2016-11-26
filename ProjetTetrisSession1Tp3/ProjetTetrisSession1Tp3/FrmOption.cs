@@ -34,8 +34,8 @@ namespace ProjetTetrisSession1Tp3
             get
             {
                 Bitmap[] imageBlocs = new Bitmap[] { (Bitmap)pictureBoxBlocGele.BackgroundImage, (Bitmap)pictureBoxBlocCarre.BackgroundImage,
-                    (Bitmap)pictureBoxBlocJ.BackgroundImage, (Bitmap)pictureBoxBlocL.BackgroundImage, (Bitmap)pictureBoxBlocLigne.BackgroundImage,
-                    (Bitmap)pictureBoxBlocS.BackgroundImage, (Bitmap)pictureBoxBlocT.BackgroundImage, (Bitmap)pictureBoxBlocZ.BackgroundImage, };
+                    (Bitmap)pictureBoxBlocLigne.BackgroundImage, (Bitmap)pictureBoxBlocT.BackgroundImage, (Bitmap)pictureBoxBlocL.BackgroundImage,
+                    (Bitmap)pictureBoxBlocJ.BackgroundImage, (Bitmap)pictureBoxBlocS.BackgroundImage, (Bitmap)pictureBoxBlocZ.BackgroundImage, };
                 return imageBlocs;
             }
         }
