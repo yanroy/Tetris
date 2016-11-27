@@ -66,11 +66,45 @@ namespace ProjetTetrisSession1Tp3
                 {
                     tableauDeBlocs[blocActifI[i], blocActifJ[i]] = TypeBloc.Gelé;
                 }
+                EnleverLignesCompletes();
                 TransformerProchainBlocEnActif();
                 GenererBlocAleatoire();
             }
             DessinerJeu();
             DessinerProchainBloc();
+        }
+
+        void EnleverLignesCompletes()
+        {
+            for(int i = 0; i < tableauDeBlocs.GetLength(0);i++)
+            {
+                if (EstUneLigneComplete(i))
+                {
+                    DecalerLignes(i);
+                }
+            }
+        }
+        bool EstUneLigneComplete(int ligne)
+        {
+            int compteurBlocsGeles = 0;
+            for(int j = 0; j < tableauDeBlocs.GetLength(1);j++)
+            {
+                if(tableauDeBlocs[ligne,j] == TypeBloc.Gelé)
+                {
+                    compteurBlocsGeles++;
+                }
+            }
+            return compteurBlocsGeles == tableauDeBlocs.GetLength(1) ? true : false;
+        }
+        void DecalerLignes(int ligneDeDepart)
+        {
+            for(int i = ligneDeDepart; i > 1;i--)
+            {
+                for(int j = 0; j < tableauDeBlocs.GetLength(1); j++)
+                {
+                    tableauDeBlocs[i, j] = tableauDeBlocs[i - 1, j];
+                }
+            }
         }
         //Simon
         protected override bool ProcessDialogKey(Keys keyData)
@@ -421,14 +455,13 @@ namespace ProjetTetrisSession1Tp3
         {
             ConfigurerJeu();
         }
-
         // Yannick
         bool DetectionDeFinDePartie()
         {
             bool partieEstFinnie = false;
             return partieEstFinnie;
         }
-
+        //Simon
         private void boutonPersonnaliseNouvellePartie_Click(object sender, EventArgs e)
         {
             if(MessageBox.Show("Toute partie en cours sera perdu, voulez-vous vraiment faire une nouvelle partie?","Nouvelle partie",MessageBoxButtons.YesNo,MessageBoxIcon.Exclamation) == DialogResult.Yes)
