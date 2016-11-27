@@ -54,9 +54,6 @@ namespace ProjetTetrisSession1Tp3
             textBoxMusiqueNomFichier.Text = openFileDialogMusique.FileName;
         }
 
-        private void buttonOk_Click(object sender, EventArgs e)
-        {
-        }
 
         private void pictureBoxBlocGele_Click(object sender, EventArgs e)
         {
@@ -132,7 +129,10 @@ namespace ProjetTetrisSession1Tp3
 
         private void pictureBoxCouleurFond2_Click(object sender, EventArgs e)
         {
-
+            if (colorDialogCouleurFond.ShowDialog() == DialogResult.OK)
+            {
+                pictureBoxCouleurFond2.BackColor = colorDialogCouleurFond.Color;
+            }
         }
     }
 }

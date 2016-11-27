@@ -32,26 +32,24 @@ namespace ProjetTetrisSession1Tp3
         int[] blocActifJProchain;
         TypeBloc blocActif = TypeBloc.None;
         TypeBloc blocActifProchain = TypeBloc.None;
+        bool jeuSurPause = false;
+        Bitmap imageJeu;
+        string pauseText = "Pause";
         public FormPrincipal()
         {
             InitializeComponent();
-        }
-        private void FormPrincipal_Load(object sender, EventArgs e)
-        {
-            InitialiserJeu();
         }
         //Simon
         void DessinerJeu()
         {
             Graphics graphicsPanelJeu = panelJeu.CreateGraphics();
-            Bitmap imageJeu = new Bitmap(panelJeu.Size.Width, panelJeu.Size.Height);
+            imageJeu = new Bitmap(panelJeu.Size.Width, panelJeu.Size.Height);
             //Faire le dessinage du jeu ici-----------
-            DessinerFondJeu(imageJeu);
-            DessinerLesBlocs(imageJeu);
+            DessinerFondJeu();
+            DessinerLesBlocs();
             //-----------------------------------------
             graphicsPanelJeu.DrawImage(imageJeu, 0, 0);
             graphicsPanelJeu.Dispose();
-            imageJeu.Dispose();
         }
         //Simon
         private void timerDescenteBloc_Tick(object sender, EventArgs e)
@@ -73,7 +71,7 @@ namespace ProjetTetrisSession1Tp3
             DessinerJeu();
             DessinerProchainBloc();
         }
-
+        //Simon
         void EnleverLignesCompletes()
         {
             for(int i = 0; i < tableauDeBlocs.GetLength(0);i++)
@@ -84,6 +82,7 @@ namespace ProjetTetrisSession1Tp3
                 }
             }
         }
+        //Simon
         bool EstUneLigneComplete(int ligne)
         {
             int compteurBlocsGeles = 0;
@@ -96,6 +95,7 @@ namespace ProjetTetrisSession1Tp3
             }
             return compteurBlocsGeles == tableauDeBlocs.GetLength(1) ? true : false;
         }
+        //Simon
         void DecalerLignes(int ligneDeDepart)
         {
             for(int i = ligneDeDepart; i > 1;i--)
@@ -109,7 +109,11 @@ namespace ProjetTetrisSession1Tp3
         //Simon
         protected override bool ProcessDialogKey(Keys keyData)
         {
-            if (keyData == keysBougerADroite && DeterminerSiLeBlocPeutBouger(Deplacement.Right))
+            if(jeuSurPause)
+            {
+                return false;
+            }
+            else if (keyData == keysBougerADroite && DeterminerSiLeBlocPeutBouger(Deplacement.Right))
             {
                 BougerBlocActif(Deplacement.Right);
                 DessinerJeu();
@@ -134,7 +138,7 @@ namespace ProjetTetrisSession1Tp3
             return base.ProcessDialogKey(keyData);
         }
         //Simon
-        void DessinerFondJeu(Bitmap imageJeu)
+        void DessinerFondJeu()
         {
             Graphics graphicsImageJeu = Graphics.FromImage(imageJeu);
             SolidBrush solidBrushUtilise = couleur1JeuArrierePlan;
@@ -156,7 +160,7 @@ namespace ProjetTetrisSession1Tp3
             graphicsImageJeu.Dispose();
         }
         //Simon
-        void DessinerLesBlocs(Bitmap imageJeu)
+        void DessinerLesBlocs()
         {
             Graphics graphicsImageJeu = Graphics.FromImage(imageJeu);
             for (int i = 0; i < nbreLignes; i++)
@@ -395,6 +399,7 @@ namespace ProjetTetrisSession1Tp3
         //Simon
         void InitialiserJeu()
         {
+            imageJeu = new Bitmap(panelJeu.Size.Width, panelJeu.Size.Height);
             tableauDeBlocs = new TypeBloc[nbreLignes, nbreColonnes];
             blocActifI = new int[4];
             blocActifJ = new int[4];
@@ -433,6 +438,7 @@ namespace ProjetTetrisSession1Tp3
                 fmrOption.couleur2JeuArrierePlan = couleur2JeuArrierePlan;
                 fmrOption.vitesse = timerDescenteBloc.Interval;
             }
+            ReprendreLeJeu();
         }
         //Simon
         void DessinerProchainBloc()
@@ -451,9 +457,28 @@ namespace ProjetTetrisSession1Tp3
             graphicsProchainBlocImage.Dispose();
         }
         //Simon
+        void PauserLeJeu()
+        {
+            jeuSurPause = true;
+            timerDescenteBloc.Enabled = false;
+            Brush brush = new SolidBrush(Color.FromArgb(200,Color.Black));
+            Graphics graphicsPauseJeu = panelJeu.CreateGraphics();
+            graphicsPauseJeu.FillRectangle(brush, ClientRectangle);
+            graphicsPauseJeu.DrawString(pauseText, labelTitre.Font,new SolidBrush(Color.White), panelJeu.Width/2 - graphicsPauseJeu.MeasureString(pauseText, labelTitre.Font).Width/2, 100);
+            graphicsPauseJeu.Dispose();
+        }
+        //Simon
+        void ReprendreLeJeu()
+        {
+            jeuSurPause = false;
+            timerDescenteBloc.Enabled = true;
+        }
+        //Simon
         private void boutonPersonnaliseOption_Click(object sender, EventArgs e)
         {
+            PauserLeJeu();
             ConfigurerJeu();
+            DessinerJeu();
         }
         // Yannick
         bool DetectionDeFinDePartie()
@@ -464,10 +489,34 @@ namespace ProjetTetrisSession1Tp3
         //Simon
         private void boutonPersonnaliseNouvellePartie_Click(object sender, EventArgs e)
         {
-            if(MessageBox.Show("Toute partie en cours sera perdu, voulez-vous vraiment faire une nouvelle partie?","Nouvelle partie",MessageBoxButtons.YesNo,MessageBoxIcon.Exclamation) == DialogResult.Yes)
+            PauserLeJeu();
+            if (MessageBox.Show("Toute partie en cours sera perdu, voulez-vous vraiment faire une nouvelle partie?","Nouvelle partie",MessageBoxButtons.YesNo,MessageBoxIcon.Exclamation) == DialogResult.Yes)
             {
                 InitialiserJeu();
             }
+            ReprendreLeJeu();
+            DessinerJeu();
+        }
+        //Simon
+        private void panelJeu_Paint(object sender, PaintEventArgs e)
+        {
+            InitialiserJeu();
+        }
+        //Simon
+        private void panelProchainBloc_Paint(object sender, PaintEventArgs e)
+        {
+            DessinerProchainBloc();
+        }
+        //Simon
+        private void boutonPersonnaliseQuitter_Click(object sender, EventArgs e)
+        {
+            PauserLeJeu();
+            if(MessageBox.Show("Aucune donnée sera préservée, voulez-vous vraiment quitter le jeu.", "Quitter le jeu",MessageBoxButtons.OKCancel,MessageBoxIcon.Exclamation) == DialogResult.OK)
+            {
+                Application.Exit();
+            }
+            DessinerJeu();
+            ReprendreLeJeu();
         }
     }
 }
