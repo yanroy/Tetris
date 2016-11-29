@@ -301,20 +301,12 @@ namespace ProjetTetrisSession1Tp3
         {
             blocActif = blocActifProchain;
 
-            blocActifI[0] = blocActifIProchain[0];
-            blocActifI[1] = blocActifIProchain[1];
-            blocActifI[2] = blocActifIProchain[2];
-            blocActifI[3] = blocActifIProchain[3];
-
-            blocActifJ[0] = blocActifJProchain[0];
-            blocActifJ[1] = blocActifJProchain[1];
-            blocActifJ[2] = blocActifJProchain[2];
-            blocActifJ[3] = blocActifJProchain[3];
-
-            tableauDeBlocs[blocActifI[0], blocActifJ[0]] = blocActif;
-            tableauDeBlocs[blocActifI[1], blocActifJ[1]] = blocActif;
-            tableauDeBlocs[blocActifI[2], blocActifJ[2]] = blocActif;
-            tableauDeBlocs[blocActifI[3], blocActifJ[3]] = blocActif;
+            for(int i =0; i < blocActifI.Length;i++)
+            {
+                blocActifI[i] = blocActifIProchain[i];
+                blocActifJ[i] = blocActifJProchain[i];
+                tableauDeBlocs[blocActifI[i], blocActifJ[i]] = blocActif;
+            }
         }
         //Simon
         TypeBloc ChoisirBlocAleatoirement()

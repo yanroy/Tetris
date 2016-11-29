@@ -33,15 +33,18 @@
             this.panelConteneurPanelJeu = new System.Windows.Forms.Panel();
             this.panelJeu = new System.Windows.Forms.Panel();
             this.panelMenu = new System.Windows.Forms.Panel();
+            this.panelConteneurProchain = new System.Windows.Forms.Panel();
+            this.labelProchain = new System.Windows.Forms.Label();
             this.panelProchainBloc = new System.Windows.Forms.Panel();
-            this.pictureBoxEntete = new System.Windows.Forms.PictureBox();
-            this.labelTitre = new System.Windows.Forms.Label();
             this.panelStatistique = new System.Windows.Forms.Panel();
             this.boutonPersonnaliseQuitter = new ProjetTetrisSession1Tp3.BoutonPersonnalise();
             this.boutonPersonnaliseOption = new ProjetTetrisSession1Tp3.BoutonPersonnalise();
             this.boutonPersonnaliseNouvellePartie = new ProjetTetrisSession1Tp3.BoutonPersonnalise();
+            this.pictureBoxEntete = new System.Windows.Forms.PictureBox();
+            this.labelTitre = new System.Windows.Forms.Label();
             this.panelConteneurPanelJeu.SuspendLayout();
             this.panelMenu.SuspendLayout();
+            this.panelConteneurProchain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEntete)).BeginInit();
             this.SuspendLayout();
             // 
@@ -75,9 +78,9 @@
             this.panelMenu.BackColor = System.Drawing.Color.Transparent;
             this.panelMenu.BackgroundImage = global::ProjetTetrisSession1Tp3.Properties.Resources.ImageDeFond;
             this.panelMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panelMenu.Controls.Add(this.panelConteneurProchain);
             this.panelMenu.Controls.Add(this.panelStatistique);
             this.panelMenu.Controls.Add(this.boutonPersonnaliseQuitter);
-            this.panelMenu.Controls.Add(this.panelProchainBloc);
             this.panelMenu.Controls.Add(this.boutonPersonnaliseOption);
             this.panelMenu.Controls.Add(this.boutonPersonnaliseNouvellePartie);
             this.panelMenu.Location = new System.Drawing.Point(15, 131);
@@ -85,38 +88,33 @@
             this.panelMenu.Size = new System.Drawing.Size(199, 616);
             this.panelMenu.TabIndex = 2;
             // 
+            // panelConteneurProchain
+            // 
+            this.panelConteneurProchain.Controls.Add(this.labelProchain);
+            this.panelConteneurProchain.Controls.Add(this.panelProchainBloc);
+            this.panelConteneurProchain.Location = new System.Drawing.Point(40, 132);
+            this.panelConteneurProchain.Name = "panelConteneurProchain";
+            this.panelConteneurProchain.Size = new System.Drawing.Size(112, 86);
+            this.panelConteneurProchain.TabIndex = 6;
+            // 
+            // labelProchain
+            // 
+            this.labelProchain.Font = new System.Drawing.Font("Perpetua Titling MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelProchain.Location = new System.Drawing.Point(0, 0);
+            this.labelProchain.Name = "labelProchain";
+            this.labelProchain.Size = new System.Drawing.Size(112, 30);
+            this.labelProchain.TabIndex = 3;
+            this.labelProchain.Text = "Prochain";
+            this.labelProchain.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // panelProchainBloc
             // 
             this.panelProchainBloc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(51)))), ((int)(((byte)(159)))));
-            this.panelProchainBloc.Location = new System.Drawing.Point(40, 132);
+            this.panelProchainBloc.Location = new System.Drawing.Point(0, 30);
             this.panelProchainBloc.Name = "panelProchainBloc";
             this.panelProchainBloc.Size = new System.Drawing.Size(112, 56);
             this.panelProchainBloc.TabIndex = 2;
             this.panelProchainBloc.Paint += new System.Windows.Forms.PaintEventHandler(this.panelProchainBloc_Paint);
-            // 
-            // pictureBoxEntete
-            // 
-            this.pictureBoxEntete.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBoxEntete.BackgroundImage = global::ProjetTetrisSession1Tp3.Properties.Resources.ImageDeFondEnTete;
-            this.pictureBoxEntete.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBoxEntete.Location = new System.Drawing.Point(15, 3);
-            this.pictureBoxEntete.Name = "pictureBoxEntete";
-            this.pictureBoxEntete.Size = new System.Drawing.Size(607, 119);
-            this.pictureBoxEntete.TabIndex = 1;
-            this.pictureBoxEntete.TabStop = false;
-            // 
-            // labelTitre
-            // 
-            this.labelTitre.AutoSize = true;
-            this.labelTitre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(51)))), ((int)(((byte)(159)))));
-            this.labelTitre.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelTitre.Font = new System.Drawing.Font("Perpetua Titling MT", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTitre.Location = new System.Drawing.Point(30, 32);
-            this.labelTitre.Name = "labelTitre";
-            this.labelTitre.Size = new System.Drawing.Size(577, 58);
-            this.labelTitre.TabIndex = 4;
-            this.labelTitre.Text = "TETRIS SIM AND YAN";
-            this.labelTitre.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panelStatistique
             // 
@@ -176,6 +174,30 @@
             this.boutonPersonnaliseNouvellePartie.UseVisualStyleBackColor = false;
             this.boutonPersonnaliseNouvellePartie.Click += new System.EventHandler(this.boutonPersonnaliseNouvellePartie_Click);
             // 
+            // pictureBoxEntete
+            // 
+            this.pictureBoxEntete.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBoxEntete.BackgroundImage = global::ProjetTetrisSession1Tp3.Properties.Resources.ImageDeFondEnTete;
+            this.pictureBoxEntete.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBoxEntete.Location = new System.Drawing.Point(15, 3);
+            this.pictureBoxEntete.Name = "pictureBoxEntete";
+            this.pictureBoxEntete.Size = new System.Drawing.Size(607, 119);
+            this.pictureBoxEntete.TabIndex = 1;
+            this.pictureBoxEntete.TabStop = false;
+            // 
+            // labelTitre
+            // 
+            this.labelTitre.AutoSize = true;
+            this.labelTitre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(51)))), ((int)(((byte)(159)))));
+            this.labelTitre.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelTitre.Font = new System.Drawing.Font("Perpetua Titling MT", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTitre.Location = new System.Drawing.Point(30, 32);
+            this.labelTitre.Name = "labelTitre";
+            this.labelTitre.Size = new System.Drawing.Size(577, 58);
+            this.labelTitre.TabIndex = 4;
+            this.labelTitre.Text = "TETRIS SIM AND YAN";
+            this.labelTitre.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // FormPrincipal
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -190,6 +212,7 @@
             this.Text = "Tetris ";
             this.panelConteneurPanelJeu.ResumeLayout(false);
             this.panelMenu.ResumeLayout(false);
+            this.panelConteneurProchain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEntete)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -209,6 +232,8 @@
         private System.Windows.Forms.Label labelTitre;
         private BoutonPersonnalise boutonPersonnaliseQuitter;
         private System.Windows.Forms.Panel panelStatistique;
+        private System.Windows.Forms.Panel panelConteneurProchain;
+        private System.Windows.Forms.Label labelProchain;
     }
 }
 
