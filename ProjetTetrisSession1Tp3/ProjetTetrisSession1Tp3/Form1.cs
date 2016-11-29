@@ -521,10 +521,14 @@ namespace ProjetTetrisSession1Tp3
             Bitmap reserveBlocImage = new Bitmap(panelBlocReserve.Size.Width, panelBlocReserve.Size.Height);
             Graphics graphicsReserveBlocImage = Graphics.FromImage(reserveBlocImage);
             graphicsReserveBlocImage.FillRectangle(new SolidBrush(panelBlocReserve.BackColor), 0, 0, panelBlocReserve.Width, panelBlocReserve.Height);
-            for (int i = 0; i < blocActifIReserve.Length; i++)
+            if(blocActifReserve != TypeBloc.None)
             {
-                graphicsReserveBlocImage.DrawImage(imageBlocs[(int)blocActifReserve - 1], grosseurDesBlocs * blocActifJReserve[i], grosseurDesBlocs * blocActifIReserve[i], grosseurDesBlocs, grosseurDesBlocs);
+                for (int i = 0; i < blocActifIReserve.Length; i++)
+                {
+                    graphicsReserveBlocImage.DrawImage(imageBlocs[(int)blocActifReserve - 1], grosseurDesBlocs * blocActifJReserve[i], grosseurDesBlocs * blocActifIReserve[i], grosseurDesBlocs, grosseurDesBlocs);
+                }
             }
+           
             graphicsReserveBloc.DrawImage(reserveBlocImage, 0, 0);
             graphicsReserveBloc.Dispose();
             reserveBlocImage.Dispose();
