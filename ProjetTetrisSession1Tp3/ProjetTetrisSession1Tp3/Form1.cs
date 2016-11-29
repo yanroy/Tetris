@@ -25,6 +25,7 @@ namespace ProjetTetrisSession1Tp3
         Keys keysBougerAGauche = Keys.Left;
         Keys keysTournerSensAntihoraire = Keys.X;
         Keys keysTournerSensHoraire = Keys.Z;
+        Keys keysMettreEnReserve = Keys.C;
         int nbreLignes = 22;
         int nbreColonnes = 12;
         Bitmap[] imageBlocs = new Bitmap[] {Properties.Resources.Gele, Properties.Resources.carre, Properties.Resources.ligne, Properties.Resources.T,
@@ -34,11 +35,15 @@ namespace ProjetTetrisSession1Tp3
         int[] blocActifJEnJeu;
         int[] blocActifIProchain;
         int[] blocActifJProchain;
+        int[] blocActifIReserve;
+        int[] blocActifJReserve;
         TypeBloc blocActifEnJeu = TypeBloc.None;
         TypeBloc blocActifProchain = TypeBloc.None;
+        TypeBloc blocActifReserve = TypeBloc.None;
         bool jeuSurPause = false;
         Bitmap imageJeu;
         string pauseText = "Pause";
+        bool blocDejaMisEnReserve = false;
         public FormPrincipal()
         {
             InitializeComponent();
@@ -79,9 +84,11 @@ namespace ProjetTetrisSession1Tp3
                     timerDescenteBloc.Stop();                    
                     FaireFinDePartie();
                 }           
+                blocDejaMisEnReserve = false;
             }
             DessinerJeu();
             DessinerProchainBloc();
+            DessinerBlocEnReserve();
         }
 
         // Yannick
@@ -167,6 +174,11 @@ namespace ProjetTetrisSession1Tp3
                 // Yannick
                 BougerBlocActif(Deplacement.Horraire);
                 DessinerJeu();
+                return true;
+            }
+            else if(keyData == keysMettreEnReserve)
+            {
+                MettreBlocActifEnReserve();
                 return true;
             }
             return base.ProcessDialogKey(keyData);
@@ -449,6 +461,8 @@ namespace ProjetTetrisSession1Tp3
             blocActifJEnJeu = new int[4];
             blocActifIProchain = new int[4];
             blocActifJProchain = new int[4];
+            blocActifIReserve = new int[4];
+            blocActifJReserve = new int[4];
             blocActifProchain = GenererBloc(ChoisirBlocAleatoirement(), blocActifIProchain, blocActifJProchain);
             TransformerProchainBlocEnActif();
             blocActifProchain = GenererBloc(ChoisirBlocAleatoirement(), blocActifIProchain, blocActifJProchain);
@@ -499,6 +513,22 @@ namespace ProjetTetrisSession1Tp3
             graphicsProchainBloc.Dispose();
             prochainBlocImage.Dispose();
             graphicsProchainBlocImage.Dispose();
+        }
+        //Simon
+        void DessinerBlocEnReserve()
+        {
+            Graphics graphicsReserveBloc = panelBlocReserve.CreateGraphics();
+            Bitmap reserveBlocImage = new Bitmap(panelBlocReserve.Size.Width, panelBlocReserve.Size.Height);
+            Graphics graphicsReserveBlocImage = Graphics.FromImage(reserveBlocImage);
+            graphicsReserveBlocImage.FillRectangle(new SolidBrush(panelBlocReserve.BackColor), 0, 0, panelBlocReserve.Width, panelBlocReserve.Height);
+            for (int i = 0; i < blocActifIReserve.Length; i++)
+            {
+                graphicsReserveBlocImage.DrawImage(imageBlocs[(int)blocActifReserve - 1], grosseurDesBlocs * blocActifJReserve[i], grosseurDesBlocs * blocActifIReserve[i], grosseurDesBlocs, grosseurDesBlocs);
+            }
+            graphicsReserveBloc.DrawImage(reserveBlocImage, 0, 0);
+            graphicsReserveBloc.Dispose();
+            reserveBlocImage.Dispose();
+            graphicsReserveBlocImage.Dispose();
         }
         //Simon
         void PauserLeJeu()
@@ -556,6 +586,23 @@ namespace ProjetTetrisSession1Tp3
             }
             DessinerJeu();
             ReprendreLeJeu();
+        }
+        //Simon
+        void MettreBlocActifEnReserve()
+        {
+            if (blocDejaMisEnReserve == false || blocActifReserve == TypeBloc.None)
+            {
+                blocActifReserve = GenererBloc(blocActifEnJeu, blocActifIReserve, blocActifJReserve);
+                TransformerProchainBlocEnActif();
+                blocActifProchain = GenererBloc(ChoisirBlocAleatoirement(), blocActifIProchain, blocActifJProchain);
+            }
+            else if(blocDejaMisEnReserve == false)
+            {
+                TypeBloc temporaire = blocActifReserve;
+                blocActifReserve = GenererBloc(blocActifEnJeu, blocActifIReserve, blocActifJReserve);
+                blocActifEnJeu = GenererBloc(temporaire, blocActifIEnJeu, blocActifJEnJeu);
+                blocDejaMisEnReserve = true;
+            }
         }
     }
 }
