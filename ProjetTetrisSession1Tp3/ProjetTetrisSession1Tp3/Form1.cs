@@ -26,11 +26,11 @@ namespace ProjetTetrisSession1Tp3
         Bitmap[] imageBlocs = new Bitmap[] {Properties.Resources.Gele, Properties.Resources.carre, Properties.Resources.ligne, Properties.Resources.T,
                                             Properties.Resources.L, Properties.Resources.J, Properties.Resources.S, Properties.Resources.Z, };
         TypeBloc[,] tableauDeBlocs;
-        int[] blocActifI;
-        int[] blocActifJ;
+        int[] blocActifIEnJeu;
+        int[] blocActifJEnJeu;
         int[] blocActifIProchain;
         int[] blocActifJProchain;
-        TypeBloc blocActif = TypeBloc.None;
+        TypeBloc blocActifEnJeu = TypeBloc.None;
         TypeBloc blocActifProchain = TypeBloc.None;
         bool jeuSurPause = false;
         Bitmap imageJeu;
@@ -60,13 +60,13 @@ namespace ProjetTetrisSession1Tp3
             }
             else
             {
-                for(int i = 0;i < blocActifI.Length;i++)
+                for(int i = 0;i < blocActifIEnJeu.Length;i++)
                 {
-                    tableauDeBlocs[blocActifI[i], blocActifJ[i]] = TypeBloc.Gelé;
+                    tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.Gelé;
                 }
                 EnleverLignesCompletes();
                 TransformerProchainBlocEnActif();
-                GenererBlocAleatoire();
+                blocActifProchain = GenererBloc(ChoisirBlocAleatoirement(), blocActifIProchain, blocActifJProchain);
             }
             DessinerJeu();
             DessinerProchainBloc();
@@ -199,113 +199,115 @@ namespace ProjetTetrisSession1Tp3
             graphicsImageJeu.Dispose();
         }
         //Simon
-        void GenererBlocAleatoire()
+        TypeBloc GenererBloc(TypeBloc blocAGenerer, int[] blocActifIVariable, int[] blocActifJVariable)
         {
-            switch (ChoisirBlocAleatoirement())
+            TypeBloc blocActifVariable = blocAGenerer;
+            switch (blocActifVariable)
             {
                 case TypeBloc.Carré:
-                    blocActifProchain = TypeBloc.Carré;
+                    blocActifVariable = TypeBloc.Carré;
 
-                    blocActifIProchain[0] = 0;
-                    blocActifIProchain[1] = 0;
-                    blocActifIProchain[2] = 1;
-                    blocActifIProchain[3] = 1;
+                    blocActifIVariable[0] = 0;
+                    blocActifIVariable[1] = 0;
+                    blocActifIVariable[2] = 1;
+                    blocActifIVariable[3] = 1;
 
-                    blocActifJProchain[0] = tableauDeBlocs.GetLength(1) / 2 - 1;
-                    blocActifJProchain[1] = tableauDeBlocs.GetLength(1) / 2;
-                    blocActifJProchain[2] = tableauDeBlocs.GetLength(1) / 2 - 1;
-                    blocActifJProchain[3] = tableauDeBlocs.GetLength(1) / 2;
+                    blocActifJVariable[0] = 2 - 1;
+                    blocActifJVariable[1] = 2;
+                    blocActifJVariable[2] = 2 - 1;
+                    blocActifJVariable[3] = 2;
                     break;
                 case TypeBloc.J:
-                    blocActifProchain = TypeBloc.J;
+                    blocActifVariable = TypeBloc.J;
 
-                    blocActifIProchain[0] = 0;
-                    blocActifIProchain[1] = 1;
-                    blocActifIProchain[2] = 1;
-                    blocActifIProchain[3] = 1;
+                    blocActifIVariable[0] = 0;
+                    blocActifIVariable[1] = 1;
+                    blocActifIVariable[2] = 1;
+                    blocActifIVariable[3] = 1;
 
-                    blocActifJProchain[0] = tableauDeBlocs.GetLength(1) / 2 - 2;
-                    blocActifJProchain[1] = tableauDeBlocs.GetLength(1) / 2 - 2;
-                    blocActifJProchain[2] = tableauDeBlocs.GetLength(1) / 2 - 1;
-                    blocActifJProchain[3] = tableauDeBlocs.GetLength(1) / 2;
+                    blocActifJVariable[0] = 2 - 2;
+                    blocActifJVariable[1] = 2 - 2;
+                    blocActifJVariable[2] = 2 - 1;
+                    blocActifJVariable[3] = 2;
                     break;
                 case TypeBloc.L:
-                    blocActifProchain = TypeBloc.L;
+                    blocActifVariable = TypeBloc.L;
 
-                    blocActifIProchain[0] = 1;
-                    blocActifIProchain[1] = 1;
-                    blocActifIProchain[2] = 1;
-                    blocActifIProchain[3] = 0;
+                    blocActifIVariable[0] = 1;
+                    blocActifIVariable[1] = 1;
+                    blocActifIVariable[2] = 1;
+                    blocActifIVariable[3] = 0;
 
-                    blocActifJProchain[0] = tableauDeBlocs.GetLength(1) / 2 - 2;
-                    blocActifJProchain[1] = tableauDeBlocs.GetLength(1) / 2 - 1;
-                    blocActifJProchain[2] = tableauDeBlocs.GetLength(1) / 2;
-                    blocActifJProchain[3] = tableauDeBlocs.GetLength(1) / 2;
+                    blocActifJVariable[0] = 2 - 2;
+                    blocActifJVariable[1] = 2 - 1;
+                    blocActifJVariable[2] = 2;
+                    blocActifJVariable[3] = 2;
                     break;
                 case TypeBloc.Ligne:
-                    blocActifProchain = TypeBloc.Ligne;
+                    blocActifVariable = TypeBloc.Ligne;
 
-                    blocActifIProchain[0] = 0;
-                    blocActifIProchain[1] = 0;
-                    blocActifIProchain[2] = 0;
-                    blocActifIProchain[3] = 0;
+                    blocActifIVariable[0] = 0;
+                    blocActifIVariable[1] = 0;
+                    blocActifIVariable[2] = 0;
+                    blocActifIVariable[3] = 0;
 
-                    blocActifJProchain[0] = tableauDeBlocs.GetLength(1) / 2 - 2;
-                    blocActifJProchain[1] = tableauDeBlocs.GetLength(1) / 2 - 1;
-                    blocActifJProchain[2] = tableauDeBlocs.GetLength(1) / 2;
-                    blocActifJProchain[3] = tableauDeBlocs.GetLength(1) / 2 + 1;
+                    blocActifJVariable[0] = 2 - 2;
+                    blocActifJVariable[1] = 2 - 1;
+                    blocActifJVariable[2] = 2;
+                    blocActifJVariable[3] = 2 + 1;
                     break;
                 case TypeBloc.S:
-                    blocActifProchain = TypeBloc.S;
+                    blocActifVariable = TypeBloc.S;
 
-                    blocActifIProchain[0] = 0;
-                    blocActifIProchain[1] = 0;
-                    blocActifIProchain[2] = 1;
-                    blocActifIProchain[3] = 1;
+                    blocActifIVariable[0] = 0;
+                    blocActifIVariable[1] = 0;
+                    blocActifIVariable[2] = 1;
+                    blocActifIVariable[3] = 1;
 
-                    blocActifJProchain[0] = tableauDeBlocs.GetLength(1) / 2;
-                    blocActifJProchain[1] = tableauDeBlocs.GetLength(1) / 2 - 1;
-                    blocActifJProchain[2] = tableauDeBlocs.GetLength(1) / 2 - 1;
-                    blocActifJProchain[3] = tableauDeBlocs.GetLength(1) / 2 - 2;
+                    blocActifJVariable[0] = 2;
+                    blocActifJVariable[1] = 2 - 1;
+                    blocActifJVariable[2] = 2 - 1;
+                    blocActifJVariable[3] = 2 - 2;
                     break;
                 case TypeBloc.T:
-                    blocActifProchain = TypeBloc.T;
+                    blocActifVariable = TypeBloc.T;
 
-                    blocActifIProchain[0] = 1;
-                    blocActifIProchain[1] = 1;
-                    blocActifIProchain[2] = 1;
-                    blocActifIProchain[3] = 0;
+                    blocActifIVariable[0] = 1;
+                    blocActifIVariable[1] = 1;
+                    blocActifIVariable[2] = 1;
+                    blocActifIVariable[3] = 0;
 
-                    blocActifJProchain[0] = tableauDeBlocs.GetLength(1) / 2 - 2;
-                    blocActifJProchain[1] = tableauDeBlocs.GetLength(1) / 2 - 1;
-                    blocActifJProchain[2] = tableauDeBlocs.GetLength(1) / 2;
-                    blocActifJProchain[3] = tableauDeBlocs.GetLength(1) / 2 - 1;
+                    blocActifJVariable[0] = 2 - 2;
+                    blocActifJVariable[1] = 2 - 1;
+                    blocActifJVariable[2] = 2;
+                    blocActifJVariable[3] = 2 - 1;
                     break;
                 case TypeBloc.Z:
-                    blocActifProchain = TypeBloc.Z;
+                    blocActifVariable = TypeBloc.Z;
 
-                    blocActifIProchain[0] = 0;
-                    blocActifIProchain[1] = 0;
-                    blocActifIProchain[2] = 1;
-                    blocActifIProchain[3] = 1;
+                    blocActifIVariable[0] = 0;
+                    blocActifIVariable[1] = 0;
+                    blocActifIVariable[2] = 1;
+                    blocActifIVariable[3] = 1;
 
-                    blocActifJProchain[0] = tableauDeBlocs.GetLength(1) / 2 - 2;
-                    blocActifJProchain[1] = tableauDeBlocs.GetLength(1) / 2 - 1;
-                    blocActifJProchain[2] = tableauDeBlocs.GetLength(1) / 2 - 1;
-                    blocActifJProchain[3] = tableauDeBlocs.GetLength(1) / 2;
+                    blocActifJVariable[0] = 2 - 2;
+                    blocActifJVariable[1] = 2 - 1;
+                    blocActifJVariable[2] = 2 - 1;
+                    blocActifJVariable[3] = 2;
                     break;
             }
+            return blocActifVariable;
         }
         //Simon
         void TransformerProchainBlocEnActif()
         {
-            blocActif = blocActifProchain;
+            blocActifEnJeu = blocActifProchain;
 
-            for(int i =0; i < blocActifI.Length;i++)
+            for(int i =0; i < blocActifIEnJeu.Length;i++)
             {
-                blocActifI[i] = blocActifIProchain[i];
-                blocActifJ[i] = blocActifJProchain[i];
-                tableauDeBlocs[blocActifI[i], blocActifJ[i]] = blocActif;
+                blocActifIEnJeu[i] = blocActifIProchain[i];
+                blocActifJEnJeu[i] = blocActifJProchain[i] + tableauDeBlocs.GetLength(1) / 2 - 2;
+                tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = blocActifEnJeu;
             }
         }
         //Simon
@@ -318,9 +320,9 @@ namespace ProjetTetrisSession1Tp3
         {
             if(direction == Deplacement.Down)
             {
-                for(int i = 0; i < blocActifI.Length; i++)
+                for(int i = 0; i < blocActifIEnJeu.Length; i++)
                 {
-                    if(blocActifI[i] + 1 >= tableauDeBlocs.GetLength(0) || tableauDeBlocs[blocActifI[i] + 1, blocActifJ[i]] == TypeBloc.Gelé)
+                    if(blocActifIEnJeu[i] + 1 >= tableauDeBlocs.GetLength(0) || tableauDeBlocs[blocActifIEnJeu[i] + 1, blocActifJEnJeu[i]] == TypeBloc.Gelé)
                     {
                         return false;
                     }
@@ -328,9 +330,9 @@ namespace ProjetTetrisSession1Tp3
             }
             else if(direction == Deplacement.Right)
             {
-                for(int i = 0; i < blocActifJ.Length; i++)
+                for(int i = 0; i < blocActifJEnJeu.Length; i++)
                 {
-                    if (blocActifJ[i] + 1 >= tableauDeBlocs.GetLength(1) || tableauDeBlocs[blocActifI[i], blocActifJ[i] + 1] == TypeBloc.Gelé)
+                    if (blocActifJEnJeu[i] + 1 >= tableauDeBlocs.GetLength(1) || tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i] + 1] == TypeBloc.Gelé)
                     {
                         return false;
                     }
@@ -338,9 +340,9 @@ namespace ProjetTetrisSession1Tp3
             }
             else if (direction == Deplacement.Left)
             {
-                for (int i = 0; i < blocActifJ.Length; i++)
+                for (int i = 0; i < blocActifJEnJeu.Length; i++)
                 {
-                    if (blocActifJ[i] - 1 < 0 || tableauDeBlocs[blocActifI[i], blocActifJ[i] - 1] == TypeBloc.Gelé)
+                    if (blocActifJEnJeu[i] - 1 < 0 || tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i] - 1] == TypeBloc.Gelé)
                     {
                         return false;
                     }
@@ -353,38 +355,38 @@ namespace ProjetTetrisSession1Tp3
         {
             if(direction == Deplacement.Down)
             {
-                for(int i = 0; i < blocActifI.Length;i++)
+                for(int i = 0; i < blocActifIEnJeu.Length;i++)
                 {
-                    tableauDeBlocs[blocActifI[i], blocActifJ[i]] = TypeBloc.None;
+                    tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.None;
                 }
-                for (int i = 0; i < blocActifI.Length; i++)
+                for (int i = 0; i < blocActifIEnJeu.Length; i++)
                 {
-                    blocActifI[i]++;
-                    tableauDeBlocs[blocActifI[i], blocActifJ[i]] = blocActif;
+                    blocActifIEnJeu[i]++;
+                    tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = blocActifEnJeu;
                 }
             }
             else if(direction == Deplacement.Right)
             {
-                for (int i = 0; i < blocActifI.Length; i++)
+                for (int i = 0; i < blocActifIEnJeu.Length; i++)
                 {
-                    tableauDeBlocs[blocActifI[i], blocActifJ[i]] = TypeBloc.None;
+                    tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.None;
                 }
-                for (int i = 0; i < blocActifI.Length; i++)
+                for (int i = 0; i < blocActifIEnJeu.Length; i++)
                 {
-                    blocActifJ[i]++;
-                    tableauDeBlocs[blocActifI[i], blocActifJ[i]] = blocActif;
+                    blocActifJEnJeu[i]++;
+                    tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = blocActifEnJeu;
                 }
             }
             else if (direction == Deplacement.Left)
             {
-                for (int i = 0; i < blocActifI.Length; i++)
+                for (int i = 0; i < blocActifIEnJeu.Length; i++)
                 {
-                    tableauDeBlocs[blocActifI[i], blocActifJ[i]] = TypeBloc.None;
+                    tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.None;
                 }
-                for (int i = 0; i < blocActifI.Length; i++)
+                for (int i = 0; i < blocActifIEnJeu.Length; i++)
                 {
-                    blocActifJ[i]--;
-                    tableauDeBlocs[blocActifI[i], blocActifJ[i]] = blocActif;
+                    blocActifJEnJeu[i]--;
+                    tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = blocActifEnJeu;
                 }
             }
         }
@@ -393,13 +395,13 @@ namespace ProjetTetrisSession1Tp3
         {
             imageJeu = new Bitmap(panelJeu.Size.Width, panelJeu.Size.Height);
             tableauDeBlocs = new TypeBloc[nbreLignes, nbreColonnes];
-            blocActifI = new int[4];
-            blocActifJ = new int[4];
+            blocActifIEnJeu = new int[4];
+            blocActifJEnJeu = new int[4];
             blocActifIProchain = new int[4];
             blocActifJProchain = new int[4];
-            GenererBlocAleatoire();
+            blocActifProchain = GenererBloc(ChoisirBlocAleatoirement(), blocActifIProchain, blocActifJProchain);
             TransformerProchainBlocEnActif();
-            GenererBlocAleatoire();
+            blocActifProchain = GenererBloc(ChoisirBlocAleatoirement(), blocActifIProchain, blocActifJProchain);
             DessinerJeu();
         }
         //Simon
@@ -441,7 +443,7 @@ namespace ProjetTetrisSession1Tp3
             graphicsProchainBlocImage.FillRectangle(new SolidBrush(panelProchainBloc.BackColor), 0,0,panelProchainBloc.Width,panelProchainBloc.Height);
             for(int i = 0; i < blocActifIProchain.Length; i++)
             {
-                    graphicsProchainBlocImage.DrawImage(imageBlocs[(int)blocActifProchain - 1], grosseurDesBlocs * (blocActifJProchain[i] - (tableauDeBlocs.GetLength(1) / 2 - 2)), grosseurDesBlocs * blocActifIProchain[i], grosseurDesBlocs, grosseurDesBlocs);
+                    graphicsProchainBlocImage.DrawImage(imageBlocs[(int)blocActifProchain - 1], grosseurDesBlocs * blocActifJProchain[i], grosseurDesBlocs * blocActifIProchain[i], grosseurDesBlocs, grosseurDesBlocs);
             }
             graphicsProchainBloc.DrawImage(prochainBlocImage,0,0);
             graphicsProchainBloc.Dispose();
