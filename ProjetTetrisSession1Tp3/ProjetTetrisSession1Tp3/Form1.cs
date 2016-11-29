@@ -88,7 +88,10 @@ namespace ProjetTetrisSession1Tp3
             }
             DessinerJeu();
             DessinerProchainBloc();
-            DessinerBlocEnReserve();
+            if(blocActifReserve != TypeBloc.None)
+            {
+                DessinerBlocEnReserve();
+            }
         }
 
         // Yannick
@@ -594,17 +597,31 @@ namespace ProjetTetrisSession1Tp3
         //Simon
         void MettreBlocActifEnReserve()
         {
-            if (blocDejaMisEnReserve == false || blocActifReserve == TypeBloc.None)
+            if (blocDejaMisEnReserve == false && blocActifReserve == TypeBloc.None)
             {
                 blocActifReserve = GenererBloc(blocActifEnJeu, blocActifIReserve, blocActifJReserve);
+                for (int i = 0; i < blocActifIEnJeu.Length; i++)
+                {
+                    tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.None;
+                }
                 TransformerProchainBlocEnActif();
+
                 blocActifProchain = GenererBloc(ChoisirBlocAleatoirement(), blocActifIProchain, blocActifJProchain);
+                blocDejaMisEnReserve = true;
             }
             else if(blocDejaMisEnReserve == false)
             {
                 TypeBloc temporaire = blocActifReserve;
                 blocActifReserve = GenererBloc(blocActifEnJeu, blocActifIReserve, blocActifJReserve);
+                for (int i = 0; i < blocActifIEnJeu.Length; i++)
+                {
+                    tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.None;
+                }
                 blocActifEnJeu = GenererBloc(temporaire, blocActifIEnJeu, blocActifJEnJeu);
+                for(int i =0; i < blocActifJEnJeu.Length;i++)
+                {
+                    blocActifJEnJeu[i] = blocActifJEnJeu[i] + tableauDeBlocs.GetLength(1) / 2 - 2;
+                }
                 blocDejaMisEnReserve = true;
             }
         }
