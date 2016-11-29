@@ -23,5 +23,15 @@ namespace ProjetTetrisSession1Tp3
         {
             InitializeComponent();
         }
+
+        private void buttonRejouer_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FinDePartie_Load(object sender, EventArgs e)
+        {
+            lableTest.Text = compteurDeL.ToString();
+        }
     }
 }

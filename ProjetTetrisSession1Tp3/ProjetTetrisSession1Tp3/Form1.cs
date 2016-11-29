@@ -12,7 +12,6 @@ namespace ProjetTetrisSession1Tp3
 {
     public partial class FormPrincipal : Form
     {
-        bool test2 = true;
         int compteurDeCarre2 = 0;
         int compteurDeLigne2 = 0;
         int compteurDeT2 = 0;
@@ -49,6 +48,9 @@ namespace ProjetTetrisSession1Tp3
         Bitmap imageJeu;
         string pauseText = "Pause";
         bool blocDejaMisEnReserve = false;
+        int status = 0;
+        int[] operateurRotationI;
+        int[] operateurRotationJ;
         public FormPrincipal()
         {
             InitializeComponent();
@@ -108,15 +110,16 @@ namespace ProjetTetrisSession1Tp3
         // Yannick
         void InformerFinDePartie()
         {
+            frmFinDePartie.compteurDeCarre = compteurDeCarre2;
+            frmFinDePartie.compteurDeJ = compteurDeJ2;
+            frmFinDePartie.compteurDeL = compteurDeL2;
+            frmFinDePartie.compteurDeLigne = compteurDeLigne2;
+            frmFinDePartie.compteurDeS = compteurDeS2;
+            frmFinDePartie.compteurDeT = compteurDeT2;
+            frmFinDePartie.compteurDeZ = compteurDeZ2;
             if (frmFinDePartie.ShowDialog() == DialogResult.OK)
             {
-                frmFinDePartie.compteurDeCarre = compteurDeCarre2;
-                frmFinDePartie.compteurDeJ = compteurDeJ2;
-                frmFinDePartie.compteurDeL = compteurDeJ2;
-                frmFinDePartie.compteurDeLigne = compteurDeLigne2;
-                frmFinDePartie.compteurDeS = compteurDeS2;
-                frmFinDePartie.compteurDeT = compteurDeT2;
-                frmFinDePartie.compteurDeZ = compteurDeZ2;
+               
                 InitialiserJeu();
                 timerDescenteBloc.Start();
             }
@@ -193,6 +196,7 @@ namespace ProjetTetrisSession1Tp3
             else if(keyData == keysMettreEnReserve)
             {
                 MettreBlocActifEnReserve();
+                DessinerJeu();
                 return true;
             }
             return base.ProcessDialogKey(keyData);
@@ -261,6 +265,7 @@ namespace ProjetTetrisSession1Tp3
         //Simon
         TypeBloc GenererBloc(TypeBloc blocAGenerer, int[] blocActifIVariable, int[] blocActifJVariable)
         {
+            status = 0;
             TypeBloc blocActifVariable = blocAGenerer;
             switch (blocActifVariable)
             {
@@ -272,9 +277,9 @@ namespace ProjetTetrisSession1Tp3
                     blocActifIVariable[2] = 1;
                     blocActifIVariable[3] = 1;
 
-                    blocActifJVariable[0] = 2 - 1;
+                    blocActifJVariable[0] = 1;
                     blocActifJVariable[1] = 2;
-                    blocActifJVariable[2] = 2 - 1;
+                    blocActifJVariable[2] = 1;
                     blocActifJVariable[3] = 2;
                     break;
                 case TypeBloc.J:
@@ -285,9 +290,9 @@ namespace ProjetTetrisSession1Tp3
                     blocActifIVariable[2] = 1;
                     blocActifIVariable[3] = 1;
 
-                    blocActifJVariable[0] = 2 - 2;
-                    blocActifJVariable[1] = 2 - 2;
-                    blocActifJVariable[2] = 2 - 1;
+                    blocActifJVariable[0] = 0;
+                    blocActifJVariable[1] = 0;
+                    blocActifJVariable[2] = 1;
                     blocActifJVariable[3] = 2;
                     break;
                 case TypeBloc.L:
@@ -298,8 +303,8 @@ namespace ProjetTetrisSession1Tp3
                     blocActifIVariable[2] = 1;
                     blocActifIVariable[3] = 0;
 
-                    blocActifJVariable[0] = 2 - 2;
-                    blocActifJVariable[1] = 2 - 1;
+                    blocActifJVariable[0] = 0;
+                    blocActifJVariable[1] = 1;
                     blocActifJVariable[2] = 2;
                     blocActifJVariable[3] = 2;
                     break;
@@ -311,10 +316,10 @@ namespace ProjetTetrisSession1Tp3
                     blocActifIVariable[2] = 0;
                     blocActifIVariable[3] = 0;
 
-                    blocActifJVariable[0] = 2 - 2;
-                    blocActifJVariable[1] = 2 - 1;
+                    blocActifJVariable[0] = 0;
+                    blocActifJVariable[1] = 1;
                     blocActifJVariable[2] = 2;
-                    blocActifJVariable[3] = 2 + 1;
+                    blocActifJVariable[3] = 3;
                     break;
                 case TypeBloc.S:
                     blocActifVariable = TypeBloc.S;
@@ -325,9 +330,9 @@ namespace ProjetTetrisSession1Tp3
                     blocActifIVariable[3] = 1;
 
                     blocActifJVariable[0] = 2;
-                    blocActifJVariable[1] = 2 - 1;
-                    blocActifJVariable[2] = 2 - 1;
-                    blocActifJVariable[3] = 2 - 2;
+                    blocActifJVariable[1] = 1;
+                    blocActifJVariable[2] = 1;
+                    blocActifJVariable[3] = 0;
                     break;
                 case TypeBloc.T:
                     blocActifVariable = TypeBloc.T;
@@ -337,10 +342,10 @@ namespace ProjetTetrisSession1Tp3
                     blocActifIVariable[2] = 1;
                     blocActifIVariable[3] = 0;
 
-                    blocActifJVariable[0] = 2 - 2;
-                    blocActifJVariable[1] = 2 - 1;
+                    blocActifJVariable[0] = 0;
+                    blocActifJVariable[1] = 1;
                     blocActifJVariable[2] = 2;
-                    blocActifJVariable[3] = 2 - 1;
+                    blocActifJVariable[3] = 1;
                     break;
                 case TypeBloc.Z:
                     blocActifVariable = TypeBloc.Z;
@@ -350,9 +355,9 @@ namespace ProjetTetrisSession1Tp3
                     blocActifIVariable[2] = 1;
                     blocActifIVariable[3] = 1;
 
-                    blocActifJVariable[0] = 2 - 2;
-                    blocActifJVariable[1] = 2 - 1;
-                    blocActifJVariable[2] = 2 - 1;
+                    blocActifJVariable[0] = 0;
+                    blocActifJVariable[1] = 1;
+                    blocActifJVariable[2] = 1;
                     blocActifJVariable[3] = 2;
                     break;
             }
@@ -396,7 +401,7 @@ namespace ProjetTetrisSession1Tp3
             for (int i =0; i < blocActifIEnJeu.Length;i++)
             {
                 blocActifIEnJeu[i] = blocActifIProchain[i];
-                blocActifJEnJeu[i] = blocActifJProchain[i] + tableauDeBlocs.GetLength(1) / 2 - 2;
+                blocActifJEnJeu[i] = blocActifJProchain[i] + tableauDeBlocs.GetLength(1) / 2 -2;
                 tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = blocActifEnJeu;
             }
         }
@@ -494,7 +499,456 @@ namespace ProjetTetrisSession1Tp3
                     tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = blocActifEnJeu;
                 }
             }
+            else if (direction == Deplacement.AntiHorraire)
+            {
+                bougerBlocAntiHorraire();
+            }
 
+        }
+
+        void bougerBlocAntiHorraire()
+        {
+            switch (blocActifEnJeu)
+            {
+                case TypeBloc.Carré:
+                    for (int i =0; i < operateurRotationI.Length; i++)
+                    {
+                        operateurRotationI[i] = 0;
+                        operateurRotationJ[i] = 0;
+                    }
+                    break;
+                case TypeBloc.Ligne:
+                    switch (status)
+                    {
+                        case 0:
+                            for (int i = 0; i < blocActifIEnJeu.Length; i++)
+                            {
+                                tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.None;
+                            }
+                            operateurRotationI[0] = 1;
+                            operateurRotationI[1] = 0;
+                            operateurRotationI[2] = -1;
+                            operateurRotationI[3] = -2;
+
+                            operateurRotationJ[0] = 1;
+                            operateurRotationJ[1] = 0;
+                            operateurRotationJ[2] = -1;
+                            operateurRotationJ[3] = -2;
+                            break;
+
+                        case 1:
+                            for (int i = 0; i < blocActifIEnJeu.Length; i++)
+                            {
+                                tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.None;
+                            }
+                            operateurRotationI[0] = -1;
+                            operateurRotationI[1] = 0;
+                            operateurRotationI[2] = 1;
+                            operateurRotationI[3] = 2;
+
+                            operateurRotationJ[0] = 1;
+                            operateurRotationJ[1] = 0;
+                            operateurRotationJ[2] = -1;
+                            operateurRotationJ[3] = -2;
+                            break;
+
+                        case 2:
+                            for (int i = 0; i < blocActifIEnJeu.Length; i++)
+                            {
+                                tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.None;
+                            }
+                            operateurRotationI[0] = -1;
+                            operateurRotationI[1] = 0;
+                            operateurRotationI[2] = 1;
+                            operateurRotationI[3] = 2;
+
+                            operateurRotationJ[0] = -1;
+                            operateurRotationJ[1] = 0;
+                            operateurRotationJ[2] = 1;
+                            operateurRotationJ[3] = 2;
+                            break;
+
+                        case 3:
+                            for (int i = 0; i < blocActifIEnJeu.Length; i++)
+                            {
+                                tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.None;
+                            }
+                            operateurRotationI[0] = 1;
+                            operateurRotationI[1] = 0;
+                            operateurRotationI[2] = -1;
+                            operateurRotationI[3] = -2;
+
+                            operateurRotationJ[0] = -1;
+                            operateurRotationJ[1] = 0;
+                            operateurRotationJ[2] = 1;
+                            operateurRotationJ[3] = 2;
+                            break;
+                    }
+                    
+                    break;
+                case TypeBloc.T:
+                    switch (status)
+                    {
+                        case 0:
+                            for (int i = 0; i < blocActifIEnJeu.Length; i++)
+                            {
+                                tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.None;
+                            }
+                            operateurRotationI[0] = 1;
+                            operateurRotationI[1] = 0;
+                            operateurRotationI[2] = -1;
+                            operateurRotationI[3] = 1;
+
+                            operateurRotationJ[0] = 1;
+                            operateurRotationJ[1] = 0;
+                            operateurRotationJ[2] = -1;
+                            operateurRotationJ[3] = -1;
+                            break;
+                        case 1:
+                            for (int i = 0; i < blocActifIEnJeu.Length; i++)
+                            {
+                                tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.None;
+                            }
+                            operateurRotationI[0] = -1;
+                            operateurRotationI[1] = 0;
+                            operateurRotationI[2] = 1;
+                            operateurRotationI[3] = 1;
+
+                            operateurRotationJ[0] = 1;
+                            operateurRotationJ[1] = 0;
+                            operateurRotationJ[2] = -1;
+                            operateurRotationJ[3] = 1;
+                            break;
+                        case 2:
+                            for (int i = 0; i < blocActifIEnJeu.Length; i++)
+                            {
+                                tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.None;
+                            }
+                            operateurRotationI[0] = -1;
+                            operateurRotationI[1] = 0;
+                            operateurRotationI[2] = 1;
+                            operateurRotationI[3] = -1;
+
+                            operateurRotationJ[0] = -1;
+                            operateurRotationJ[1] = 0;
+                            operateurRotationJ[2] = 1;
+                            operateurRotationJ[3] = 1;
+                            break;
+                        case 3:
+                            for (int i = 0; i < blocActifIEnJeu.Length; i++)
+                            {
+                                tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.None;
+                            }
+                            operateurRotationI[0] = 1;
+                            operateurRotationI[1] = 0;
+                            operateurRotationI[2] = -1;
+                            operateurRotationI[3] = -1;
+
+                            operateurRotationJ[0] = -1;
+                            operateurRotationJ[1] = 0;
+                            operateurRotationJ[2] = 1;
+                            operateurRotationJ[3] = -1;
+                            break;
+                    }
+                    break;
+                case TypeBloc.L:
+                    switch(status)
+                    {
+                        case 0:
+                            for (int i = 0; i < blocActifIEnJeu.Length; i++)
+                            {
+                                tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.None;
+                            }
+                            operateurRotationI[0] = 1;
+                            operateurRotationI[1] = 0;
+                            operateurRotationI[2] = -1;
+                            operateurRotationI[3] = 0;
+
+                            operateurRotationJ[0] = 1;
+                            operateurRotationJ[1] = 0;
+                            operateurRotationJ[2] = -1;
+                            operateurRotationJ[3] = -2;
+                            break;
+                        case 1:
+                            for (int i = 0; i < blocActifIEnJeu.Length; i++)
+                            {
+                                tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.None;
+                            }
+                            operateurRotationI[0] = -1;
+                            operateurRotationI[1] = 0;
+                            operateurRotationI[2] = 1;
+                            operateurRotationI[3] = 2;
+
+                            operateurRotationJ[0] = 1;
+                            operateurRotationJ[1] = 0;
+                            operateurRotationJ[2] = -1;
+                            operateurRotationJ[3] = 0;
+                            break;
+                        case 2:
+                            for (int i = 0; i < blocActifIEnJeu.Length; i++)
+                            {
+                                tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.None;
+                            }
+                            operateurRotationI[0] = -1;
+                            operateurRotationI[1] = 0;
+                            operateurRotationI[2] = 1;
+                            operateurRotationI[3] = 0;
+
+                            operateurRotationJ[0] = -1;
+                            operateurRotationJ[1] = 0;
+                            operateurRotationJ[2] = 1;
+                            operateurRotationJ[3] = 2;
+                            break;
+                        case 3:
+                            for (int i = 0; i < blocActifIEnJeu.Length; i++)
+                            {
+                                tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.None;
+                            }
+                            operateurRotationI[0] = 1;
+                            operateurRotationI[1] = 0;
+                            operateurRotationI[2] = -1;
+                            operateurRotationI[3] = -2;
+
+                            operateurRotationJ[0] = -1;
+                            operateurRotationJ[1] = 0;
+                            operateurRotationJ[2] = 1;
+                            operateurRotationJ[3] = 0;
+                            break;
+                    }
+                    break;
+                case TypeBloc.J:
+                    switch (status)
+                    {
+                        case 0:
+                            for (int i = 0; i < blocActifIEnJeu.Length; i++)
+                            {
+                                tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.None;
+                            }
+                            operateurRotationI[0] = 2;
+                            operateurRotationI[1] = 1;
+                            operateurRotationI[2] = 0;
+                            operateurRotationI[3] = -1;
+
+                            operateurRotationJ[0] = 0;
+                            operateurRotationJ[1] = 1;
+                            operateurRotationJ[2] = 0;
+                            operateurRotationJ[3] = -1;
+                            break;
+                        case 1:
+                            for (int i = 0; i < blocActifIEnJeu.Length; i++)
+                            {
+                                tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.None;
+                            }
+                            operateurRotationI[0] = 0;
+                            operateurRotationI[1] = -1;
+                            operateurRotationI[2] = 0;
+                            operateurRotationI[3] = 1;
+
+                            operateurRotationJ[0] = 2;
+                            operateurRotationJ[1] = 1;
+                            operateurRotationJ[2] = 0;
+                            operateurRotationJ[3] = -1;
+                            break;
+                        case 2:
+                            for (int i = 0; i < blocActifIEnJeu.Length; i++)
+                            {
+                                tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.None;
+                            }
+                            operateurRotationI[0] = -2;
+                            operateurRotationI[1] = -1;
+                            operateurRotationI[2] = 0;
+                            operateurRotationI[3] = 1;
+
+                            operateurRotationJ[0] = 0;
+                            operateurRotationJ[1] = -1;
+                            operateurRotationJ[2] = 0;
+                            operateurRotationJ[3] = 1;
+                            break;
+                        case 3:
+                            for (int i = 0; i < blocActifIEnJeu.Length; i++)
+                            {
+                                tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.None;
+                            }
+                            operateurRotationI[0] = 0;
+                            operateurRotationI[1] = 1;
+                            operateurRotationI[2] = 0;
+                            operateurRotationI[3] = -1;
+
+                            operateurRotationJ[0] = -2;
+                            operateurRotationJ[1] = -1;
+                            operateurRotationJ[2] = 0;
+                            operateurRotationJ[3] = 1;
+                            break;
+                    }
+                    break;
+                case TypeBloc.S:
+                    switch (status)
+                    {
+                        case 0:
+                            for (int i = 0; i < blocActifIEnJeu.Length; i++)
+                            {
+                                tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.None;
+                            }
+                            operateurRotationI[0] = -1;
+                            operateurRotationI[1] = 0;
+                            operateurRotationI[2] = -1;
+                            operateurRotationI[3] = 0;
+
+                            operateurRotationJ[0] = -1;
+                            operateurRotationJ[1] = 0;
+                            operateurRotationJ[2] = 1;
+                            operateurRotationJ[3] = 2;
+                            break;
+                        case 1:
+                            for (int i = 0; i < blocActifIEnJeu.Length; i++)
+                            {
+                                tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.None;
+                            }
+                            operateurRotationI[0] = 1;
+                            operateurRotationI[1] = 0;
+                            operateurRotationI[2] = -1;
+                            operateurRotationI[3] = -2;
+
+                            operateurRotationJ[0] = -1;
+                            operateurRotationJ[1] = 0;
+                            operateurRotationJ[2] = -1;
+                            operateurRotationJ[3] = 0;
+                            break;
+                        case 2:
+                            for (int i = 0; i < blocActifIEnJeu.Length; i++)
+                            {
+                                tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.None;
+                            }
+                            operateurRotationI[0] = 1;
+                            operateurRotationI[1] = 0;
+                            operateurRotationI[2] = 1;
+                            operateurRotationI[3] = 0;
+
+                            operateurRotationJ[0] = 1;
+                            operateurRotationJ[1] = 0;
+                            operateurRotationJ[2] = -1;
+                            operateurRotationJ[3] = -2;
+                            break;
+                        case 3:
+                            for (int i = 0; i < blocActifIEnJeu.Length; i++)
+                            {
+                                tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.None;
+                            }
+                            operateurRotationI[0] = -1;
+                            operateurRotationI[1] = 0;
+                            operateurRotationI[2] = 1;
+                            operateurRotationI[3] = 2;
+
+                            operateurRotationJ[0] = 1;
+                            operateurRotationJ[1] = 0;
+                            operateurRotationJ[2] = 1;
+                            operateurRotationJ[3] = 0;
+                            break;
+                    }
+                    break;
+                case TypeBloc.Z:
+                    switch (status)
+                    {
+                        case 0:
+                            for (int i = 0; i < blocActifIEnJeu.Length; i++)
+                            {
+                                tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.None;
+                            }
+                            operateurRotationI[0] = 1;
+                            operateurRotationI[1] = 0;
+                            operateurRotationI[2] = -1;
+                            operateurRotationI[3] = -2;
+
+                            operateurRotationJ[0] = 1;
+                            operateurRotationJ[1] = 0;
+                            operateurRotationJ[2] = 1;
+                            operateurRotationJ[3] = 0;
+                            break;
+                        case 1:
+                            for (int i = 0; i < blocActifIEnJeu.Length; i++)
+                            {
+                                tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.None;
+                            }
+                            operateurRotationI[0] = -1;
+                            operateurRotationI[1] = 0;
+                            operateurRotationI[2] = -1;
+                            operateurRotationI[3] = 0;
+
+                            operateurRotationJ[0] = 1;
+                            operateurRotationJ[1] = 0;
+                            operateurRotationJ[2] = -1;
+                            operateurRotationJ[3] = -2;
+                            break;
+                        case 2:
+                            for (int i = 0; i < blocActifIEnJeu.Length; i++)
+                            {
+                                tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.None;
+                            }
+                            operateurRotationI[0] = -1;
+                            operateurRotationI[1] = 0;
+                            operateurRotationI[2] = 1;
+                            operateurRotationI[3] = 2;
+
+                            operateurRotationJ[0] = -1;
+                            operateurRotationJ[1] = 0;
+                            operateurRotationJ[2] = -1;
+                            operateurRotationJ[3] = 0;
+                            break;
+                        case 3:
+                            for (int i = 0; i < blocActifIEnJeu.Length; i++)
+                            {
+                                tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.None;
+                            }
+                            operateurRotationI[0] = 1;
+                            operateurRotationI[1] = 0;
+                            operateurRotationI[2] = 1;
+                            operateurRotationI[3] = 0;
+
+                            operateurRotationJ[0] = -1;
+                            operateurRotationJ[1] = 0;
+                            operateurRotationJ[2] = 1;
+                            operateurRotationJ[3] = 2;
+                            break;
+                    }
+                    break;
+
+            }
+            if (VerifierSiTournerEstPossible(Deplacement.AntiHorraire))
+            {
+                if(status == 3)
+                {
+                    status = 0;
+                }
+                else
+                {
+                    status++;
+                }
+                for (int i = 0; i < operateurRotationI.Length; i++)
+                {
+                    blocActifIEnJeu[i] += operateurRotationI[i];
+                    blocActifJEnJeu[i] += operateurRotationJ[i];
+                }
+            }
+            
+            for (int i = 0; i < blocActifIEnJeu.Length; i++)
+            {
+                tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = blocActifEnJeu;
+            }
+        }
+        bool VerifierSiTournerEstPossible(Deplacement rotation)
+        {
+            if (rotation == Deplacement.AntiHorraire)
+            {
+                for (int i = 0; i < operateurRotationI.Length; i++)
+                {
+                    if (blocActifIEnJeu[i] + operateurRotationI[i] < 0 || blocActifJEnJeu[i] + operateurRotationJ[i] < 0 || blocActifIEnJeu[i] + operateurRotationI[i] > tableauDeBlocs.GetLength(0) - 1 || blocActifJEnJeu[i] + operateurRotationJ[i] > tableauDeBlocs.GetLength(1) - 1)
+                    {
+                        return false;
+                    }
+                }
+            }
+           
+            return true;
         }
         //Simon
         void InitialiserJeu()
@@ -507,7 +961,9 @@ namespace ProjetTetrisSession1Tp3
             blocActifJProchain = new int[4];
             blocActifIReserve = new int[4];
             blocActifJReserve = new int[4];
-            blocActifProchain = GenererBloc(ChoisirBlocAleatoirement(), blocActifIProchain, blocActifJProchain);
+            operateurRotationI = new int[4];
+            operateurRotationJ = new int[4];
+            blocActifProchain = GenererBloc(TypeBloc.Z, blocActifIProchain, blocActifJProchain);
             TransformerProchainBlocEnActif();
             blocActifProchain = GenererBloc(ChoisirBlocAleatoirement(), blocActifIProchain, blocActifJProchain);
             DessinerJeu();

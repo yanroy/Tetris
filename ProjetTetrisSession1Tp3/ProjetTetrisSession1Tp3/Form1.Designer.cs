@@ -33,23 +33,23 @@
             this.panelConteneurPanelJeu = new System.Windows.Forms.Panel();
             this.panelJeu = new System.Windows.Forms.Panel();
             this.panelMenu = new System.Windows.Forms.Panel();
+            this.panelConteneurBlocReserve = new System.Windows.Forms.Panel();
+            this.labelBlocReserve = new System.Windows.Forms.Label();
+            this.panelBlocReserve = new System.Windows.Forms.Panel();
             this.panelConteneurProchain = new System.Windows.Forms.Panel();
             this.labelProchain = new System.Windows.Forms.Label();
             this.panelProchainBloc = new System.Windows.Forms.Panel();
             this.panelStatistique = new System.Windows.Forms.Panel();
             this.pictureBoxEntete = new System.Windows.Forms.PictureBox();
             this.labelTitre = new System.Windows.Forms.Label();
-            this.panelConteneurBlocReserve = new System.Windows.Forms.Panel();
-            this.labelBlocReserve = new System.Windows.Forms.Label();
-            this.panelBlocReserve = new System.Windows.Forms.Panel();
             this.boutonPersonnaliseQuitter = new ProjetTetrisSession1Tp3.BoutonPersonnalise();
             this.boutonPersonnaliseOption = new ProjetTetrisSession1Tp3.BoutonPersonnalise();
             this.boutonPersonnaliseNouvellePartie = new ProjetTetrisSession1Tp3.BoutonPersonnalise();
             this.panelConteneurPanelJeu.SuspendLayout();
             this.panelMenu.SuspendLayout();
+            this.panelConteneurBlocReserve.SuspendLayout();
             this.panelConteneurProchain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEntete)).BeginInit();
-            this.panelConteneurBlocReserve.SuspendLayout();
             this.SuspendLayout();
             // 
             // timerDescenteBloc
@@ -92,6 +92,33 @@
             this.panelMenu.Name = "panelMenu";
             this.panelMenu.Size = new System.Drawing.Size(199, 616);
             this.panelMenu.TabIndex = 2;
+            // 
+            // panelConteneurBlocReserve
+            // 
+            this.panelConteneurBlocReserve.Controls.Add(this.labelBlocReserve);
+            this.panelConteneurBlocReserve.Controls.Add(this.panelBlocReserve);
+            this.panelConteneurBlocReserve.Location = new System.Drawing.Point(43, 229);
+            this.panelConteneurBlocReserve.Name = "panelConteneurBlocReserve";
+            this.panelConteneurBlocReserve.Size = new System.Drawing.Size(112, 86);
+            this.panelConteneurBlocReserve.TabIndex = 7;
+            // 
+            // labelBlocReserve
+            // 
+            this.labelBlocReserve.Font = new System.Drawing.Font("Perpetua Titling MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelBlocReserve.Location = new System.Drawing.Point(0, 0);
+            this.labelBlocReserve.Name = "labelBlocReserve";
+            this.labelBlocReserve.Size = new System.Drawing.Size(112, 30);
+            this.labelBlocReserve.TabIndex = 3;
+            this.labelBlocReserve.Text = "Reserve";
+            this.labelBlocReserve.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panelBlocReserve
+            // 
+            this.panelBlocReserve.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(51)))), ((int)(((byte)(159)))));
+            this.panelBlocReserve.Location = new System.Drawing.Point(0, 30);
+            this.panelBlocReserve.Name = "panelBlocReserve";
+            this.panelBlocReserve.Size = new System.Drawing.Size(112, 56);
+            this.panelBlocReserve.TabIndex = 2;
             // 
             // panelConteneurProchain
             // 
@@ -148,37 +175,10 @@
             this.labelTitre.Font = new System.Drawing.Font("Perpetua Titling MT", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTitre.Location = new System.Drawing.Point(30, 32);
             this.labelTitre.Name = "labelTitre";
-            this.labelTitre.Size = new System.Drawing.Size(720, 72);
+            this.labelTitre.Size = new System.Drawing.Size(577, 58);
             this.labelTitre.TabIndex = 4;
             this.labelTitre.Text = "TETRIS SIM AND YAN";
             this.labelTitre.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // panelConteneurBlocReserve
-            // 
-            this.panelConteneurBlocReserve.Controls.Add(this.labelBlocReserve);
-            this.panelConteneurBlocReserve.Controls.Add(this.panelBlocReserve);
-            this.panelConteneurBlocReserve.Location = new System.Drawing.Point(43, 229);
-            this.panelConteneurBlocReserve.Name = "panelConteneurBlocReserve";
-            this.panelConteneurBlocReserve.Size = new System.Drawing.Size(112, 86);
-            this.panelConteneurBlocReserve.TabIndex = 7;
-            // 
-            // labelBlocReserve
-            // 
-            this.labelBlocReserve.Font = new System.Drawing.Font("Perpetua Titling MT", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelBlocReserve.Location = new System.Drawing.Point(0, 0);
-            this.labelBlocReserve.Name = "labelBlocReserve";
-            this.labelBlocReserve.Size = new System.Drawing.Size(112, 30);
-            this.labelBlocReserve.TabIndex = 3;
-            this.labelBlocReserve.Text = "Reserve";
-            this.labelBlocReserve.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // panelBlocReserve
-            // 
-            this.panelBlocReserve.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(51)))), ((int)(((byte)(159)))));
-            this.panelBlocReserve.Location = new System.Drawing.Point(0, 30);
-            this.panelBlocReserve.Name = "panelBlocReserve";
-            this.panelBlocReserve.Size = new System.Drawing.Size(112, 56);
-            this.panelBlocReserve.TabIndex = 2;
             // 
             // boutonPersonnaliseQuitter
             // 
@@ -244,9 +244,9 @@
             this.Text = "Tetris ";
             this.panelConteneurPanelJeu.ResumeLayout(false);
             this.panelMenu.ResumeLayout(false);
+            this.panelConteneurBlocReserve.ResumeLayout(false);
             this.panelConteneurProchain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxEntete)).EndInit();
-            this.panelConteneurBlocReserve.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
