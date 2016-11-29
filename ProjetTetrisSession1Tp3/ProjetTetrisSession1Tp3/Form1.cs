@@ -12,7 +12,11 @@ namespace ProjetTetrisSession1Tp3
 {
     public partial class FormPrincipal : Form
     {
+        bool test2 = true;
+        int compteurDeCarre2 = 0;
+        int compteurDeLigne2 = 0;
         FrmOption fmrOption = new FrmOption();
+        FinDePartie frmFinDePartie = new FinDePartie();
         Random rnd = new Random();
         SolidBrush couleur1JeuArrierePlan = new SolidBrush(Color.Beige);
         SolidBrush couleur2JeuArrierePlan = new SolidBrush(Color.DarkGray);
@@ -89,8 +93,9 @@ namespace ProjetTetrisSession1Tp3
         // Yannick
         void InformerFinDePartie()
         {
-            if (MessageBox.Show("Partie terminée!","Fin de partie",MessageBoxButtons.RetryCancel,MessageBoxIcon.Exclamation) == DialogResult.Retry)
+            if (frmFinDePartie.ShowDialog() == DialogResult.OK)
             {
+                frmFinDePartie.test = test2;
                 InitialiserJeu();
                 timerDescenteBloc.Start();
             }
@@ -152,12 +157,16 @@ namespace ProjetTetrisSession1Tp3
             }
             else if (keyData == keysTournerSensAntihoraire)
             {
-                //Tourner antihoraire
+                // Yannick
+                BougerBlocActif(Deplacement.AntiHorraire);
+                DessinerJeu();
                 return true;
             }
             else if (keyData == keysTournerSensHoraire)
             {
-                //Tourner horaire
+                // Yannick
+                BougerBlocActif(Deplacement.Horraire);
+                DessinerJeu();
                 return true;
             }
             return base.ProcessDialogKey(keyData);
@@ -429,6 +438,7 @@ namespace ProjetTetrisSession1Tp3
                     tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = blocActifEnJeu;
                 }
             }
+
         }
         //Simon
         void InitialiserJeu()
