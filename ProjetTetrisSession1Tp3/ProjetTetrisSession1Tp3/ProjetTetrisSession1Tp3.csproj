@@ -50,6 +50,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Deplacement.cs" />
+    <Compile Include="FinDePartie.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FinDePartie.Designer.cs">
+      <DependentUpon>FinDePartie.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -67,6 +73,9 @@
     <Compile Include="TypeBloc.cs" />
     <EmbeddedResource Include="BoutonPersonnalise.resx">
       <DependentUpon>BoutonPersonnalise.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FinDePartie.resx">
+      <DependentUpon>FinDePartie.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
