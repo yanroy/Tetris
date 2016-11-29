@@ -19,7 +19,7 @@ namespace ProjetTetrisSession1Tp3
         int compteurDeL2 = 0;
         int compteurDeJ2 = 0;
         int compteurDeS2 = 0;
-        int compteurDez2 = 0;
+        int compteurDeZ2 = 0;
         FrmOption fmrOption = new FrmOption();
         FinDePartie frmFinDePartie = new FinDePartie();
         Random rnd = new Random();
@@ -107,7 +107,13 @@ namespace ProjetTetrisSession1Tp3
         {
             if (frmFinDePartie.ShowDialog() == DialogResult.OK)
             {
-                frmFinDePartie.test = test2;
+                frmFinDePartie.compteurDeCarre = compteurDeCarre2;
+                frmFinDePartie.compteurDeJ = compteurDeJ2;
+                frmFinDePartie.compteurDeL = compteurDeJ2;
+                frmFinDePartie.compteurDeLigne = compteurDeLigne2;
+                frmFinDePartie.compteurDeS = compteurDeS2;
+                frmFinDePartie.compteurDeT = compteurDeT2;
+                frmFinDePartie.compteurDeZ = compteurDeZ2;
                 InitialiserJeu();
                 timerDescenteBloc.Start();
             }
@@ -353,8 +359,38 @@ namespace ProjetTetrisSession1Tp3
         void TransformerProchainBlocEnActif()
         {
             blocActifEnJeu = blocActifProchain;
+            // Yannick
+            // Verification pour statistiques.
+            if (blocActifEnJeu == TypeBloc.Ligne)
+            {
+                compteurDeLigne2++;
+            }
+            if (blocActifEnJeu == TypeBloc.Carré)
+            {
+                compteurDeCarre2++;
+            }
+            if (blocActifEnJeu == TypeBloc.T)
+            {
+                compteurDeT2++;
+            }
+            if (blocActifEnJeu == TypeBloc.L)
+            {
+                compteurDeL2++;
+            }
+            if (blocActifEnJeu == TypeBloc.J)
+            {
+                compteurDeJ2++;
+            }
+            if (blocActifEnJeu == TypeBloc.S)
+            {
+                compteurDeS2++;
+            }
+            if (blocActifEnJeu == TypeBloc.Z)
+            {
+                compteurDeZ2++;
+            }
 
-            for(int i =0; i < blocActifIEnJeu.Length;i++)
+            for (int i =0; i < blocActifIEnJeu.Length;i++)
             {
                 blocActifIEnJeu[i] = blocActifIProchain[i];
                 blocActifJEnJeu[i] = blocActifJProchain[i] + tableauDeBlocs.GetLength(1) / 2 - 2;

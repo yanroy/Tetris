@@ -12,10 +12,13 @@ namespace ProjetTetrisSession1Tp3
 {
     public partial class FinDePartie : Form
     {
-        public bool test = true;
         public int compteurDeCarre = 0;
         public int compteurDeLigne = 0;
         public int compteurDeT = 0;
+        public int compteurDeL = 0;
+        public int compteurDeJ = 0;
+        public int compteurDeS = 0;
+        public int compteurDeZ = 0;
         public FinDePartie()
         {
             InitializeComponent();
