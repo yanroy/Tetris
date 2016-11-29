@@ -65,11 +65,36 @@ namespace ProjetTetrisSession1Tp3
                     tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.Gelé;
                 }
                 EnleverLignesCompletes();
-                TransformerProchainBlocEnActif();
-                blocActifProchain = GenererBloc(ChoisirBlocAleatoirement(), blocActifIProchain, blocActifJProchain);
+                if (VerifierSiTransformerProchainBlocEnActifPossible() == true)
+                {
+                    TransformerProchainBlocEnActif();
+                    blocActifProchain = GenererBloc(ChoisirBlocAleatoirement(), blocActifIProchain, blocActifJProchain);
+                }
+                else
+                {
+                    timerDescenteBloc.Stop();                    
+                    FaireFinDePartie();
+                }           
             }
             DessinerJeu();
             DessinerProchainBloc();
+        }
+
+        // Yannick
+        void FaireFinDePartie()
+        {
+            InformerFinDePartie();
+        }
+
+        // Yannick
+        void InformerFinDePartie()
+        {
+            if (MessageBox.Show("Partie terminée!","Fin de partie",MessageBoxButtons.RetryCancel,MessageBoxIcon.Exclamation) == DialogResult.Retry)
+            {
+                InitialiserJeu();
+                timerDescenteBloc.Start();
+            }
+           
         }
         //Simon
         void EnleverLignesCompletes()
@@ -310,6 +335,21 @@ namespace ProjetTetrisSession1Tp3
                 tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = blocActifEnJeu;
             }
         }
+
+         // Yannick
+         bool VerifierSiTransformerProchainBlocEnActifPossible()
+        {
+            bool possible = true;
+            for (int i = 0; i < blocActifIProchain.Length; i++)
+            {
+                if (tableauDeBlocs[blocActifIProchain[i], blocActifJProchain[i] + tableauDeBlocs.GetLength(1) / 2 - 2] == TypeBloc.Gelé)
+                {
+                    possible = false;
+                }
+            }
+            return possible;
+        }
+
         //Simon
         TypeBloc ChoisirBlocAleatoirement()
         {
@@ -474,12 +514,7 @@ namespace ProjetTetrisSession1Tp3
             ConfigurerJeu();
             DessinerJeu();
         }
-        // Yannick
-        bool DetectionDeFinDePartie()
-        {
-            bool partieEstFinnie = false;
-            return partieEstFinnie;
-        }
+              
         //Simon
         private void boutonPersonnaliseNouvellePartie_Click(object sender, EventArgs e)
         {
