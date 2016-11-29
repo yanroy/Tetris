@@ -28,8 +28,8 @@ namespace ProjetTetrisSession1Tp3
         Keys keysBougerADroite = Keys.Right;
         Keys keysBougerAGauche = Keys.Left;
         Keys keysTournerSensAntihoraire = Keys.X;
-        Keys keysTournerSensHoraire = Keys.Z;
         Keys keysMettreEnReserve = Keys.C;
+        Keys keysDescendrePlusVite = Keys.Down;
         int nbreLignes = 22;
         int nbreColonnes = 12;
         Bitmap[] imageBlocs = new Bitmap[] {Properties.Resources.Gele, Properties.Resources.carre, Properties.Resources.ligne, Properties.Resources.T,
@@ -51,6 +51,7 @@ namespace ProjetTetrisSession1Tp3
         int status = 0;
         int[] operateurRotationI;
         int[] operateurRotationJ;
+        Deplacement deplacement = Deplacement.None;
         public FormPrincipal()
         {
             InitializeComponent();
@@ -182,15 +183,7 @@ namespace ProjetTetrisSession1Tp3
             else if (keyData == keysTournerSensAntihoraire)
             {
                 // Yannick
-                BougerBlocActif(Deplacement.AntiHorraire);
-                DessinerJeu();
-                return true;
-            }
-            else if (keyData == keysTournerSensHoraire)
-            {
-                // Yannick
-                BougerBlocActif(Deplacement.Horraire);
-                DessinerJeu();
+                deplacement = Deplacement.AntiHorraire;
                 return true;
             }
             else if(keyData == keysMettreEnReserve)
@@ -975,10 +968,6 @@ namespace ProjetTetrisSession1Tp3
             {
                 nbreColonnes = fmrOption.nbreColonnes;
                 nbreLignes = fmrOption.nbreLignes;
-                for (int i = 0; i < imageBlocs.Length; i++)
-                {
-                    imageBlocs[i] = fmrOption.imageBlocs[i];
-                }
                 couleur1JeuArrierePlan = fmrOption.couleur1JeuArrierePlan;
                 couleur2JeuArrierePlan = fmrOption.couleur2JeuArrierePlan;
                 timerDescenteBloc.Interval = fmrOption.vitesse;
@@ -988,13 +977,10 @@ namespace ProjetTetrisSession1Tp3
             {
                 fmrOption.nbreColonnes = nbreColonnes;
                 nbreLignes = fmrOption.nbreLignes;
-                for (int i = 0; i < imageBlocs.Length; i++)
-                {
-                    fmrOption.imageBlocs[i] = imageBlocs[i];
-                }
                 fmrOption.couleur1JeuArrierePlan = couleur1JeuArrierePlan;
                 fmrOption.couleur2JeuArrierePlan = couleur2JeuArrierePlan;
                 fmrOption.vitesse = timerDescenteBloc.Interval;
+                
             }
             ReprendreLeJeu();
         }
@@ -1039,6 +1025,7 @@ namespace ProjetTetrisSession1Tp3
         {
             jeuSurPause = true;
             timerDescenteBloc.Enabled = false;
+            timerRotation.Enabled = false;
             Brush brush = new SolidBrush(Color.FromArgb(200,Color.Black));
             Graphics graphicsPauseJeu = panelJeu.CreateGraphics();
             graphicsPauseJeu.FillRectangle(brush, ClientRectangle);
@@ -1050,6 +1037,7 @@ namespace ProjetTetrisSession1Tp3
         {
             jeuSurPause = false;
             timerDescenteBloc.Enabled = true;
+            timerRotation.Enabled = true;
         }
         //Simon
         private void boutonPersonnaliseOption_Click(object sender, EventArgs e)
@@ -1121,6 +1109,18 @@ namespace ProjetTetrisSession1Tp3
                 }
                 blocDejaMisEnReserve = true;
             }
+        }
+
+        private void timerRotation_Tick(object sender, EventArgs e)
+        {
+            switch(deplacement)
+            {
+                case Deplacement.AntiHorraire:
+                    BougerBlocActif(Deplacement.AntiHorraire);
+                    break;
+            }
+            DessinerJeu();
+            deplacement = Deplacement.None;
         }
     }
 }

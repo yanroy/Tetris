@@ -42,6 +42,7 @@
             this.panelStatistique = new System.Windows.Forms.Panel();
             this.pictureBoxEntete = new System.Windows.Forms.PictureBox();
             this.labelTitre = new System.Windows.Forms.Label();
+            this.timerRotation = new System.Windows.Forms.Timer(this.components);
             this.boutonPersonnaliseQuitter = new ProjetTetrisSession1Tp3.BoutonPersonnalise();
             this.boutonPersonnaliseOption = new ProjetTetrisSession1Tp3.BoutonPersonnalise();
             this.boutonPersonnaliseNouvellePartie = new ProjetTetrisSession1Tp3.BoutonPersonnalise();
@@ -55,6 +56,7 @@
             // timerDescenteBloc
             // 
             this.timerDescenteBloc.Enabled = true;
+            this.timerDescenteBloc.Interval = 500;
             this.timerDescenteBloc.Tick += new System.EventHandler(this.timerDescenteBloc_Tick);
             // 
             // panelConteneurPanelJeu
@@ -180,6 +182,12 @@
             this.labelTitre.Text = "TETRIS SIM AND YAN";
             this.labelTitre.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // timerRotation
+            // 
+            this.timerRotation.Enabled = true;
+            this.timerRotation.Interval = 10;
+            this.timerRotation.Tick += new System.EventHandler(this.timerRotation_Tick);
+            // 
             // boutonPersonnaliseQuitter
             // 
             this.boutonPersonnaliseQuitter.BackColor = System.Drawing.Color.Transparent;
@@ -270,6 +278,7 @@
         private System.Windows.Forms.Panel panelConteneurBlocReserve;
         private System.Windows.Forms.Label labelBlocReserve;
         private System.Windows.Forms.Panel panelBlocReserve;
+        private System.Windows.Forms.Timer timerRotation;
     }
 }
 

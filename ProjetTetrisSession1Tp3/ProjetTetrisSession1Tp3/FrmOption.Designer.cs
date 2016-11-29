@@ -29,16 +29,18 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanelTout = new System.Windows.Forms.TableLayoutPanel();
-            this.groupBoxPersonnalisationImagesBlocs = new System.Windows.Forms.GroupBox();
-            this.flowLayoutPanelBlocsImages = new System.Windows.Forms.FlowLayoutPanel();
-            this.pictureBoxBlocGele = new System.Windows.Forms.PictureBox();
-            this.pictureBoxBlocCarre = new System.Windows.Forms.PictureBox();
-            this.pictureBoxBlocJ = new System.Windows.Forms.PictureBox();
-            this.pictureBoxBlocL = new System.Windows.Forms.PictureBox();
-            this.pictureBoxBlocLigne = new System.Windows.Forms.PictureBox();
-            this.pictureBoxBlocS = new System.Windows.Forms.PictureBox();
-            this.pictureBoxBlocT = new System.Windows.Forms.PictureBox();
-            this.pictureBoxBlocZ = new System.Windows.Forms.PictureBox();
+            this.groupBoxControls = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanelControles = new System.Windows.Forms.TableLayoutPanel();
+            this.labelDroite = new System.Windows.Forms.Label();
+            this.labelGauche = new System.Windows.Forms.Label();
+            this.labelAccelerer = new System.Windows.Forms.Label();
+            this.labelReserve = new System.Windows.Forms.Label();
+            this.labelRotation = new System.Windows.Forms.Label();
+            this.textBoxToucheDroite = new System.Windows.Forms.TextBox();
+            this.textBoxToucheGauche = new System.Windows.Forms.TextBox();
+            this.textBoxToucheAccelerer = new System.Windows.Forms.TextBox();
+            this.textBoxToucheReserve = new System.Windows.Forms.TextBox();
+            this.textBoxToucheRotation = new System.Windows.Forms.TextBox();
             this.groupBoxSon = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanelMusique = new System.Windows.Forms.TableLayoutPanel();
             this.labelMusique = new System.Windows.Forms.Label();
@@ -58,23 +60,14 @@
             this.labelCouleurFond1 = new System.Windows.Forms.Label();
             this.labelCouleurFond2 = new System.Windows.Forms.Label();
             this.pictureBoxCouleurFond1 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxCouleurFond2 = new System.Windows.Forms.PictureBox();
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonAnnuler = new System.Windows.Forms.Button();
             this.openFileDialogMusique = new System.Windows.Forms.OpenFileDialog();
-            this.openFileDialogImages = new System.Windows.Forms.OpenFileDialog();
             this.colorDialogCouleurFond = new System.Windows.Forms.ColorDialog();
-            this.pictureBoxCouleurFond2 = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanelTout.SuspendLayout();
-            this.groupBoxPersonnalisationImagesBlocs.SuspendLayout();
-            this.flowLayoutPanelBlocsImages.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBlocGele)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBlocCarre)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBlocJ)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBlocL)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBlocLigne)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBlocS)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBlocT)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBlocZ)).BeginInit();
+            this.groupBoxControls.SuspendLayout();
+            this.tableLayoutPanelControles.SuspendLayout();
             this.groupBoxSon.SuspendLayout();
             this.tableLayoutPanelMusique.SuspendLayout();
             this.groupBoxConfigurationJeu.SuspendLayout();
@@ -93,7 +86,7 @@
             this.tableLayoutPanelTout.ColumnCount = 2;
             this.tableLayoutPanelTout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanelTout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanelTout.Controls.Add(this.groupBoxPersonnalisationImagesBlocs, 1, 0);
+            this.tableLayoutPanelTout.Controls.Add(this.groupBoxControls, 1, 0);
             this.tableLayoutPanelTout.Controls.Add(this.groupBoxSon, 0, 1);
             this.tableLayoutPanelTout.Controls.Add(this.groupBoxConfigurationJeu, 0, 0);
             this.tableLayoutPanelTout.Controls.Add(this.groupBoxCouleursFond, 1, 1);
@@ -109,128 +102,139 @@
             this.tableLayoutPanelTout.Size = new System.Drawing.Size(598, 292);
             this.tableLayoutPanelTout.TabIndex = 0;
             // 
-            // groupBoxPersonnalisationImagesBlocs
+            // groupBoxControls
             // 
-            this.groupBoxPersonnalisationImagesBlocs.Controls.Add(this.flowLayoutPanelBlocsImages);
-            this.groupBoxPersonnalisationImagesBlocs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxPersonnalisationImagesBlocs.Location = new System.Drawing.Point(302, 3);
-            this.groupBoxPersonnalisationImagesBlocs.Name = "groupBoxPersonnalisationImagesBlocs";
-            this.groupBoxPersonnalisationImagesBlocs.Size = new System.Drawing.Size(293, 149);
-            this.groupBoxPersonnalisationImagesBlocs.TabIndex = 1;
-            this.groupBoxPersonnalisationImagesBlocs.TabStop = false;
-            this.groupBoxPersonnalisationImagesBlocs.Text = "Personnalisation des images des blocs";
+            this.groupBoxControls.Controls.Add(this.tableLayoutPanelControles);
+            this.groupBoxControls.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxControls.Location = new System.Drawing.Point(302, 3);
+            this.groupBoxControls.Name = "groupBoxControls";
+            this.groupBoxControls.Size = new System.Drawing.Size(293, 149);
+            this.groupBoxControls.TabIndex = 1;
+            this.groupBoxControls.TabStop = false;
+            this.groupBoxControls.Text = "Configuration des touches";
             // 
-            // flowLayoutPanelBlocsImages
+            // tableLayoutPanelControles
             // 
-            this.flowLayoutPanelBlocsImages.Controls.Add(this.pictureBoxBlocGele);
-            this.flowLayoutPanelBlocsImages.Controls.Add(this.pictureBoxBlocCarre);
-            this.flowLayoutPanelBlocsImages.Controls.Add(this.pictureBoxBlocJ);
-            this.flowLayoutPanelBlocsImages.Controls.Add(this.pictureBoxBlocL);
-            this.flowLayoutPanelBlocsImages.Controls.Add(this.pictureBoxBlocLigne);
-            this.flowLayoutPanelBlocsImages.Controls.Add(this.pictureBoxBlocS);
-            this.flowLayoutPanelBlocsImages.Controls.Add(this.pictureBoxBlocT);
-            this.flowLayoutPanelBlocsImages.Controls.Add(this.pictureBoxBlocZ);
-            this.flowLayoutPanelBlocsImages.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanelBlocsImages.Location = new System.Drawing.Point(3, 16);
-            this.flowLayoutPanelBlocsImages.Name = "flowLayoutPanelBlocsImages";
-            this.flowLayoutPanelBlocsImages.Size = new System.Drawing.Size(287, 130);
-            this.flowLayoutPanelBlocsImages.TabIndex = 0;
+            this.tableLayoutPanelControles.ColumnCount = 2;
+            this.tableLayoutPanelControles.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanelControles.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanelControles.Controls.Add(this.labelDroite, 0, 0);
+            this.tableLayoutPanelControles.Controls.Add(this.labelGauche, 0, 1);
+            this.tableLayoutPanelControles.Controls.Add(this.labelAccelerer, 0, 2);
+            this.tableLayoutPanelControles.Controls.Add(this.labelReserve, 0, 3);
+            this.tableLayoutPanelControles.Controls.Add(this.labelRotation, 0, 4);
+            this.tableLayoutPanelControles.Controls.Add(this.textBoxToucheDroite, 1, 0);
+            this.tableLayoutPanelControles.Controls.Add(this.textBoxToucheGauche, 1, 1);
+            this.tableLayoutPanelControles.Controls.Add(this.textBoxToucheAccelerer, 1, 2);
+            this.tableLayoutPanelControles.Controls.Add(this.textBoxToucheReserve, 1, 3);
+            this.tableLayoutPanelControles.Controls.Add(this.textBoxToucheRotation, 1, 4);
+            this.tableLayoutPanelControles.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanelControles.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanelControles.Name = "tableLayoutPanelControles";
+            this.tableLayoutPanelControles.RowCount = 5;
+            this.tableLayoutPanelControles.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanelControles.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanelControles.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanelControles.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanelControles.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanelControles.Size = new System.Drawing.Size(287, 130);
+            this.tableLayoutPanelControles.TabIndex = 0;
             // 
-            // pictureBoxBlocGele
+            // labelDroite
             // 
-            this.pictureBoxBlocGele.BackgroundImage = global::ProjetTetrisSession1Tp3.Properties.Resources.Gele;
-            this.pictureBoxBlocGele.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBoxBlocGele.Location = new System.Drawing.Point(10, 5);
-            this.pictureBoxBlocGele.Margin = new System.Windows.Forms.Padding(10, 5, 10, 10);
-            this.pictureBoxBlocGele.Name = "pictureBoxBlocGele";
-            this.pictureBoxBlocGele.Size = new System.Drawing.Size(50, 50);
-            this.pictureBoxBlocGele.TabIndex = 0;
-            this.pictureBoxBlocGele.TabStop = false;
-            this.pictureBoxBlocGele.Click += new System.EventHandler(this.pictureBoxBlocGele_Click);
+            this.labelDroite.AutoSize = true;
+            this.labelDroite.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelDroite.Location = new System.Drawing.Point(3, 0);
+            this.labelDroite.Name = "labelDroite";
+            this.labelDroite.Size = new System.Drawing.Size(108, 26);
+            this.labelDroite.TabIndex = 0;
+            this.labelDroite.Text = "Droite : ";
             // 
-            // pictureBoxBlocCarre
+            // labelGauche
             // 
-            this.pictureBoxBlocCarre.BackgroundImage = global::ProjetTetrisSession1Tp3.Properties.Resources.carre;
-            this.pictureBoxBlocCarre.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBoxBlocCarre.Location = new System.Drawing.Point(80, 5);
-            this.pictureBoxBlocCarre.Margin = new System.Windows.Forms.Padding(10, 5, 10, 10);
-            this.pictureBoxBlocCarre.Name = "pictureBoxBlocCarre";
-            this.pictureBoxBlocCarre.Size = new System.Drawing.Size(50, 50);
-            this.pictureBoxBlocCarre.TabIndex = 1;
-            this.pictureBoxBlocCarre.TabStop = false;
-            this.pictureBoxBlocCarre.Click += new System.EventHandler(this.pictureBoxBlocCarre_Click);
+            this.labelGauche.AutoSize = true;
+            this.labelGauche.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelGauche.Location = new System.Drawing.Point(3, 26);
+            this.labelGauche.Name = "labelGauche";
+            this.labelGauche.Size = new System.Drawing.Size(108, 26);
+            this.labelGauche.TabIndex = 1;
+            this.labelGauche.Text = "Gauche : ";
             // 
-            // pictureBoxBlocJ
+            // labelAccelerer
             // 
-            this.pictureBoxBlocJ.BackgroundImage = global::ProjetTetrisSession1Tp3.Properties.Resources.J;
-            this.pictureBoxBlocJ.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBoxBlocJ.Location = new System.Drawing.Point(150, 5);
-            this.pictureBoxBlocJ.Margin = new System.Windows.Forms.Padding(10, 5, 10, 10);
-            this.pictureBoxBlocJ.Name = "pictureBoxBlocJ";
-            this.pictureBoxBlocJ.Size = new System.Drawing.Size(50, 50);
-            this.pictureBoxBlocJ.TabIndex = 2;
-            this.pictureBoxBlocJ.TabStop = false;
-            this.pictureBoxBlocJ.Click += new System.EventHandler(this.pictureBoxBlocJ_Click);
+            this.labelAccelerer.AutoSize = true;
+            this.labelAccelerer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelAccelerer.Location = new System.Drawing.Point(3, 52);
+            this.labelAccelerer.Name = "labelAccelerer";
+            this.labelAccelerer.Size = new System.Drawing.Size(108, 26);
+            this.labelAccelerer.TabIndex = 2;
+            this.labelAccelerer.Text = "Accélérer Descente : ";
             // 
-            // pictureBoxBlocL
+            // labelReserve
             // 
-            this.pictureBoxBlocL.BackgroundImage = global::ProjetTetrisSession1Tp3.Properties.Resources.L;
-            this.pictureBoxBlocL.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBoxBlocL.Location = new System.Drawing.Point(220, 5);
-            this.pictureBoxBlocL.Margin = new System.Windows.Forms.Padding(10, 5, 10, 10);
-            this.pictureBoxBlocL.Name = "pictureBoxBlocL";
-            this.pictureBoxBlocL.Size = new System.Drawing.Size(50, 50);
-            this.pictureBoxBlocL.TabIndex = 3;
-            this.pictureBoxBlocL.TabStop = false;
-            this.pictureBoxBlocL.Click += new System.EventHandler(this.pictureBoxBlocL_Click);
+            this.labelReserve.AutoSize = true;
+            this.labelReserve.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelReserve.Location = new System.Drawing.Point(3, 78);
+            this.labelReserve.Name = "labelReserve";
+            this.labelReserve.Size = new System.Drawing.Size(108, 26);
+            this.labelReserve.TabIndex = 3;
+            this.labelReserve.Text = "Reserve : ";
             // 
-            // pictureBoxBlocLigne
+            // labelRotation
             // 
-            this.pictureBoxBlocLigne.BackgroundImage = global::ProjetTetrisSession1Tp3.Properties.Resources.ligne;
-            this.pictureBoxBlocLigne.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBoxBlocLigne.Location = new System.Drawing.Point(10, 70);
-            this.pictureBoxBlocLigne.Margin = new System.Windows.Forms.Padding(10, 5, 10, 10);
-            this.pictureBoxBlocLigne.Name = "pictureBoxBlocLigne";
-            this.pictureBoxBlocLigne.Size = new System.Drawing.Size(50, 50);
-            this.pictureBoxBlocLigne.TabIndex = 4;
-            this.pictureBoxBlocLigne.TabStop = false;
-            this.pictureBoxBlocLigne.Click += new System.EventHandler(this.pictureBoxBlocLigne_Click);
+            this.labelRotation.AutoSize = true;
+            this.labelRotation.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelRotation.Location = new System.Drawing.Point(3, 104);
+            this.labelRotation.Name = "labelRotation";
+            this.labelRotation.Size = new System.Drawing.Size(108, 26);
+            this.labelRotation.TabIndex = 4;
+            this.labelRotation.Text = "Rotation : ";
             // 
-            // pictureBoxBlocS
+            // textBoxToucheDroite
             // 
-            this.pictureBoxBlocS.BackgroundImage = global::ProjetTetrisSession1Tp3.Properties.Resources.S;
-            this.pictureBoxBlocS.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBoxBlocS.Location = new System.Drawing.Point(80, 70);
-            this.pictureBoxBlocS.Margin = new System.Windows.Forms.Padding(10, 5, 10, 10);
-            this.pictureBoxBlocS.Name = "pictureBoxBlocS";
-            this.pictureBoxBlocS.Size = new System.Drawing.Size(50, 50);
-            this.pictureBoxBlocS.TabIndex = 5;
-            this.pictureBoxBlocS.TabStop = false;
-            this.pictureBoxBlocS.Click += new System.EventHandler(this.pictureBoxBlocS_Click);
+            this.textBoxToucheDroite.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxToucheDroite.Location = new System.Drawing.Point(117, 3);
+            this.textBoxToucheDroite.Name = "textBoxToucheDroite";
+            this.textBoxToucheDroite.ReadOnly = true;
+            this.textBoxToucheDroite.Size = new System.Drawing.Size(167, 20);
+            this.textBoxToucheDroite.TabIndex = 5;
             // 
-            // pictureBoxBlocT
+            // textBoxToucheGauche
             // 
-            this.pictureBoxBlocT.BackgroundImage = global::ProjetTetrisSession1Tp3.Properties.Resources.T;
-            this.pictureBoxBlocT.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBoxBlocT.Location = new System.Drawing.Point(150, 70);
-            this.pictureBoxBlocT.Margin = new System.Windows.Forms.Padding(10, 5, 10, 10);
-            this.pictureBoxBlocT.Name = "pictureBoxBlocT";
-            this.pictureBoxBlocT.Size = new System.Drawing.Size(50, 50);
-            this.pictureBoxBlocT.TabIndex = 6;
-            this.pictureBoxBlocT.TabStop = false;
-            this.pictureBoxBlocT.Click += new System.EventHandler(this.pictureBoxBlocT_Click);
+            this.textBoxToucheGauche.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxToucheGauche.Location = new System.Drawing.Point(117, 29);
+            this.textBoxToucheGauche.Name = "textBoxToucheGauche";
+            this.textBoxToucheGauche.ReadOnly = true;
+            this.textBoxToucheGauche.Size = new System.Drawing.Size(167, 20);
+            this.textBoxToucheGauche.TabIndex = 6;
             // 
-            // pictureBoxBlocZ
+            // textBoxToucheAccelerer
             // 
-            this.pictureBoxBlocZ.BackgroundImage = global::ProjetTetrisSession1Tp3.Properties.Resources.Z;
-            this.pictureBoxBlocZ.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBoxBlocZ.Location = new System.Drawing.Point(220, 70);
-            this.pictureBoxBlocZ.Margin = new System.Windows.Forms.Padding(10, 5, 10, 10);
-            this.pictureBoxBlocZ.Name = "pictureBoxBlocZ";
-            this.pictureBoxBlocZ.Size = new System.Drawing.Size(50, 50);
-            this.pictureBoxBlocZ.TabIndex = 7;
-            this.pictureBoxBlocZ.TabStop = false;
-            this.pictureBoxBlocZ.Click += new System.EventHandler(this.pictureBoxBlocZ_Click);
+            this.textBoxToucheAccelerer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxToucheAccelerer.Location = new System.Drawing.Point(117, 55);
+            this.textBoxToucheAccelerer.Name = "textBoxToucheAccelerer";
+            this.textBoxToucheAccelerer.ReadOnly = true;
+            this.textBoxToucheAccelerer.Size = new System.Drawing.Size(167, 20);
+            this.textBoxToucheAccelerer.TabIndex = 7;
+            // 
+            // textBoxToucheReserve
+            // 
+            this.textBoxToucheReserve.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxToucheReserve.Location = new System.Drawing.Point(117, 81);
+            this.textBoxToucheReserve.Name = "textBoxToucheReserve";
+            this.textBoxToucheReserve.ReadOnly = true;
+            this.textBoxToucheReserve.Size = new System.Drawing.Size(167, 20);
+            this.textBoxToucheReserve.TabIndex = 8;
+            // 
+            // textBoxToucheRotation
+            // 
+            this.textBoxToucheRotation.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxToucheRotation.Location = new System.Drawing.Point(117, 107);
+            this.textBoxToucheRotation.Name = "textBoxToucheRotation";
+            this.textBoxToucheRotation.ReadOnly = true;
+            this.textBoxToucheRotation.Size = new System.Drawing.Size(167, 20);
+            this.textBoxToucheRotation.TabIndex = 9;
+            this.textBoxToucheRotation.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxToucheRotation_KeyDown);
             // 
             // groupBoxSon
             // 
@@ -489,6 +493,16 @@
             this.pictureBoxCouleurFond1.TabStop = false;
             this.pictureBoxCouleurFond1.Click += new System.EventHandler(this.pictureBoxCouleurFond1_Click);
             // 
+            // pictureBoxCouleurFond2
+            // 
+            this.pictureBoxCouleurFond2.BackColor = System.Drawing.Color.DarkGray;
+            this.pictureBoxCouleurFond2.Location = new System.Drawing.Point(109, 41);
+            this.pictureBoxCouleurFond2.Name = "pictureBoxCouleurFond2";
+            this.pictureBoxCouleurFond2.Size = new System.Drawing.Size(50, 32);
+            this.pictureBoxCouleurFond2.TabIndex = 3;
+            this.pictureBoxCouleurFond2.TabStop = false;
+            this.pictureBoxCouleurFond2.Click += new System.EventHandler(this.pictureBoxCouleurFond2_Click);
+            // 
             // buttonOk
             // 
             this.buttonOk.DialogResult = System.Windows.Forms.DialogResult.OK;
@@ -515,20 +529,6 @@
             // 
             this.openFileDialogMusique.FileName = "openFileDialogMusique";
             // 
-            // openFileDialogImages
-            // 
-            this.openFileDialogImages.FileName = "openFileDialogImage";
-            // 
-            // pictureBoxCouleurFond2
-            // 
-            this.pictureBoxCouleurFond2.BackColor = System.Drawing.Color.DarkGray;
-            this.pictureBoxCouleurFond2.Location = new System.Drawing.Point(109, 41);
-            this.pictureBoxCouleurFond2.Name = "pictureBoxCouleurFond2";
-            this.pictureBoxCouleurFond2.Size = new System.Drawing.Size(50, 32);
-            this.pictureBoxCouleurFond2.TabIndex = 3;
-            this.pictureBoxCouleurFond2.TabStop = false;
-            this.pictureBoxCouleurFond2.Click += new System.EventHandler(this.pictureBoxCouleurFond2_Click);
-            // 
             // FrmOption
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -537,16 +537,9 @@
             this.Name = "FrmOption";
             this.Text = "FrmOption";
             this.tableLayoutPanelTout.ResumeLayout(false);
-            this.groupBoxPersonnalisationImagesBlocs.ResumeLayout(false);
-            this.flowLayoutPanelBlocsImages.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBlocGele)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBlocCarre)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBlocJ)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBlocL)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBlocLigne)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBlocS)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBlocT)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBlocZ)).EndInit();
+            this.groupBoxControls.ResumeLayout(false);
+            this.tableLayoutPanelControles.ResumeLayout(false);
+            this.tableLayoutPanelControles.PerformLayout();
             this.groupBoxSon.ResumeLayout(false);
             this.tableLayoutPanelMusique.ResumeLayout(false);
             this.tableLayoutPanelMusique.PerformLayout();
@@ -568,16 +561,7 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelTout;
-        private System.Windows.Forms.GroupBox groupBoxPersonnalisationImagesBlocs;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelBlocsImages;
-        private System.Windows.Forms.PictureBox pictureBoxBlocGele;
-        private System.Windows.Forms.PictureBox pictureBoxBlocCarre;
-        private System.Windows.Forms.PictureBox pictureBoxBlocJ;
-        private System.Windows.Forms.PictureBox pictureBoxBlocL;
-        private System.Windows.Forms.PictureBox pictureBoxBlocLigne;
-        private System.Windows.Forms.PictureBox pictureBoxBlocS;
-        private System.Windows.Forms.PictureBox pictureBoxBlocT;
-        private System.Windows.Forms.PictureBox pictureBoxBlocZ;
+        private System.Windows.Forms.GroupBox groupBoxControls;
         private System.Windows.Forms.GroupBox groupBoxSon;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelMusique;
         private System.Windows.Forms.Label labelMusique;
@@ -598,10 +582,20 @@
         private System.Windows.Forms.Label labelCouleurFond2;
         private System.Windows.Forms.PictureBox pictureBoxCouleurFond1;
         private System.Windows.Forms.OpenFileDialog openFileDialogMusique;
-        private System.Windows.Forms.OpenFileDialog openFileDialogImages;
         private System.Windows.Forms.ColorDialog colorDialogCouleurFond;
         private System.Windows.Forms.Button buttonOk;
         private System.Windows.Forms.Button buttonAnnuler;
         private System.Windows.Forms.PictureBox pictureBoxCouleurFond2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelControles;
+        private System.Windows.Forms.Label labelDroite;
+        private System.Windows.Forms.Label labelGauche;
+        private System.Windows.Forms.Label labelAccelerer;
+        private System.Windows.Forms.Label labelReserve;
+        private System.Windows.Forms.Label labelRotation;
+        private System.Windows.Forms.TextBox textBoxToucheDroite;
+        private System.Windows.Forms.TextBox textBoxToucheGauche;
+        private System.Windows.Forms.TextBox textBoxToucheAccelerer;
+        private System.Windows.Forms.TextBox textBoxToucheReserve;
+        private System.Windows.Forms.TextBox textBoxToucheRotation;
     }
 }
