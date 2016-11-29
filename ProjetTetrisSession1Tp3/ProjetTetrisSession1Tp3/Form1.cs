@@ -15,6 +15,11 @@ namespace ProjetTetrisSession1Tp3
         bool test2 = true;
         int compteurDeCarre2 = 0;
         int compteurDeLigne2 = 0;
+        int compteurDeT2 = 0;
+        int compteurDeL2 = 0;
+        int compteurDeJ2 = 0;
+        int compteurDeS2 = 0;
+        int compteurDez2 = 0;
         FrmOption fmrOption = new FrmOption();
         FinDePartie frmFinDePartie = new FinDePartie();
         Random rnd = new Random();

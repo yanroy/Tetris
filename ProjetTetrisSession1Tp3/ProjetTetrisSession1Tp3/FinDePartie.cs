@@ -15,6 +15,7 @@ namespace ProjetTetrisSession1Tp3
         public bool test = true;
         public int compteurDeCarre = 0;
         public int compteurDeLigne = 0;
+        public int compteurDeT = 0;
         public FinDePartie()
         {
             InitializeComponent();
