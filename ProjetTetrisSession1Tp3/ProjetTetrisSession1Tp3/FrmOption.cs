@@ -13,14 +13,13 @@ namespace ProjetTetrisSession1Tp3
 {
     public partial class FrmOption : Form
     {
-        public int vitesse { set { numericUpDownVitesse.Value = value; } get { return (int)numericUpDownVitesse.Value; } }
         public int nbreLignes { set { numericUpDownNbreLignes.Value = value; } get { return (int)numericUpDownNbreLignes.Value; } }
         public int nbreColonnes { set { numericUpDownNbreColonnes.Value = value; } get { return (int)numericUpDownNbreColonnes.Value; } }
         public SolidBrush couleur1JeuArrierePlan { set { pictureBoxCouleurFond1.BackColor = value.Color; } get { return new SolidBrush(pictureBoxCouleurFond1.BackColor); } }
         public SolidBrush couleur2JeuArrierePlan { set { pictureBoxCouleurFond2.BackColor = value.Color; } get { return new SolidBrush(pictureBoxCouleurFond2.BackColor); } }
         public Keys keysBougerADroite { set { keysBougerADroite = value; textBoxToucheDroite.Text = value.ToString(); } get { return keysBougerADroite; } }
         public Keys keysBougerAGauche { set { keysBougerAGauche = value; textBoxToucheGauche.Text = value.ToString(); } get { return keysBougerAGauche; } }
-        public Keys keysAccelerer { set { keysAccelerer = value; textBoxToucheAccelerer.Text = value.ToString(); } get { return keysAccelerer; } }
+        public Keys keysChute { set { keysChute = value; textBoxToucheChute.Text = value.ToString(); } get { return keysChute; } }
         public Keys keysReserve { set { keysReserve = value; textBoxToucheReserve.Text = value.ToString(); } get { return keysReserve; } }
         public Keys keysRotation { set { keysRotation = value; textBoxToucheRotation.Text = value.ToString(); } get { return keysRotation; } }
         public FrmOption()
@@ -29,7 +28,7 @@ namespace ProjetTetrisSession1Tp3
             openFileDialogMusique.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
             textBoxToucheDroite.Text = Keys.Right.ToString();
             textBoxToucheGauche.Text = Keys.Left.ToString();
-            textBoxToucheAccelerer.Text = Keys.Down.ToString();
+            textBoxToucheChute.Text = Keys.Down.ToString();
             textBoxToucheReserve.Text = Keys.C.ToString();
             textBoxToucheRotation.Text = Keys.X.ToString();
         }

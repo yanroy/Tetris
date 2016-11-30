@@ -19,7 +19,10 @@ namespace ProjetTetrisSession1Tp3
         int compteurDeJ2 = 0;
         int compteurDeS2 = 0;
         int compteurDeZ2 = 0;
-        FrmOption fmrOption = new FrmOption();
+        int score = 0;
+        int nbreLignesCompletes = 0;
+        int niveau = 0;
+        FrmOption frmOption = new FrmOption();
         FinDePartie frmFinDePartie = new FinDePartie();
         Random rnd = new Random();
         SolidBrush couleur1JeuArrierePlan = new SolidBrush(Color.Beige);
@@ -29,7 +32,7 @@ namespace ProjetTetrisSession1Tp3
         Keys keysBougerAGauche = Keys.Left;
         Keys keysTournerSensAntihoraire = Keys.X;
         Keys keysMettreEnReserve = Keys.C;
-        Keys keysDescendrePlusVite = Keys.Down;
+        Keys keysChute = Keys.Down;
         int nbreLignes = 22;
         int nbreColonnes = 12;
         Bitmap[] imageBlocs = new Bitmap[] {Properties.Resources.Gele, Properties.Resources.carre, Properties.Resources.ligne, Properties.Resources.T,
@@ -52,6 +55,7 @@ namespace ProjetTetrisSession1Tp3
         int[] operateurRotationI;
         int[] operateurRotationJ;
         Deplacement deplacement = Deplacement.None;
+        int vitesse = 500;
         public FormPrincipal()
         {
             InitializeComponent();
@@ -71,17 +75,21 @@ namespace ProjetTetrisSession1Tp3
         //Simon
         private void timerDescenteBloc_Tick(object sender, EventArgs e)
         {
+            score++;
+            labelScoreNombre.Text = score.ToString();
+            labelNiveauNombre.Text = niveau.ToString();
             if (DeterminerSiLeBlocPeutBouger(Deplacement.Down))
             {
                 BougerBlocActif(Deplacement.Down);
             }
             else
-            {
+            {  
                 for(int i = 0;i < blocActifIEnJeu.Length;i++)
                 {
                     tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.Gelé;
                 }
                 EnleverLignesCompletes();
+                timerDescenteBloc.Interval = vitesse;
                 if (VerifierSiTransformerProchainBlocEnActifPossible() == true)
                 {
                     TransformerProchainBlocEnActif();
@@ -91,7 +99,7 @@ namespace ProjetTetrisSession1Tp3
                 {
                     timerDescenteBloc.Stop();                    
                     FaireFinDePartie();
-                }           
+                }
                 blocDejaMisEnReserve = false;
             }
             DessinerJeu();
@@ -101,13 +109,11 @@ namespace ProjetTetrisSession1Tp3
                 DessinerBlocEnReserve();
             }
         }
-
         // Yannick
         void FaireFinDePartie()
         {
             InformerFinDePartie();
         }
-
         // Yannick
         void InformerFinDePartie()
         {
@@ -133,6 +139,17 @@ namespace ProjetTetrisSession1Tp3
             {
                 if (EstUneLigneComplete(i))
                 {
+                    nbreLignesCompletes++;
+                    if (nbreLignesCompletes != 0 && nbreLignesCompletes % 3 == 0)
+                    {
+                        niveau++;
+                        vitesse = vitesse / 100 * 60;
+                        if (vitesse == 0)
+                        {
+                            vitesse = 1;
+                        }
+                    }
+                    score += 300;
                     DecalerLignes(i);
                 }
             }
@@ -166,31 +183,40 @@ namespace ProjetTetrisSession1Tp3
         {
             if(jeuSurPause)
             {
+                timerDescenteBloc.Interval = vitesse;
                 return false;
             }
             else if (keyData == keysBougerADroite && DeterminerSiLeBlocPeutBouger(Deplacement.Right))
             {
                 BougerBlocActif(Deplacement.Right);
                 DessinerJeu();
+                timerDescenteBloc.Interval = vitesse;
                 return true;
             }
             else if (keyData == keysBougerAGauche && DeterminerSiLeBlocPeutBouger(Deplacement.Left))
             {
                 BougerBlocActif(Deplacement.Left);
                 DessinerJeu();
+                timerDescenteBloc.Interval = vitesse;
                 return true;
             }
             else if (keyData == keysTournerSensAntihoraire)
             {
                 // Yannick
                 deplacement = Deplacement.AntiHorraire;
+                timerDescenteBloc.Interval = vitesse;
                 return true;
             }
             else if(keyData == keysMettreEnReserve)
             {
                 MettreBlocActifEnReserve();
                 DessinerJeu();
+                timerDescenteBloc.Interval = vitesse;
                 return true;
+            }
+            else if(keyData == keysChute)
+            {
+                timerDescenteBloc.Interval = 1;
             }
             return base.ProcessDialogKey(keyData);
         }
@@ -398,9 +424,8 @@ namespace ProjetTetrisSession1Tp3
                 tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = blocActifEnJeu;
             }
         }
-
-         // Yannick
-         bool VerifierSiTransformerProchainBlocEnActifPossible()
+        // Yannick
+        bool VerifierSiTransformerProchainBlocEnActifPossible()
         {
             bool possible = true;
             for (int i = 0; i < blocActifIProchain.Length; i++)
@@ -412,7 +437,6 @@ namespace ProjetTetrisSession1Tp3
             }
             return possible;
         }
-
         //Simon
         TypeBloc ChoisirBlocAleatoirement()
         {
@@ -494,13 +518,13 @@ namespace ProjetTetrisSession1Tp3
             }
             else if (direction == Deplacement.AntiHorraire)
             {
-                bougerBlocAntiHorraire();
-                //rotationTest();--------------------------------------------------------------------------------------------------------------------------------
+                BougerBlocAntiHorraire();
+                //RotaterHorrairement();
             }
 
         }
-
-        void bougerBlocAntiHorraire()
+        //Yannick
+        void BougerBlocAntiHorraire()
         {
             switch (blocActifEnJeu)
             {
@@ -929,6 +953,7 @@ namespace ProjetTetrisSession1Tp3
                 tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = blocActifEnJeu;
             }
         }
+        //Yannick
         bool VerifierSiTournerEstPossible(Deplacement rotation)
         {
             if (rotation == Deplacement.AntiHorraire)
@@ -957,7 +982,7 @@ namespace ProjetTetrisSession1Tp3
             blocActifJReserve = new int[4];
             operateurRotationI = new int[4];
             operateurRotationJ = new int[4];
-            blocActifProchain = GenererBloc(TypeBloc.Z, blocActifIProchain, blocActifJProchain);
+            blocActifProchain = GenererBloc(ChoisirBlocAleatoirement(), blocActifIProchain, blocActifJProchain);
             TransformerProchainBlocEnActif();
             blocActifProchain = GenererBloc(ChoisirBlocAleatoirement(), blocActifIProchain, blocActifJProchain);
             DessinerJeu();
@@ -965,23 +990,20 @@ namespace ProjetTetrisSession1Tp3
         //Simon
         void ConfigurerJeu()
         {
-            if(fmrOption.ShowDialog() == DialogResult.OK)
+            if(frmOption.ShowDialog() == DialogResult.OK)
             {
-                nbreColonnes = fmrOption.nbreColonnes;
-                nbreLignes = fmrOption.nbreLignes;
-                couleur1JeuArrierePlan = fmrOption.couleur1JeuArrierePlan;
-                couleur2JeuArrierePlan = fmrOption.couleur2JeuArrierePlan;
-                timerDescenteBloc.Interval = fmrOption.vitesse;
+                nbreColonnes = frmOption.nbreColonnes;
+                nbreLignes = frmOption.nbreLignes;
+                couleur1JeuArrierePlan = frmOption.couleur1JeuArrierePlan;
+                couleur2JeuArrierePlan = frmOption.couleur2JeuArrierePlan;
                 InitialiserJeu();
             }
             else
             {
-                fmrOption.nbreColonnes = nbreColonnes;
-                nbreLignes = fmrOption.nbreLignes;
-                fmrOption.couleur1JeuArrierePlan = couleur1JeuArrierePlan;
-                fmrOption.couleur2JeuArrierePlan = couleur2JeuArrierePlan;
-                fmrOption.vitesse = timerDescenteBloc.Interval;
-                
+                frmOption.nbreColonnes = nbreColonnes;
+                nbreLignes = frmOption.nbreLignes;
+                frmOption.couleur1JeuArrierePlan = couleur1JeuArrierePlan;
+                frmOption.couleur2JeuArrierePlan = couleur2JeuArrierePlan;
             }
             ReprendreLeJeu();
         }
@@ -1047,7 +1069,6 @@ namespace ProjetTetrisSession1Tp3
             ConfigurerJeu();
             DessinerJeu();
         }
-              
         //Simon
         private void boutonPersonnaliseNouvellePartie_Click(object sender, EventArgs e)
         {
@@ -1111,7 +1132,7 @@ namespace ProjetTetrisSession1Tp3
                 blocDejaMisEnReserve = true;
             }
         }
-
+        //Simon
         private void timerRotation_Tick(object sender, EventArgs e)
         {
             switch(deplacement)
@@ -1123,38 +1144,28 @@ namespace ProjetTetrisSession1Tp3
             DessinerJeu();
             deplacement = Deplacement.None;
         }
-        void rotationTest()
+        //Simon
+        void RotaterHorrairement()
         {
             if(blocActifEnJeu != TypeBloc.Carré)
             {
+                EffacerBlocActif();
                 int[] nvBlocX = new int[4];
                 int[] nvBlocY = new int[4];
-                int petitX = blocActifIEnJeu[0];
-                int grandX = blocActifIEnJeu[0];
-                int petitY = blocActifJEnJeu[0];
-                int grandY = blocActifJEnJeu[0];
-                for (int i = 0; i < blocActifJEnJeu.Length; i++)
-                {
-                    if (blocActifIEnJeu[i] < petitX)
-                    {
-                        petitX = blocActifIEnJeu[i];
-                    }
-                    if (blocActifIEnJeu[i] > grandX)
-                    {
-                        grandX = blocActifIEnJeu[i];
-                    }
-                    if (blocActifJEnJeu[i] < petitY)
-                    {
-                        petitY = blocActifJEnJeu[i];
-                    }
-                    if (blocActifJEnJeu[i] > grandY)
-                    {
-                        grandY = blocActifJEnJeu[i];
-                    }
-                    tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.None;
-                }
                 int centreX = 0;
                 int centreY = 0;
+                int operateurDeSensDeRotationX = 1;
+                int operateurDeSensDeRotationY = -1;
+                if (blocActifEnJeu == TypeBloc.T)
+                {
+                    operateurDeSensDeRotationX = -1;
+                    operateurDeSensDeRotationY = 1;
+                }
+                else
+                {
+                    operateurDeSensDeRotationX = 1;
+                    operateurDeSensDeRotationY = -1;
+                }
                 if (blocActifEnJeu == TypeBloc.J)
                 {
                     centreX = blocActifIEnJeu[2];
@@ -1167,12 +1178,20 @@ namespace ProjetTetrisSession1Tp3
                 }
                 for (int i = 0; i < nvBlocX.Length; i++)
                 {
-                    nvBlocX[i] = blocActifJEnJeu[i] - centreY + centreX;
-                    nvBlocY[i] = (blocActifIEnJeu[i] - centreX) * -1 + centreY;
+                    nvBlocX[i] = (blocActifJEnJeu[i] - centreY) * operateurDeSensDeRotationX + centreX;
+                    nvBlocY[i] = (blocActifIEnJeu[i] - centreX) * operateurDeSensDeRotationY + centreY;
                     blocActifIEnJeu[i] = nvBlocX[i];
                     blocActifJEnJeu[i] = nvBlocY[i];
                     tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = blocActifEnJeu;
                 }
+            }
+        }
+        //Simon
+        void EffacerBlocActif()
+        {
+            for(int i = 0; i < blocActifIEnJeu.Length;i++)
+            {
+                tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.None;
             }
         }
     }

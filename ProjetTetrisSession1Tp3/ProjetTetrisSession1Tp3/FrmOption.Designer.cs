@@ -33,12 +33,12 @@
             this.tableLayoutPanelControles = new System.Windows.Forms.TableLayoutPanel();
             this.labelDroite = new System.Windows.Forms.Label();
             this.labelGauche = new System.Windows.Forms.Label();
-            this.labelAccelerer = new System.Windows.Forms.Label();
+            this.labelChute = new System.Windows.Forms.Label();
             this.labelReserve = new System.Windows.Forms.Label();
             this.labelRotation = new System.Windows.Forms.Label();
             this.textBoxToucheDroite = new System.Windows.Forms.TextBox();
             this.textBoxToucheGauche = new System.Windows.Forms.TextBox();
-            this.textBoxToucheAccelerer = new System.Windows.Forms.TextBox();
+            this.textBoxToucheChute = new System.Windows.Forms.TextBox();
             this.textBoxToucheReserve = new System.Windows.Forms.TextBox();
             this.textBoxToucheRotation = new System.Windows.Forms.TextBox();
             this.groupBoxSon = new System.Windows.Forms.GroupBox();
@@ -53,8 +53,6 @@
             this.numericUpDownNbreColonnes = new System.Windows.Forms.NumericUpDown();
             this.labelNbreLignes = new System.Windows.Forms.Label();
             this.labelNbreColonnes = new System.Windows.Forms.Label();
-            this.labelVitesse = new System.Windows.Forms.Label();
-            this.numericUpDownVitesse = new System.Windows.Forms.NumericUpDown();
             this.groupBoxCouleursFond = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanelPersonnaliserCouleursFond = new System.Windows.Forms.TableLayoutPanel();
             this.labelCouleurFond1 = new System.Windows.Forms.Label();
@@ -74,7 +72,6 @@
             this.tableLayoutPanelConfigurationJeu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNbreLignes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNbreColonnes)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownVitesse)).BeginInit();
             this.groupBoxCouleursFond.SuspendLayout();
             this.tableLayoutPanelPersonnaliserCouleursFond.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCouleurFond1)).BeginInit();
@@ -120,12 +117,12 @@
             this.tableLayoutPanelControles.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
             this.tableLayoutPanelControles.Controls.Add(this.labelDroite, 0, 0);
             this.tableLayoutPanelControles.Controls.Add(this.labelGauche, 0, 1);
-            this.tableLayoutPanelControles.Controls.Add(this.labelAccelerer, 0, 2);
+            this.tableLayoutPanelControles.Controls.Add(this.labelChute, 0, 2);
             this.tableLayoutPanelControles.Controls.Add(this.labelReserve, 0, 3);
             this.tableLayoutPanelControles.Controls.Add(this.labelRotation, 0, 4);
             this.tableLayoutPanelControles.Controls.Add(this.textBoxToucheDroite, 1, 0);
             this.tableLayoutPanelControles.Controls.Add(this.textBoxToucheGauche, 1, 1);
-            this.tableLayoutPanelControles.Controls.Add(this.textBoxToucheAccelerer, 1, 2);
+            this.tableLayoutPanelControles.Controls.Add(this.textBoxToucheChute, 1, 2);
             this.tableLayoutPanelControles.Controls.Add(this.textBoxToucheReserve, 1, 3);
             this.tableLayoutPanelControles.Controls.Add(this.textBoxToucheRotation, 1, 4);
             this.tableLayoutPanelControles.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -160,15 +157,15 @@
             this.labelGauche.TabIndex = 1;
             this.labelGauche.Text = "Gauche : ";
             // 
-            // labelAccelerer
+            // labelChute
             // 
-            this.labelAccelerer.AutoSize = true;
-            this.labelAccelerer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelAccelerer.Location = new System.Drawing.Point(3, 52);
-            this.labelAccelerer.Name = "labelAccelerer";
-            this.labelAccelerer.Size = new System.Drawing.Size(108, 26);
-            this.labelAccelerer.TabIndex = 2;
-            this.labelAccelerer.Text = "Accélérer Descente : ";
+            this.labelChute.AutoSize = true;
+            this.labelChute.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelChute.Location = new System.Drawing.Point(3, 52);
+            this.labelChute.Name = "labelChute";
+            this.labelChute.Size = new System.Drawing.Size(108, 26);
+            this.labelChute.TabIndex = 2;
+            this.labelChute.Text = "Chute : ";
             // 
             // labelReserve
             // 
@@ -208,14 +205,14 @@
             this.textBoxToucheGauche.Size = new System.Drawing.Size(167, 20);
             this.textBoxToucheGauche.TabIndex = 6;
             // 
-            // textBoxToucheAccelerer
+            // textBoxToucheChute
             // 
-            this.textBoxToucheAccelerer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxToucheAccelerer.Location = new System.Drawing.Point(117, 55);
-            this.textBoxToucheAccelerer.Name = "textBoxToucheAccelerer";
-            this.textBoxToucheAccelerer.ReadOnly = true;
-            this.textBoxToucheAccelerer.Size = new System.Drawing.Size(167, 20);
-            this.textBoxToucheAccelerer.TabIndex = 7;
+            this.textBoxToucheChute.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBoxToucheChute.Location = new System.Drawing.Point(117, 55);
+            this.textBoxToucheChute.Name = "textBoxToucheChute";
+            this.textBoxToucheChute.ReadOnly = true;
+            this.textBoxToucheChute.Size = new System.Drawing.Size(167, 20);
+            this.textBoxToucheChute.TabIndex = 7;
             // 
             // textBoxToucheReserve
             // 
@@ -326,8 +323,6 @@
             this.tableLayoutPanelConfigurationJeu.Controls.Add(this.numericUpDownNbreColonnes, 1, 1);
             this.tableLayoutPanelConfigurationJeu.Controls.Add(this.labelNbreLignes, 0, 0);
             this.tableLayoutPanelConfigurationJeu.Controls.Add(this.labelNbreColonnes, 0, 1);
-            this.tableLayoutPanelConfigurationJeu.Controls.Add(this.labelVitesse, 2, 0);
-            this.tableLayoutPanelConfigurationJeu.Controls.Add(this.numericUpDownVitesse, 3, 0);
             this.tableLayoutPanelConfigurationJeu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelConfigurationJeu.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanelConfigurationJeu.Name = "tableLayoutPanelConfigurationJeu";
@@ -401,38 +396,6 @@
             this.labelNbreColonnes.Size = new System.Drawing.Size(111, 13);
             this.labelNbreColonnes.TabIndex = 3;
             this.labelNbreColonnes.Text = "Nombre de colonnes :";
-            // 
-            // labelVitesse
-            // 
-            this.labelVitesse.AutoSize = true;
-            this.labelVitesse.Location = new System.Drawing.Point(173, 5);
-            this.labelVitesse.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
-            this.labelVitesse.Name = "labelVitesse";
-            this.labelVitesse.Size = new System.Drawing.Size(41, 13);
-            this.labelVitesse.TabIndex = 4;
-            this.labelVitesse.Text = "Vitesse";
-            // 
-            // numericUpDownVitesse
-            // 
-            this.numericUpDownVitesse.Location = new System.Drawing.Point(237, 3);
-            this.numericUpDownVitesse.Maximum = new decimal(new int[] {
-            3000,
-            0,
-            0,
-            0});
-            this.numericUpDownVitesse.Minimum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.numericUpDownVitesse.Name = "numericUpDownVitesse";
-            this.numericUpDownVitesse.Size = new System.Drawing.Size(46, 20);
-            this.numericUpDownVitesse.TabIndex = 5;
-            this.numericUpDownVitesse.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
             // 
             // groupBoxCouleursFond
             // 
@@ -548,7 +511,6 @@
             this.tableLayoutPanelConfigurationJeu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNbreLignes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNbreColonnes)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownVitesse)).EndInit();
             this.groupBoxCouleursFond.ResumeLayout(false);
             this.tableLayoutPanelPersonnaliserCouleursFond.ResumeLayout(false);
             this.tableLayoutPanelPersonnaliserCouleursFond.PerformLayout();
@@ -574,8 +536,6 @@
         private System.Windows.Forms.NumericUpDown numericUpDownNbreColonnes;
         private System.Windows.Forms.Label labelNbreLignes;
         private System.Windows.Forms.Label labelNbreColonnes;
-        private System.Windows.Forms.Label labelVitesse;
-        private System.Windows.Forms.NumericUpDown numericUpDownVitesse;
         private System.Windows.Forms.GroupBox groupBoxCouleursFond;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelPersonnaliserCouleursFond;
         private System.Windows.Forms.Label labelCouleurFond1;
@@ -589,12 +549,12 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelControles;
         private System.Windows.Forms.Label labelDroite;
         private System.Windows.Forms.Label labelGauche;
-        private System.Windows.Forms.Label labelAccelerer;
+        private System.Windows.Forms.Label labelChute;
         private System.Windows.Forms.Label labelReserve;
         private System.Windows.Forms.Label labelRotation;
         private System.Windows.Forms.TextBox textBoxToucheDroite;
         private System.Windows.Forms.TextBox textBoxToucheGauche;
-        private System.Windows.Forms.TextBox textBoxToucheAccelerer;
+        private System.Windows.Forms.TextBox textBoxToucheChute;
         private System.Windows.Forms.TextBox textBoxToucheReserve;
         private System.Windows.Forms.TextBox textBoxToucheRotation;
     }
