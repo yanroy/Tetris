@@ -495,6 +495,7 @@ namespace ProjetTetrisSession1Tp3
             else if (direction == Deplacement.AntiHorraire)
             {
                 bougerBlocAntiHorraire();
+                //rotationTest();--------------------------------------------------------------------------------------------------------------------------------
             }
 
         }
@@ -1121,6 +1122,58 @@ namespace ProjetTetrisSession1Tp3
             }
             DessinerJeu();
             deplacement = Deplacement.None;
+        }
+        void rotationTest()
+        {
+            if(blocActifEnJeu != TypeBloc.Carré)
+            {
+                int[] nvBlocX = new int[4];
+                int[] nvBlocY = new int[4];
+                int petitX = blocActifIEnJeu[0];
+                int grandX = blocActifIEnJeu[0];
+                int petitY = blocActifJEnJeu[0];
+                int grandY = blocActifJEnJeu[0];
+                for (int i = 0; i < blocActifJEnJeu.Length; i++)
+                {
+                    if (blocActifIEnJeu[i] < petitX)
+                    {
+                        petitX = blocActifIEnJeu[i];
+                    }
+                    if (blocActifIEnJeu[i] > grandX)
+                    {
+                        grandX = blocActifIEnJeu[i];
+                    }
+                    if (blocActifJEnJeu[i] < petitY)
+                    {
+                        petitY = blocActifJEnJeu[i];
+                    }
+                    if (blocActifJEnJeu[i] > grandY)
+                    {
+                        grandY = blocActifJEnJeu[i];
+                    }
+                    tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.None;
+                }
+                int centreX = 0;
+                int centreY = 0;
+                if (blocActifEnJeu == TypeBloc.J)
+                {
+                    centreX = blocActifIEnJeu[2];
+                    centreY = blocActifJEnJeu[2];
+                }
+                else
+                {
+                    centreX = blocActifIEnJeu[1];
+                    centreY = blocActifJEnJeu[1];
+                }
+                for (int i = 0; i < nvBlocX.Length; i++)
+                {
+                    nvBlocX[i] = blocActifJEnJeu[i] - centreY + centreX;
+                    nvBlocY[i] = (blocActifIEnJeu[i] - centreX) * -1 + centreY;
+                    blocActifIEnJeu[i] = nvBlocX[i];
+                    blocActifJEnJeu[i] = nvBlocY[i];
+                    tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = blocActifEnJeu;
+                }
+            }
         }
     }
 }
