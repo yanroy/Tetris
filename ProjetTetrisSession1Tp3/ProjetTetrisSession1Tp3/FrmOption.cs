@@ -30,7 +30,7 @@ namespace ProjetTetrisSession1Tp3
             textBoxToucheGauche.Text = Keys.Left.ToString();
             textBoxToucheChute.Text = Keys.Down.ToString();
             textBoxToucheReserve.Text = Keys.C.ToString();
-            textBoxToucheRotation.Text = Keys.X.ToString();
+            textBoxToucheRotation.Text = Keys.Up.ToString();
         }
 
         private void buttonFichierMusique_Click(object sender, EventArgs e)

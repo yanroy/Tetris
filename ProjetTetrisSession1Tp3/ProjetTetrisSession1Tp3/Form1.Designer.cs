@@ -40,6 +40,8 @@
             this.labelProchain = new System.Windows.Forms.Label();
             this.panelProchainBloc = new System.Windows.Forms.Panel();
             this.panelStatistique = new System.Windows.Forms.Panel();
+            this.labelNiveauNombre = new System.Windows.Forms.Label();
+            this.labelNiveauMot = new System.Windows.Forms.Label();
             this.labelScoreNombre = new System.Windows.Forms.Label();
             this.labelScoreMot = new System.Windows.Forms.Label();
             this.boutonPersonnaliseQuitter = new ProjetTetrisSession1Tp3.BoutonPersonnalise();
@@ -48,8 +50,6 @@
             this.pictureBoxEntete = new System.Windows.Forms.PictureBox();
             this.labelTitre = new System.Windows.Forms.Label();
             this.timerRotation = new System.Windows.Forms.Timer(this.components);
-            this.labelNiveauMot = new System.Windows.Forms.Label();
-            this.labelNiveauNombre = new System.Windows.Forms.Label();
             this.panelConteneurPanelJeu.SuspendLayout();
             this.panelMenu.SuspendLayout();
             this.panelConteneurBlocReserve.SuspendLayout();
@@ -167,13 +167,34 @@
             this.panelStatistique.Size = new System.Drawing.Size(146, 145);
             this.panelStatistique.TabIndex = 4;
             // 
+            // labelNiveauNombre
+            // 
+            this.labelNiveauNombre.AutoSize = true;
+            this.labelNiveauNombre.Font = new System.Drawing.Font("Perpetua Titling MT", 12F);
+            this.labelNiveauNombre.Location = new System.Drawing.Point(81, 12);
+            this.labelNiveauNombre.Name = "labelNiveauNombre";
+            this.labelNiveauNombre.Size = new System.Drawing.Size(23, 23);
+            this.labelNiveauNombre.TabIndex = 3;
+            this.labelNiveauNombre.Text = "0";
+            this.labelNiveauNombre.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // labelNiveauMot
+            // 
+            this.labelNiveauMot.AutoSize = true;
+            this.labelNiveauMot.Font = new System.Drawing.Font("Perpetua Titling MT", 12F);
+            this.labelNiveauMot.Location = new System.Drawing.Point(10, 10);
+            this.labelNiveauMot.Name = "labelNiveauMot";
+            this.labelNiveauMot.Size = new System.Drawing.Size(103, 23);
+            this.labelNiveauMot.TabIndex = 2;
+            this.labelNiveauMot.Text = "Niveau : ";
+            // 
             // labelScoreNombre
             // 
             this.labelScoreNombre.AutoSize = true;
             this.labelScoreNombre.Font = new System.Drawing.Font("Perpetua Titling MT", 12F);
             this.labelScoreNombre.Location = new System.Drawing.Point(81, 43);
             this.labelScoreNombre.Name = "labelScoreNombre";
-            this.labelScoreNombre.Size = new System.Drawing.Size(20, 19);
+            this.labelScoreNombre.Size = new System.Drawing.Size(23, 23);
             this.labelScoreNombre.TabIndex = 1;
             this.labelScoreNombre.Text = "0";
             this.labelScoreNombre.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -257,7 +278,7 @@
             this.labelTitre.Font = new System.Drawing.Font("Perpetua Titling MT", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTitre.Location = new System.Drawing.Point(30, 32);
             this.labelTitre.Name = "labelTitre";
-            this.labelTitre.Size = new System.Drawing.Size(577, 58);
+            this.labelTitre.Size = new System.Drawing.Size(720, 72);
             this.labelTitre.TabIndex = 4;
             this.labelTitre.Text = "TETRIS SIM AND YAN";
             this.labelTitre.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -267,27 +288,6 @@
             this.timerRotation.Enabled = true;
             this.timerRotation.Interval = 10;
             this.timerRotation.Tick += new System.EventHandler(this.timerRotation_Tick);
-            // 
-            // labelNiveauMot
-            // 
-            this.labelNiveauMot.AutoSize = true;
-            this.labelNiveauMot.Font = new System.Drawing.Font("Perpetua Titling MT", 12F);
-            this.labelNiveauMot.Location = new System.Drawing.Point(10, 10);
-            this.labelNiveauMot.Name = "labelNiveauMot";
-            this.labelNiveauMot.Size = new System.Drawing.Size(81, 19);
-            this.labelNiveauMot.TabIndex = 2;
-            this.labelNiveauMot.Text = "Niveau : ";
-            // 
-            // labelNiveauNombre
-            // 
-            this.labelNiveauNombre.AutoSize = true;
-            this.labelNiveauNombre.Font = new System.Drawing.Font("Perpetua Titling MT", 12F);
-            this.labelNiveauNombre.Location = new System.Drawing.Point(81, 12);
-            this.labelNiveauNombre.Name = "labelNiveauNombre";
-            this.labelNiveauNombre.Size = new System.Drawing.Size(20, 19);
-            this.labelNiveauNombre.TabIndex = 3;
-            this.labelNiveauNombre.Text = "0";
-            this.labelNiveauNombre.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // FormPrincipal
             // 
@@ -301,6 +301,7 @@
             this.DoubleBuffered = true;
             this.Name = "FormPrincipal";
             this.Text = "Tetris ";
+            this.Load += new System.EventHandler(this.FormPrincipal_Load);
             this.panelConteneurPanelJeu.ResumeLayout(false);
             this.panelMenu.ResumeLayout(false);
             this.panelConteneurBlocReserve.ResumeLayout(false);
