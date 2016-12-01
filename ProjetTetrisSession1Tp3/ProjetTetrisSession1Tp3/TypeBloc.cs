@@ -16,7 +16,14 @@ namespace ProjetTetrisSession1Tp3
         L,
         J,
         S,
-        Z
+        Z,
+        GeleCarre,
+        GeleLigne,
+        GeleT,
+        GeleL,
+        GeleJ,
+        GeleS,
+        GeleZ
     }
 }
 

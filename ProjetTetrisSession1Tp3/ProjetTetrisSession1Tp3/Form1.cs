@@ -276,7 +276,7 @@ namespace ProjetTetrisSession1Tp3
             {  
                 for(int i = 0;i < blocActifIEnJeu.Length;i++)
                 {
-                    tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.Gele;
+                    tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = blocActifEnJeu + 7;
                 }
                 EnleverLignesCompletes();
                 timerDescenteBloc.Interval = vitesse;
@@ -411,6 +411,28 @@ namespace ProjetTetrisSession1Tp3
                         case TypeBloc.Z:
                             graphicsImageJeu.DrawImage(imageBlocs[7], grosseurDesBlocs * j, grosseurDesBlocs * i, grosseurDesBlocs, grosseurDesBlocs);
                             break;
+
+                        case TypeBloc.GeleCarre:
+                            graphicsImageJeu.DrawImage(imageBlocs[1], grosseurDesBlocs * j, grosseurDesBlocs * i, grosseurDesBlocs, grosseurDesBlocs);
+                            break;
+                        case TypeBloc.GeleJ:
+                            graphicsImageJeu.DrawImage(imageBlocs[5], grosseurDesBlocs * j, grosseurDesBlocs * i, grosseurDesBlocs, grosseurDesBlocs);
+                            break;
+                        case TypeBloc.GeleL:
+                            graphicsImageJeu.DrawImage(imageBlocs[4], grosseurDesBlocs * j, grosseurDesBlocs * i, grosseurDesBlocs, grosseurDesBlocs);
+                            break;
+                        case TypeBloc.GeleLigne:
+                            graphicsImageJeu.DrawImage(imageBlocs[2], grosseurDesBlocs * j, grosseurDesBlocs * i, grosseurDesBlocs, grosseurDesBlocs);
+                            break;
+                        case TypeBloc.GeleS:
+                            graphicsImageJeu.DrawImage(imageBlocs[6], grosseurDesBlocs * j, grosseurDesBlocs * i, grosseurDesBlocs, grosseurDesBlocs);
+                            break;
+                        case TypeBloc.GeleT:
+                            graphicsImageJeu.DrawImage(imageBlocs[3], grosseurDesBlocs * j, grosseurDesBlocs * i, grosseurDesBlocs, grosseurDesBlocs);
+                            break;
+                        case TypeBloc.GeleZ:
+                            graphicsImageJeu.DrawImage(imageBlocs[7], grosseurDesBlocs * j, grosseurDesBlocs * i, grosseurDesBlocs, grosseurDesBlocs);
+                            break;
                     }
                 }
             }
@@ -492,7 +514,7 @@ namespace ProjetTetrisSession1Tp3
             {
                 for(int i = 0; i < blocActifIEnJeu.Length; i++)
                 {
-                    if(blocActifIEnJeu[i] + 1 >= tableauDeBlocs.GetLength(0) || tableauDeBlocs[blocActifIEnJeu[i] + 1, blocActifJEnJeu[i]] == TypeBloc.Gele)
+                    if(blocActifIEnJeu[i] + 1 >= tableauDeBlocs.GetLength(0) || (int)tableauDeBlocs[blocActifIEnJeu[i] + 1, blocActifJEnJeu[i]] >=9)
                     {
                         return false;
                     }
@@ -503,7 +525,7 @@ namespace ProjetTetrisSession1Tp3
             {
                 for(int i = 0; i < blocActifJEnJeu.Length; i++)
                 {
-                    if (blocActifJEnJeu[i] + 1 >= tableauDeBlocs.GetLength(1) || tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i] + 1] == TypeBloc.Gele)
+                    if (blocActifJEnJeu[i] + 1 >= tableauDeBlocs.GetLength(1) || (int)tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i] + 1] >= 9)
                     {
                         return false;
                     }
@@ -514,7 +536,7 @@ namespace ProjetTetrisSession1Tp3
             {
                 for (int i = 0; i < blocActifJEnJeu.Length; i++)
                 {
-                    if (blocActifJEnJeu[i] - 1 < 0 || tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i] - 1] == TypeBloc.Gele)
+                    if (blocActifJEnJeu[i] - 1 < 0 || (int)tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i] - 1] >= 9)
                     {
                         return false;
                     }
@@ -530,7 +552,7 @@ namespace ProjetTetrisSession1Tp3
                         blocActifJEnJeu[i] + operateurRotationJ[i] < 0 || 
                         blocActifIEnJeu[i] + operateurRotationI[i] > tableauDeBlocs.GetLength(0) - 1 || 
                         blocActifJEnJeu[i] + operateurRotationJ[i] > tableauDeBlocs.GetLength(1) - 1 ||
-                        tableauDeBlocs[blocActifIEnJeu[i] + operateurRotationI[i], blocActifJEnJeu[i] + operateurRotationJ[i]] == TypeBloc.Gele)
+                        (int)tableauDeBlocs[blocActifIEnJeu[i] + operateurRotationI[i], blocActifJEnJeu[i] + operateurRotationJ[i]] >= 9)
                     {
                         return false;
                     }
@@ -1169,7 +1191,7 @@ namespace ProjetTetrisSession1Tp3
             int compteurBlocsGeles = 0;
             for(int j = 0; j < tableauDeBlocs.GetLength(1);j++)
             {
-                if(tableauDeBlocs[ligne,j] == TypeBloc.Gele)
+                if((int)tableauDeBlocs[ligne,j] >= 9)
                 {
                     compteurBlocsGeles++;
                 }
@@ -1200,14 +1222,14 @@ namespace ProjetTetrisSession1Tp3
 
             for(int i = 0; i < tableauDeBlocs.GetLength(1);i++)
             {
-                tableauDeBlocs[5, i] = TypeBloc.Gele;
+                tableauDeBlocs[5, i] = TypeBloc.GeleJ;
             }
 
             EnleverLignesCompletes();
 
             for(int i =0; i < tableauDeBlocs.GetLength(1); i++)
             {
-                Debug.Assert(tableauDeBlocs[5, i] != TypeBloc.Gele, "Le bloc 5," + i + " n'est pas supposé être gelé");    
+                Debug.Assert(tableauDeBlocs[5, i] != TypeBloc.GeleJ, "Le bloc 5," + i + " n'est pas supposé être gelé");    
             }
             //Retrait d’une ligne complète avec des blocs à décaler. 
             tableauDeBlocs = new TypeBloc[22, 12];
@@ -1219,14 +1241,14 @@ namespace ProjetTetrisSession1Tp3
 
             for (int i = 0; i < tableauDeBlocs.GetLength(1); i++)
             {
-                tableauDeBlocs[5, i] = TypeBloc.Gele;
+                tableauDeBlocs[5, i] = TypeBloc.GeleJ;
             }
-            tableauDeBlocs[4, 1] = TypeBloc.Gele;
-            tableauDeBlocs[4, 6] = TypeBloc.Gele;
+            tableauDeBlocs[4, 1] = TypeBloc.GeleJ;
+            tableauDeBlocs[4, 6] = TypeBloc.GeleJ;
             EnleverLignesCompletes();
 
-            Debug.Assert(tableauDeBlocs[5, 1] == TypeBloc.Gele, "Le bloc à la position 5,1 est supposé être gelé");
-            Debug.Assert(tableauDeBlocs[5, 6] == TypeBloc.Gele, "Le bloc à la position 5,6 est supposé être gelé");
+            Debug.Assert(tableauDeBlocs[5, 1] == TypeBloc.GeleJ, "Le bloc à la position 5,1 est supposé être gelé");
+            Debug.Assert(tableauDeBlocs[5, 6] == TypeBloc.GeleJ, "Le bloc à la position 5,6 est supposé être gelé");
             //Retrait de deux lignes complètes consécutives
             tableauDeBlocs = new TypeBloc[22, 12];
             score = 0;
@@ -1237,14 +1259,14 @@ namespace ProjetTetrisSession1Tp3
 
             for (int i = 0; i < tableauDeBlocs.GetLength(1); i++)
             {
-                tableauDeBlocs[5, i] = TypeBloc.Gele;
-                tableauDeBlocs[6, i] = TypeBloc.Gele;
+                tableauDeBlocs[5, i] = TypeBloc.GeleJ;
+                tableauDeBlocs[6, i] = TypeBloc.GeleJ;
             }
             EnleverLignesCompletes();
             for (int i = 0; i < tableauDeBlocs.GetLength(1); i++)
             {
-                Debug.Assert(tableauDeBlocs[5, i] != TypeBloc.Gele, "Le bloc 5," + i + " n'est pas supposé être gelé");
-                Debug.Assert(tableauDeBlocs[6, i] != TypeBloc.Gele, "Le bloc 6," + i + " n'est pas supposé être gelé");
+                Debug.Assert(tableauDeBlocs[5, i] != TypeBloc.GeleJ, "Le bloc 5," + i + " n'est pas supposé être gelé");
+                Debug.Assert(tableauDeBlocs[6, i] != TypeBloc.GeleJ, "Le bloc 6," + i + " n'est pas supposé être gelé");
             }
             //Retrait de deux lignes complètes non consécutives. 
             tableauDeBlocs = new TypeBloc[22, 12];
@@ -1256,14 +1278,14 @@ namespace ProjetTetrisSession1Tp3
 
             for (int i = 0; i < tableauDeBlocs.GetLength(1); i++)
             {
-                tableauDeBlocs[5, i] = TypeBloc.Gele;
-                tableauDeBlocs[7, i] = TypeBloc.Gele;
+                tableauDeBlocs[5, i] = TypeBloc.GeleJ;
+                tableauDeBlocs[7, i] = TypeBloc.GeleJ;
             }
             EnleverLignesCompletes();
             for (int i = 0; i < tableauDeBlocs.GetLength(1); i++)
             {
-                Debug.Assert(tableauDeBlocs[5, i] != TypeBloc.Gele, "Le bloc 5," + i + " n'est pas supposé être gelé");
-                Debug.Assert(tableauDeBlocs[7, i] != TypeBloc.Gele, "Le bloc 7," + i + " n'est pas supposé être gelé");
+                Debug.Assert(tableauDeBlocs[5, i] != TypeBloc.GeleJ, "Le bloc 5," + i + " n'est pas supposé être gelé");
+                Debug.Assert(tableauDeBlocs[7, i] != TypeBloc.GeleJ, "Le bloc 7," + i + " n'est pas supposé être gelé");
             }
             //Retrait de trois lignes complètes.
             tableauDeBlocs = new TypeBloc[22, 12];
@@ -1275,16 +1297,16 @@ namespace ProjetTetrisSession1Tp3
 
             for (int i = 0; i < tableauDeBlocs.GetLength(1); i++)
             {
-                tableauDeBlocs[5, i] = TypeBloc.Gele;
-                tableauDeBlocs[6, i] = TypeBloc.Gele;
-                tableauDeBlocs[7, i] = TypeBloc.Gele;
+                tableauDeBlocs[5, i] = TypeBloc.GeleJ;
+                tableauDeBlocs[6, i] = TypeBloc.GeleJ;
+                tableauDeBlocs[7, i] = TypeBloc.GeleJ;
             }
             EnleverLignesCompletes();
             for (int i = 0; i < tableauDeBlocs.GetLength(1); i++)
             {
-                Debug.Assert(tableauDeBlocs[5, i] != TypeBloc.Gele, "Le bloc 5," + i + " n'est pas supposé être gelé");
-                Debug.Assert(tableauDeBlocs[6, i] != TypeBloc.Gele, "Le bloc 6," + i + " n'est pas supposé être gelé");
-                Debug.Assert(tableauDeBlocs[7, i] != TypeBloc.Gele, "Le bloc 7," + i + " n'est pas supposé être gelé");
+                Debug.Assert(tableauDeBlocs[5, i] != TypeBloc.GeleJ, "Le bloc 5," + i + " n'est pas supposé être gelé");
+                Debug.Assert(tableauDeBlocs[6, i] != TypeBloc.GeleJ, "Le bloc 6," + i + " n'est pas supposé être gelé");
+                Debug.Assert(tableauDeBlocs[7, i] != TypeBloc.GeleJ, "Le bloc 7," + i + " n'est pas supposé être gelé");
             }
             //Retrait de quatre lignes complètes. 
             tableauDeBlocs = new TypeBloc[22, 12];
@@ -1296,18 +1318,18 @@ namespace ProjetTetrisSession1Tp3
 
             for (int i = 0; i < tableauDeBlocs.GetLength(1); i++)
             {
-                tableauDeBlocs[5, i] = TypeBloc.Gele;
-                tableauDeBlocs[6, i] = TypeBloc.Gele;
-                tableauDeBlocs[7, i] = TypeBloc.Gele;
-                tableauDeBlocs[8, i] = TypeBloc.Gele;
+                tableauDeBlocs[5, i] = TypeBloc.GeleJ;
+                tableauDeBlocs[6, i] = TypeBloc.GeleJ;
+                tableauDeBlocs[7, i] = TypeBloc.GeleJ;
+                tableauDeBlocs[8, i] = TypeBloc.GeleJ;
             }
             EnleverLignesCompletes();
             for (int i = 0; i < tableauDeBlocs.GetLength(1); i++)
             {
-                Debug.Assert(tableauDeBlocs[5, i] != TypeBloc.Gele, "Le bloc 5," + i + " n'est pas supposé être gelé");
-                Debug.Assert(tableauDeBlocs[6, i] != TypeBloc.Gele, "Le bloc 6," + i + " n'est pas supposé être gelé");
-                Debug.Assert(tableauDeBlocs[7, i] != TypeBloc.Gele, "Le bloc 7," + i + " n'est pas supposé être gelé");
-                Debug.Assert(tableauDeBlocs[8, i] != TypeBloc.Gele, "Le bloc 8," + i + " n'est pas supposé être gelé");
+                Debug.Assert(tableauDeBlocs[5, i] != TypeBloc.GeleJ, "Le bloc 5," + i + " n'est pas supposé être gelé");
+                Debug.Assert(tableauDeBlocs[6, i] != TypeBloc.GeleJ, "Le bloc 6," + i + " n'est pas supposé être gelé");
+                Debug.Assert(tableauDeBlocs[7, i] != TypeBloc.GeleJ, "Le bloc 7," + i + " n'est pas supposé être gelé");
+                Debug.Assert(tableauDeBlocs[8, i] != TypeBloc.GeleJ, "Le bloc 8," + i + " n'est pas supposé être gelé");
             }
         }
 
