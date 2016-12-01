@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,7 @@ namespace ProjetTetrisSession1Tp3
         int compteurDeJ2 = 0;
         int compteurDeS2 = 0;
         int compteurDeZ2 = 0;
+        //Variables du score
         int score = 0;
         int nbreLignesCompletes = 0;
         int niveau = 0;
@@ -73,6 +75,7 @@ namespace ProjetTetrisSession1Tp3
         public FormPrincipal()
         {
             InitializeComponent();
+            EnleverLignesCompletes_Test();
         }       
         //Simon
         private void FormPrincipal_Load(object sender, EventArgs e)
@@ -94,7 +97,17 @@ namespace ProjetTetrisSession1Tp3
             operateurRotationJ = new int[4];
             scoreTemporaire = new int[3];
             scoreTemporaireLocation = new Point[3];
+            score = 0;
+            niveau = 0;
+            nbreLignesCompletes = 0;
             vitesse = vitesseAuDebut;
+            for (int i = 0; i < tableauDeBlocs.GetLength(0); i++)
+            {
+                for (int j = 0; j < tableauDeBlocs.GetLength(1); j++)
+                {
+                    Debug.Assert(tableauDeBlocs[i, j] == TypeBloc.None, "Le bloc en position " + i + "," + j + " n'est pas vide.");
+                }
+            }
             blocActifProchain = GenererBloc(ChoisirBlocAleatoirement(), blocActifIProchain, blocActifJProchain);
             TransformerProchainBlocEnActif();
             blocActifProchain = GenererBloc(ChoisirBlocAleatoirement(), blocActifIProchain, blocActifJProchain);
@@ -107,8 +120,8 @@ namespace ProjetTetrisSession1Tp3
             TypeBloc blocActifVariable = blocAGenerer;
             switch (blocActifVariable)
             {
-                case TypeBloc.Carré:
-                    blocActifVariable = TypeBloc.Carré;
+                case TypeBloc.Carre:
+                    blocActifVariable = TypeBloc.Carre;
 
                     blocActifIVariable[0] = 0;
                     blocActifIVariable[1] = 0;
@@ -216,7 +229,7 @@ namespace ProjetTetrisSession1Tp3
             {
                 compteurDeLigne2++;
             }
-            if (blocActifEnJeu == TypeBloc.Carré)
+            if (blocActifEnJeu == TypeBloc.Carre)
             {
                 compteurDeCarre2++;
             }
@@ -263,7 +276,7 @@ namespace ProjetTetrisSession1Tp3
             {  
                 for(int i = 0;i < blocActifIEnJeu.Length;i++)
                 {
-                    tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.Gelé;
+                    tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.Gele;
                 }
                 EnleverLignesCompletes();
                 timerDescenteBloc.Interval = vitesse;
@@ -374,10 +387,10 @@ namespace ProjetTetrisSession1Tp3
                 {
                     switch (tableauDeBlocs[i, j])
                     {
-                        case TypeBloc.Carré:
+                        case TypeBloc.Carre:
                             graphicsImageJeu.DrawImage(imageBlocs[1], grosseurDesBlocs * j, grosseurDesBlocs * i, grosseurDesBlocs, grosseurDesBlocs);
                             break;
-                        case TypeBloc.Gelé:
+                        case TypeBloc.Gele:
                             graphicsImageJeu.DrawImage(imageBlocs[0], grosseurDesBlocs * j, grosseurDesBlocs * i, grosseurDesBlocs, grosseurDesBlocs);
                             break;
                         case TypeBloc.J:
@@ -474,47 +487,57 @@ namespace ProjetTetrisSession1Tp3
         //Simon et Yannick
         bool DeterminerSiLeBlocPeutBouger(Deplacement direction)
         {
+            bool deplacementTester = false;
             if(direction == Deplacement.Down)
             {
                 for(int i = 0; i < blocActifIEnJeu.Length; i++)
                 {
-                    if(blocActifIEnJeu[i] + 1 >= tableauDeBlocs.GetLength(0) || tableauDeBlocs[blocActifIEnJeu[i] + 1, blocActifJEnJeu[i]] == TypeBloc.Gelé)
+                    if(blocActifIEnJeu[i] + 1 >= tableauDeBlocs.GetLength(0) || tableauDeBlocs[blocActifIEnJeu[i] + 1, blocActifJEnJeu[i]] == TypeBloc.Gele)
                     {
                         return false;
                     }
                 }
+                deplacementTester = true;
             }
             else if(direction == Deplacement.Right)
             {
                 for(int i = 0; i < blocActifJEnJeu.Length; i++)
                 {
-                    if (blocActifJEnJeu[i] + 1 >= tableauDeBlocs.GetLength(1) || tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i] + 1] == TypeBloc.Gelé)
+                    if (blocActifJEnJeu[i] + 1 >= tableauDeBlocs.GetLength(1) || tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i] + 1] == TypeBloc.Gele)
                     {
                         return false;
                     }
                 }
+                deplacementTester = true;
             }
             else if (direction == Deplacement.Left)
             {
                 for (int i = 0; i < blocActifJEnJeu.Length; i++)
                 {
-                    if (blocActifJEnJeu[i] - 1 < 0 || tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i] - 1] == TypeBloc.Gelé)
+                    if (blocActifJEnJeu[i] - 1 < 0 || tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i] - 1] == TypeBloc.Gele)
                     {
                         return false;
                     }
                 }
+                deplacementTester = true;
             }
             //Yannick
             else if (direction == Deplacement.AntiHorraire)
             {
                 for (int i = 0; i < operateurRotationI.Length; i++)
                 {
-                    if (blocActifIEnJeu[i] + operateurRotationI[i] < 0 || blocActifJEnJeu[i] + operateurRotationJ[i] < 0 || blocActifIEnJeu[i] + operateurRotationI[i] > tableauDeBlocs.GetLength(0) - 1 || blocActifJEnJeu[i] + operateurRotationJ[i] > tableauDeBlocs.GetLength(1) - 1)
+                    if (blocActifIEnJeu[i] + operateurRotationI[i] < 0 || 
+                        blocActifJEnJeu[i] + operateurRotationJ[i] < 0 || 
+                        blocActifIEnJeu[i] + operateurRotationI[i] > tableauDeBlocs.GetLength(0) - 1 || 
+                        blocActifJEnJeu[i] + operateurRotationJ[i] > tableauDeBlocs.GetLength(1) - 1 ||
+                        tableauDeBlocs[blocActifIEnJeu[i] + operateurRotationI[i], blocActifJEnJeu[i] + operateurRotationJ[i]] == TypeBloc.Gele)
                     {
                         return false;
                     }
                 }
+                deplacementTester = true;
             }
+            Debug.Assert(deplacementTester, "Le déplacement n'est pas pris en charge par la méthode");
             return true;
         }
         //Simon
@@ -580,7 +603,7 @@ namespace ProjetTetrisSession1Tp3
         {
             switch (blocActifEnJeu)
             {
-                case TypeBloc.Carré:
+                case TypeBloc.Carre:
                     for (int i =0; i < operateurRotationI.Length; i++)
                     {
                         operateurRotationI[i] = 0;
@@ -1008,7 +1031,7 @@ namespace ProjetTetrisSession1Tp3
         //Simon (Méthode non utilisée ni optimisée)
         void RotaterHorrairement()
         {
-            if(blocActifEnJeu != TypeBloc.Carré)
+            if(blocActifEnJeu != TypeBloc.Carre)
             {
                 EffacerBlocActif();
                 int[] nvBlocX = new int[4];
@@ -1074,7 +1097,7 @@ namespace ProjetTetrisSession1Tp3
         }
 
         //Simon
-        int AttribuerScore(Point locationScore, int score)
+        void AttribuerScore(Point locationScore, int score)
         {
             int positionScore = -1;
             for(int i =0; i < scoreTemporaire.Length; i++)
@@ -1088,16 +1111,18 @@ namespace ProjetTetrisSession1Tp3
             {
                 scoreTemporaireLocation[positionScore] = locationScore;
                 scoreTemporaire[positionScore] = score;
+                this.score += score;
+                labelScoreNombre.Text = this.score.ToString();
                 ScoreThread scoreThread = new ScoreThread(positionScore, this);
                 Thread threadScore = new Thread(new ThreadStart(scoreThread.ScoreTimer));
                 threadScore.Start();
             }
-            return positionScore;
         }
         //Simon
         Point ChoisirPointAleatoireSurLignePredefinie()
         {
-            return new Point(rnd.Next(0, tableauDeBlocs.GetLength(1) * grosseurDesBlocs), lignePredefiniePoint * grosseurDesBlocs);
+            //                                                                          (Pour éviter le dépacement)
+            return new Point(rnd.Next(0, tableauDeBlocs.GetLength(1) * grosseurDesBlocs - (3 * grosseurDesBlocs)), lignePredefiniePoint * grosseurDesBlocs );
         }
 
         //Simon
@@ -1121,11 +1146,20 @@ namespace ProjetTetrisSession1Tp3
                     }
                     nbreLignesFaitesEnUnCoup++;
                     DecalerLignes(i);
+                    bool ligneCompleteI = true;
+                    for(int j = 0; j < tableauDeBlocs.GetLength(1); j++)
+                    {
+                        if(tableauDeBlocs[i,j] == TypeBloc.None)
+                        {
+                            ligneCompleteI = false;
+                        }
+                    }
+                    Debug.Assert(!ligneCompleteI, "La ligne " + i + " ne devrait pas être complète.");
                 }
             }
-            if(nbreLignesFaitesEnUnCoup !=- 0)
+            if(nbreLignesFaitesEnUnCoup != 0)
             {
-                scoreTemporaireEnleverLigne = (int)Math.Pow(2, nbreLignesFaitesEnUnCoup - 1) * 300;
+                scoreTemporaireEnleverLigne = (int)((int)Math.Pow(1.8, nbreLignesFaitesEnUnCoup) * (300 * (1 + (double)niveau/10)));
                 AttribuerScore(ChoisirPointAleatoireSurLignePredefinie(), scoreTemporaireEnleverLigne);
             }
         }
@@ -1135,7 +1169,7 @@ namespace ProjetTetrisSession1Tp3
             int compteurBlocsGeles = 0;
             for(int j = 0; j < tableauDeBlocs.GetLength(1);j++)
             {
-                if(tableauDeBlocs[ligne,j] == TypeBloc.Gelé)
+                if(tableauDeBlocs[ligne,j] == TypeBloc.Gele)
                 {
                     compteurBlocsGeles++;
                 }
@@ -1153,6 +1187,129 @@ namespace ProjetTetrisSession1Tp3
                 }
             }
         }
+        //Simon
+        void EnleverLignesCompletes_Test()
+        {
+            // Retrait d’une ligne complète seule dans la surface de jeu.
+            tableauDeBlocs = new TypeBloc[22, 12];
+            score = 0;
+            niveau = 0;
+            vitesse = vitesseAuDebut;
+            scoreTemporaire = new int[3];
+            scoreTemporaireLocation = new Point[3];
+
+            for(int i = 0; i < tableauDeBlocs.GetLength(1);i++)
+            {
+                tableauDeBlocs[5, i] = TypeBloc.Gele;
+            }
+
+            EnleverLignesCompletes();
+
+            for(int i =0; i < tableauDeBlocs.GetLength(1); i++)
+            {
+                Debug.Assert(tableauDeBlocs[5, i] != TypeBloc.Gele, "Le bloc 5," + i + " n'est pas supposé être gelé");    
+            }
+            //Retrait d’une ligne complète avec des blocs à décaler. 
+            tableauDeBlocs = new TypeBloc[22, 12];
+            score = 0;
+            niveau = 0;
+            vitesse = vitesseAuDebut;
+            scoreTemporaire = new int[3];
+            scoreTemporaireLocation = new Point[3];
+
+            for (int i = 0; i < tableauDeBlocs.GetLength(1); i++)
+            {
+                tableauDeBlocs[5, i] = TypeBloc.Gele;
+            }
+            tableauDeBlocs[4, 1] = TypeBloc.Gele;
+            tableauDeBlocs[4, 6] = TypeBloc.Gele;
+            EnleverLignesCompletes();
+
+            Debug.Assert(tableauDeBlocs[5, 1] == TypeBloc.Gele, "Le bloc à la position 5,1 est supposé être gelé");
+            Debug.Assert(tableauDeBlocs[5, 6] == TypeBloc.Gele, "Le bloc à la position 5,6 est supposé être gelé");
+            //Retrait de deux lignes complètes consécutives
+            tableauDeBlocs = new TypeBloc[22, 12];
+            score = 0;
+            niveau = 0;
+            vitesse = vitesseAuDebut;
+            scoreTemporaire = new int[3];
+            scoreTemporaireLocation = new Point[3];
+
+            for (int i = 0; i < tableauDeBlocs.GetLength(1); i++)
+            {
+                tableauDeBlocs[5, i] = TypeBloc.Gele;
+                tableauDeBlocs[6, i] = TypeBloc.Gele;
+            }
+            EnleverLignesCompletes();
+            for (int i = 0; i < tableauDeBlocs.GetLength(1); i++)
+            {
+                Debug.Assert(tableauDeBlocs[5, i] != TypeBloc.Gele, "Le bloc 5," + i + " n'est pas supposé être gelé");
+                Debug.Assert(tableauDeBlocs[6, i] != TypeBloc.Gele, "Le bloc 6," + i + " n'est pas supposé être gelé");
+            }
+            //Retrait de deux lignes complètes non consécutives. 
+            tableauDeBlocs = new TypeBloc[22, 12];
+            score = 0;
+            niveau = 0;
+            vitesse = vitesseAuDebut;
+            scoreTemporaire = new int[3];
+            scoreTemporaireLocation = new Point[3];
+
+            for (int i = 0; i < tableauDeBlocs.GetLength(1); i++)
+            {
+                tableauDeBlocs[5, i] = TypeBloc.Gele;
+                tableauDeBlocs[7, i] = TypeBloc.Gele;
+            }
+            EnleverLignesCompletes();
+            for (int i = 0; i < tableauDeBlocs.GetLength(1); i++)
+            {
+                Debug.Assert(tableauDeBlocs[5, i] != TypeBloc.Gele, "Le bloc 5," + i + " n'est pas supposé être gelé");
+                Debug.Assert(tableauDeBlocs[7, i] != TypeBloc.Gele, "Le bloc 7," + i + " n'est pas supposé être gelé");
+            }
+            //Retrait de trois lignes complètes.
+            tableauDeBlocs = new TypeBloc[22, 12];
+            score = 0;
+            niveau = 0;
+            vitesse = vitesseAuDebut;
+            scoreTemporaire = new int[3];
+            scoreTemporaireLocation = new Point[3];
+
+            for (int i = 0; i < tableauDeBlocs.GetLength(1); i++)
+            {
+                tableauDeBlocs[5, i] = TypeBloc.Gele;
+                tableauDeBlocs[6, i] = TypeBloc.Gele;
+                tableauDeBlocs[7, i] = TypeBloc.Gele;
+            }
+            EnleverLignesCompletes();
+            for (int i = 0; i < tableauDeBlocs.GetLength(1); i++)
+            {
+                Debug.Assert(tableauDeBlocs[5, i] != TypeBloc.Gele, "Le bloc 5," + i + " n'est pas supposé être gelé");
+                Debug.Assert(tableauDeBlocs[6, i] != TypeBloc.Gele, "Le bloc 6," + i + " n'est pas supposé être gelé");
+                Debug.Assert(tableauDeBlocs[7, i] != TypeBloc.Gele, "Le bloc 7," + i + " n'est pas supposé être gelé");
+            }
+            //Retrait de quatre lignes complètes. 
+            tableauDeBlocs = new TypeBloc[22, 12];
+            score = 0;
+            niveau = 0;
+            vitesse = vitesseAuDebut;
+            scoreTemporaire = new int[3];
+            scoreTemporaireLocation = new Point[3];
+
+            for (int i = 0; i < tableauDeBlocs.GetLength(1); i++)
+            {
+                tableauDeBlocs[5, i] = TypeBloc.Gele;
+                tableauDeBlocs[6, i] = TypeBloc.Gele;
+                tableauDeBlocs[7, i] = TypeBloc.Gele;
+                tableauDeBlocs[8, i] = TypeBloc.Gele;
+            }
+            EnleverLignesCompletes();
+            for (int i = 0; i < tableauDeBlocs.GetLength(1); i++)
+            {
+                Debug.Assert(tableauDeBlocs[5, i] != TypeBloc.Gele, "Le bloc 5," + i + " n'est pas supposé être gelé");
+                Debug.Assert(tableauDeBlocs[6, i] != TypeBloc.Gele, "Le bloc 6," + i + " n'est pas supposé être gelé");
+                Debug.Assert(tableauDeBlocs[7, i] != TypeBloc.Gele, "Le bloc 7," + i + " n'est pas supposé être gelé");
+                Debug.Assert(tableauDeBlocs[8, i] != TypeBloc.Gele, "Le bloc 8," + i + " n'est pas supposé être gelé");
+            }
+        }
 
         // Yannick
         bool VerifierSiTransformerProchainBlocEnActifPossible()
@@ -1160,7 +1317,7 @@ namespace ProjetTetrisSession1Tp3
             bool possible = true;
             for (int i = 0; i < blocActifIProchain.Length; i++)
             {
-                if (tableauDeBlocs[blocActifIProchain[i], blocActifJProchain[i] + tableauDeBlocs.GetLength(1) / 2 - 2] == TypeBloc.Gelé)
+                if (tableauDeBlocs[blocActifIProchain[i], blocActifJProchain[i] + tableauDeBlocs.GetLength(1) / 2 - 2] == TypeBloc.Gele)
                 {
                     possible = false;
                 }
@@ -1241,7 +1398,8 @@ namespace ProjetTetrisSession1Tp3
         private void boutonPersonnaliseNouvellePartie_Click(object sender, EventArgs e)
         {
             PauserLeJeu();
-            if (MessageBox.Show("Toute partie en cours sera perdu, voulez-vous vraiment faire une nouvelle partie?","Nouvelle partie",MessageBoxButtons.YesNo,MessageBoxIcon.Exclamation) == DialogResult.Yes)
+            if (MessageBox.Show("Toute partie en cours sera perdu, voulez-vous vraiment faire une nouvelle partie?",
+                "Nouvelle partie",MessageBoxButtons.YesNo,MessageBoxIcon.Exclamation) == DialogResult.Yes)
             {
                 InitialiserJeu();
             }

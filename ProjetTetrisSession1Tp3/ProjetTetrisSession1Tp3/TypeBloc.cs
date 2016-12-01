@@ -9,8 +9,8 @@ namespace ProjetTetrisSession1Tp3
     enum TypeBloc
     {
         None,
-        Gelé,
-        Carré,
+        Gele,
+        Carre,
         Ligne,
         T,
         L,

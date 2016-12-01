@@ -11,6 +11,7 @@ using System.Windows.Forms;
 
 namespace ProjetTetrisSession1Tp3
 {
+    //Simon
     public partial class FrmOption : Form
     {
         public int nbreLignes { set { numericUpDownNbreLignes.Value = value; } get { return (int)numericUpDownNbreLignes.Value; } }

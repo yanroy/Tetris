@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace ProjetTetrisSession1Tp3
 {
+    //Simon
     public class BoutonPersonnalise: Button
     {
         private string displayText;
