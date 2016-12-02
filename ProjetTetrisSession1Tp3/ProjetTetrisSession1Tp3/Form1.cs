@@ -50,7 +50,7 @@ namespace ProjetTetrisSession1Tp3
 
         //Variables pour garder les informations des blocs
         TypeBloc[,] tableauDeBlocs;
-        int nbreLignes = 2;
+        int nbreLignes = 22;
         int nbreColonnes = 12;
         int[] blocActifIEnJeu;
         int[] blocActifJEnJeu;

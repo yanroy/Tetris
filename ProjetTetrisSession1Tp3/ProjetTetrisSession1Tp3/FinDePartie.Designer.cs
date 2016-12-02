@@ -36,21 +36,22 @@
             this.labelCompteurDeS = new System.Windows.Forms.Label();
             this.labelCompteurDeZ = new System.Windows.Forms.Label();
             this.groupBoxDesCompteurs = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanelStats = new System.Windows.Forms.TableLayoutPanel();
-            this.labelCarre = new System.Windows.Forms.Label();
-            this.labelLigne = new System.Windows.Forms.Label();
-            this.labelT = new System.Windows.Forms.Label();
-            this.labelL = new System.Windows.Forms.Label();
-            this.labelJ = new System.Windows.Forms.Label();
-            this.labelS = new System.Windows.Forms.Label();
-            this.labelZ = new System.Windows.Forms.Label();
-            this.labelPcCarre = new System.Windows.Forms.Label();
-            this.labelPcLigne = new System.Windows.Forms.Label();
-            this.labelPcT = new System.Windows.Forms.Label();
-            this.labelPcL = new System.Windows.Forms.Label();
-            this.labelPcJ = new System.Windows.Forms.Label();
-            this.labelPcS = new System.Windows.Forms.Label();
             this.labelPcZ = new System.Windows.Forms.Label();
+            this.labelPcS = new System.Windows.Forms.Label();
+            this.labelPcJ = new System.Windows.Forms.Label();
+            this.labelPcL = new System.Windows.Forms.Label();
+            this.labelPcT = new System.Windows.Forms.Label();
+            this.labelPcLigne = new System.Windows.Forms.Label();
+            this.labelPcCarre = new System.Windows.Forms.Label();
+            this.labelZ = new System.Windows.Forms.Label();
+            this.labelS = new System.Windows.Forms.Label();
+            this.labelJ = new System.Windows.Forms.Label();
+            this.labelL = new System.Windows.Forms.Label();
+            this.labelT = new System.Windows.Forms.Label();
+            this.labelLigne = new System.Windows.Forms.Label();
+            this.labelCarre = new System.Windows.Forms.Label();
+            this.tableLayoutPanelStats = new System.Windows.Forms.TableLayoutPanel();
+            this.buttonRejouer = new System.Windows.Forms.Button();
             this.groupBoxDesCompteurs.SuspendLayout();
             this.tableLayoutPanelStats.SuspendLayout();
             this.SuspendLayout();
@@ -143,132 +144,19 @@
             this.groupBoxDesCompteurs.Controls.Add(this.labelCompteurDeT);
             this.groupBoxDesCompteurs.Location = new System.Drawing.Point(3, 3);
             this.groupBoxDesCompteurs.Name = "groupBoxDesCompteurs";
-            this.groupBoxDesCompteurs.Size = new System.Drawing.Size(195, 113);
+            this.groupBoxDesCompteurs.Size = new System.Drawing.Size(260, 113);
             this.groupBoxDesCompteurs.TabIndex = 7;
             this.groupBoxDesCompteurs.TabStop = false;
             this.groupBoxDesCompteurs.Text = "Statistiques";
             // 
-            // tableLayoutPanelStats
+            // labelPcZ
             // 
-            this.tableLayoutPanelStats.ColumnCount = 2;
-            this.tableLayoutPanelStats.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 56.02094F));
-            this.tableLayoutPanelStats.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43.97906F));
-            this.tableLayoutPanelStats.Controls.Add(this.groupBoxDesCompteurs, 0, 0);
-            this.tableLayoutPanelStats.Location = new System.Drawing.Point(12, 12);
-            this.tableLayoutPanelStats.Name = "tableLayoutPanelStats";
-            this.tableLayoutPanelStats.RowCount = 2;
-            this.tableLayoutPanelStats.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 48.6692F));
-            this.tableLayoutPanelStats.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 51.3308F));
-            this.tableLayoutPanelStats.Size = new System.Drawing.Size(382, 263);
-            this.tableLayoutPanelStats.TabIndex = 8;
-            // 
-            // labelCarre
-            // 
-            this.labelCarre.AutoSize = true;
-            this.labelCarre.Location = new System.Drawing.Point(106, 16);
-            this.labelCarre.Name = "labelCarre";
-            this.labelCarre.Size = new System.Drawing.Size(44, 13);
-            this.labelCarre.TabIndex = 7;
-            this.labelCarre.Text = "nbCarre";
-            // 
-            // labelLigne
-            // 
-            this.labelLigne.AutoSize = true;
-            this.labelLigne.Location = new System.Drawing.Point(106, 29);
-            this.labelLigne.Name = "labelLigne";
-            this.labelLigne.Size = new System.Drawing.Size(45, 13);
-            this.labelLigne.TabIndex = 8;
-            this.labelLigne.Text = "nbLigne";
-            // 
-            // labelT
-            // 
-            this.labelT.AutoSize = true;
-            this.labelT.Location = new System.Drawing.Point(106, 42);
-            this.labelT.Name = "labelT";
-            this.labelT.Size = new System.Drawing.Size(26, 13);
-            this.labelT.TabIndex = 9;
-            this.labelT.Text = "nbT";
-            // 
-            // labelL
-            // 
-            this.labelL.AutoSize = true;
-            this.labelL.Location = new System.Drawing.Point(106, 55);
-            this.labelL.Name = "labelL";
-            this.labelL.Size = new System.Drawing.Size(25, 13);
-            this.labelL.TabIndex = 10;
-            this.labelL.Text = "nbL";
-            // 
-            // labelJ
-            // 
-            this.labelJ.AutoSize = true;
-            this.labelJ.Location = new System.Drawing.Point(106, 68);
-            this.labelJ.Name = "labelJ";
-            this.labelJ.Size = new System.Drawing.Size(24, 13);
-            this.labelJ.TabIndex = 11;
-            this.labelJ.Text = "nbJ";
-            // 
-            // labelS
-            // 
-            this.labelS.AutoSize = true;
-            this.labelS.Location = new System.Drawing.Point(106, 81);
-            this.labelS.Name = "labelS";
-            this.labelS.Size = new System.Drawing.Size(26, 13);
-            this.labelS.TabIndex = 12;
-            this.labelS.Text = "nbS";
-            // 
-            // labelZ
-            // 
-            this.labelZ.AutoSize = true;
-            this.labelZ.Location = new System.Drawing.Point(106, 94);
-            this.labelZ.Name = "labelZ";
-            this.labelZ.Size = new System.Drawing.Size(26, 13);
-            this.labelZ.TabIndex = 13;
-            this.labelZ.Text = "nbZ";
-            // 
-            // labelPcCarre
-            // 
-            this.labelPcCarre.AutoSize = true;
-            this.labelPcCarre.Location = new System.Drawing.Point(156, 16);
-            this.labelPcCarre.Name = "labelPcCarre";
-            this.labelPcCarre.Size = new System.Drawing.Size(35, 13);
-            this.labelPcCarre.TabIndex = 14;
-            this.labelPcCarre.Text = "label1";
-            // 
-            // labelPcLigne
-            // 
-            this.labelPcLigne.AutoSize = true;
-            this.labelPcLigne.Location = new System.Drawing.Point(156, 29);
-            this.labelPcLigne.Name = "labelPcLigne";
-            this.labelPcLigne.Size = new System.Drawing.Size(35, 13);
-            this.labelPcLigne.TabIndex = 15;
-            this.labelPcLigne.Text = "label2";
-            // 
-            // labelPcT
-            // 
-            this.labelPcT.AutoSize = true;
-            this.labelPcT.Location = new System.Drawing.Point(156, 41);
-            this.labelPcT.Name = "labelPcT";
-            this.labelPcT.Size = new System.Drawing.Size(35, 13);
-            this.labelPcT.TabIndex = 16;
-            this.labelPcT.Text = "label3";
-            // 
-            // labelPcL
-            // 
-            this.labelPcL.AutoSize = true;
-            this.labelPcL.Location = new System.Drawing.Point(156, 54);
-            this.labelPcL.Name = "labelPcL";
-            this.labelPcL.Size = new System.Drawing.Size(35, 13);
-            this.labelPcL.TabIndex = 17;
-            this.labelPcL.Text = "label4";
-            // 
-            // labelPcJ
-            // 
-            this.labelPcJ.AutoSize = true;
-            this.labelPcJ.Location = new System.Drawing.Point(156, 67);
-            this.labelPcJ.Name = "labelPcJ";
-            this.labelPcJ.Size = new System.Drawing.Size(35, 13);
-            this.labelPcJ.TabIndex = 18;
-            this.labelPcJ.Text = "label5";
+            this.labelPcZ.AutoSize = true;
+            this.labelPcZ.Location = new System.Drawing.Point(156, 93);
+            this.labelPcZ.Name = "labelPcZ";
+            this.labelPcZ.Size = new System.Drawing.Size(35, 13);
+            this.labelPcZ.TabIndex = 20;
+            this.labelPcZ.Text = "label7";
             // 
             // labelPcS
             // 
@@ -279,14 +167,138 @@
             this.labelPcS.TabIndex = 19;
             this.labelPcS.Text = "label6";
             // 
-            // labelPcZ
+            // labelPcJ
             // 
-            this.labelPcZ.AutoSize = true;
-            this.labelPcZ.Location = new System.Drawing.Point(156, 93);
-            this.labelPcZ.Name = "labelPcZ";
-            this.labelPcZ.Size = new System.Drawing.Size(35, 13);
-            this.labelPcZ.TabIndex = 20;
-            this.labelPcZ.Text = "label7";
+            this.labelPcJ.AutoSize = true;
+            this.labelPcJ.Location = new System.Drawing.Point(156, 67);
+            this.labelPcJ.Name = "labelPcJ";
+            this.labelPcJ.Size = new System.Drawing.Size(35, 13);
+            this.labelPcJ.TabIndex = 18;
+            this.labelPcJ.Text = "label5";
+            // 
+            // labelPcL
+            // 
+            this.labelPcL.AutoSize = true;
+            this.labelPcL.Location = new System.Drawing.Point(156, 54);
+            this.labelPcL.Name = "labelPcL";
+            this.labelPcL.Size = new System.Drawing.Size(35, 13);
+            this.labelPcL.TabIndex = 17;
+            this.labelPcL.Text = "label4";
+            // 
+            // labelPcT
+            // 
+            this.labelPcT.AutoSize = true;
+            this.labelPcT.Location = new System.Drawing.Point(156, 41);
+            this.labelPcT.Name = "labelPcT";
+            this.labelPcT.Size = new System.Drawing.Size(35, 13);
+            this.labelPcT.TabIndex = 16;
+            this.labelPcT.Text = "label3";
+            // 
+            // labelPcLigne
+            // 
+            this.labelPcLigne.AutoSize = true;
+            this.labelPcLigne.Location = new System.Drawing.Point(156, 29);
+            this.labelPcLigne.Name = "labelPcLigne";
+            this.labelPcLigne.Size = new System.Drawing.Size(35, 13);
+            this.labelPcLigne.TabIndex = 15;
+            this.labelPcLigne.Text = "label2";
+            // 
+            // labelPcCarre
+            // 
+            this.labelPcCarre.AutoSize = true;
+            this.labelPcCarre.Location = new System.Drawing.Point(156, 16);
+            this.labelPcCarre.Name = "labelPcCarre";
+            this.labelPcCarre.Size = new System.Drawing.Size(35, 13);
+            this.labelPcCarre.TabIndex = 14;
+            this.labelPcCarre.Text = "label1";
+            // 
+            // labelZ
+            // 
+            this.labelZ.AutoSize = true;
+            this.labelZ.Location = new System.Drawing.Point(106, 94);
+            this.labelZ.Name = "labelZ";
+            this.labelZ.Size = new System.Drawing.Size(26, 13);
+            this.labelZ.TabIndex = 13;
+            this.labelZ.Text = "nbZ";
+            // 
+            // labelS
+            // 
+            this.labelS.AutoSize = true;
+            this.labelS.Location = new System.Drawing.Point(106, 81);
+            this.labelS.Name = "labelS";
+            this.labelS.Size = new System.Drawing.Size(26, 13);
+            this.labelS.TabIndex = 12;
+            this.labelS.Text = "nbS";
+            // 
+            // labelJ
+            // 
+            this.labelJ.AutoSize = true;
+            this.labelJ.Location = new System.Drawing.Point(106, 68);
+            this.labelJ.Name = "labelJ";
+            this.labelJ.Size = new System.Drawing.Size(24, 13);
+            this.labelJ.TabIndex = 11;
+            this.labelJ.Text = "nbJ";
+            // 
+            // labelL
+            // 
+            this.labelL.AutoSize = true;
+            this.labelL.Location = new System.Drawing.Point(106, 55);
+            this.labelL.Name = "labelL";
+            this.labelL.Size = new System.Drawing.Size(25, 13);
+            this.labelL.TabIndex = 10;
+            this.labelL.Text = "nbL";
+            // 
+            // labelT
+            // 
+            this.labelT.AutoSize = true;
+            this.labelT.Location = new System.Drawing.Point(106, 42);
+            this.labelT.Name = "labelT";
+            this.labelT.Size = new System.Drawing.Size(26, 13);
+            this.labelT.TabIndex = 9;
+            this.labelT.Text = "nbT";
+            // 
+            // labelLigne
+            // 
+            this.labelLigne.AutoSize = true;
+            this.labelLigne.Location = new System.Drawing.Point(106, 29);
+            this.labelLigne.Name = "labelLigne";
+            this.labelLigne.Size = new System.Drawing.Size(45, 13);
+            this.labelLigne.TabIndex = 8;
+            this.labelLigne.Text = "nbLigne";
+            // 
+            // labelCarre
+            // 
+            this.labelCarre.AutoSize = true;
+            this.labelCarre.Location = new System.Drawing.Point(106, 16);
+            this.labelCarre.Name = "labelCarre";
+            this.labelCarre.Size = new System.Drawing.Size(44, 13);
+            this.labelCarre.TabIndex = 7;
+            this.labelCarre.Text = "nbCarre";
+            // 
+            // tableLayoutPanelStats
+            // 
+            this.tableLayoutPanelStats.ColumnCount = 2;
+            this.tableLayoutPanelStats.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 69.89529F));
+            this.tableLayoutPanelStats.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.10471F));
+            this.tableLayoutPanelStats.Controls.Add(this.groupBoxDesCompteurs, 0, 0);
+            this.tableLayoutPanelStats.Controls.Add(this.buttonRejouer, 0, 1);
+            this.tableLayoutPanelStats.Location = new System.Drawing.Point(12, 12);
+            this.tableLayoutPanelStats.Name = "tableLayoutPanelStats";
+            this.tableLayoutPanelStats.RowCount = 2;
+            this.tableLayoutPanelStats.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 48.6692F));
+            this.tableLayoutPanelStats.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 51.3308F));
+            this.tableLayoutPanelStats.Size = new System.Drawing.Size(382, 263);
+            this.tableLayoutPanelStats.TabIndex = 8;
+            // 
+            // buttonRejouer
+            // 
+            this.buttonRejouer.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.buttonRejouer.Location = new System.Drawing.Point(3, 130);
+            this.buttonRejouer.Name = "buttonRejouer";
+            this.buttonRejouer.Size = new System.Drawing.Size(75, 23);
+            this.buttonRejouer.TabIndex = 8;
+            this.buttonRejouer.Text = "Rejouer";
+            this.buttonRejouer.UseVisualStyleBackColor = true;
             // 
             // FinDePartie
             // 
@@ -329,5 +341,6 @@
         private System.Windows.Forms.Label labelPcT;
         private System.Windows.Forms.Label labelPcLigne;
         private System.Windows.Forms.Label labelPcCarre;
+        private System.Windows.Forms.Button buttonRejouer;
     }
 }
