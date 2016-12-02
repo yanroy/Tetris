@@ -45,7 +45,7 @@ namespace ProjetTetrisSession1Tp3
 
         //Variables pour garder les informations des blocs
         TypeBloc[,] tableauDeBlocs;
-        int nbreLignes = 22;
+        int nbreLignes = 2;
         int nbreColonnes = 12;
         int[] blocActifIEnJeu;
         int[] blocActifJEnJeu;
@@ -254,6 +254,7 @@ namespace ProjetTetrisSession1Tp3
                 compteurDeZ2++;
             }
 
+            //Simon
             for (int i =0; i < blocActifIEnJeu.Length;i++)
             {
                 blocActifIEnJeu[i] = blocActifIProchain[i];
@@ -1160,7 +1161,7 @@ namespace ProjetTetrisSession1Tp3
                     if (nbreLignesCompletes != 0 && nbreLignesCompletes % 3 == 0)
                     {
                         niveau++;
-                        vitesse = vitesse / 100 * 60;
+                        vitesse = vitesse / 100 * 80;
                         if (vitesse == 0)
                         {
                             vitesse = 1;
@@ -1339,7 +1340,7 @@ namespace ProjetTetrisSession1Tp3
             bool possible = true;
             for (int i = 0; i < blocActifIProchain.Length; i++)
             {
-                if (tableauDeBlocs[blocActifIProchain[i], blocActifJProchain[i] + tableauDeBlocs.GetLength(1) / 2 - 2] == TypeBloc.Gele)
+                if ((int)tableauDeBlocs[blocActifIProchain[i], blocActifJProchain[i] + tableauDeBlocs.GetLength(1) / 2 - 2] >= 9)
                 {
                     possible = false;
                 }
