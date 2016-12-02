@@ -25,14 +25,22 @@ namespace ProjetTetrisSession1Tp3
         {
             InitializeComponent();
         }       
-        // Affichage des nombres de blocs par partie.
+        
         private void FinDePartie_Load(object sender, EventArgs e)
         {
-            int total = compteurDeCarre + compteurDeLigne + compteurDeT + compteurDeL + compteurDeJ + compteurDeS + compteurDeZ;
-            float PcCarre = compteurDeCarre / total * 100;
-            float PcLigne = compteurDeLigne / total * 100;
-            float PcT = compteurDeT / total * 100;
+            // Calculs pour le pourcentage.
+            float total = compteurDeCarre + compteurDeLigne + compteurDeT + compteurDeL + compteurDeJ + compteurDeS + compteurDeZ;
+            float PcCarre = compteurDeCarre / total;
+            float PcLigne = compteurDeLigne / total;
+            float PcT = compteurDeT / total;
+            float PcL = compteurDeL / total;
+            float PcJ = compteurDeJ / total;
+            float PcS = compteurDeS / total;
+            float PcZ = compteurDeZ / total;
 
+            // Affichage des données.
+
+            // Nombre de blocs.
             labelCarre.Text = compteurDeCarre.ToString();
             labelLigne.Text = compteurDeLigne.ToString();
             labelT.Text     =     compteurDeT.ToString();
@@ -40,6 +48,15 @@ namespace ProjetTetrisSession1Tp3
             labelJ.Text     =     compteurDeJ.ToString();
             labelS.Text     =     compteurDeS.ToString();
             labelZ.Text     =     compteurDeZ.ToString();
+
+            // Pourcentage des blocs.
+            labelPcCarre.Text = PcCarre.ToString("p");
+            labelPcLigne.Text = PcLigne.ToString("p");
+            labelPcT.Text     = PcT.ToString("p");
+            labelPcL.Text     = PcL.ToString("p");
+            labelPcJ.Text     = PcJ.ToString("p");
+            labelPcS.Text     = PcS.ToString("p");
+            labelPcZ.Text     = PcZ.ToString("p");
         }
     }
 }
