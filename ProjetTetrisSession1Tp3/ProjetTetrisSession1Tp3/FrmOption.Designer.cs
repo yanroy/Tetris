@@ -126,7 +126,7 @@
             this.tableLayoutPanelControles.Controls.Add(this.textBoxToucheReserve, 1, 3);
             this.tableLayoutPanelControles.Controls.Add(this.textBoxToucheRotation, 1, 4);
             this.tableLayoutPanelControles.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanelControles.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanelControles.Location = new System.Drawing.Point(3, 18);
             this.tableLayoutPanelControles.Name = "tableLayoutPanelControles";
             this.tableLayoutPanelControles.RowCount = 5;
             this.tableLayoutPanelControles.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
@@ -134,7 +134,7 @@
             this.tableLayoutPanelControles.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanelControles.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanelControles.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanelControles.Size = new System.Drawing.Size(287, 130);
+            this.tableLayoutPanelControles.Size = new System.Drawing.Size(287, 128);
             this.tableLayoutPanelControles.TabIndex = 0;
             // 
             // labelDroite
@@ -143,7 +143,7 @@
             this.labelDroite.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelDroite.Location = new System.Drawing.Point(3, 0);
             this.labelDroite.Name = "labelDroite";
-            this.labelDroite.Size = new System.Drawing.Size(108, 26);
+            this.labelDroite.Size = new System.Drawing.Size(108, 25);
             this.labelDroite.TabIndex = 0;
             this.labelDroite.Text = "Droite : ";
             // 
@@ -151,9 +151,9 @@
             // 
             this.labelGauche.AutoSize = true;
             this.labelGauche.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelGauche.Location = new System.Drawing.Point(3, 26);
+            this.labelGauche.Location = new System.Drawing.Point(3, 25);
             this.labelGauche.Name = "labelGauche";
-            this.labelGauche.Size = new System.Drawing.Size(108, 26);
+            this.labelGauche.Size = new System.Drawing.Size(108, 25);
             this.labelGauche.TabIndex = 1;
             this.labelGauche.Text = "Gauche : ";
             // 
@@ -161,9 +161,9 @@
             // 
             this.labelChute.AutoSize = true;
             this.labelChute.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelChute.Location = new System.Drawing.Point(3, 52);
+            this.labelChute.Location = new System.Drawing.Point(3, 50);
             this.labelChute.Name = "labelChute";
-            this.labelChute.Size = new System.Drawing.Size(108, 26);
+            this.labelChute.Size = new System.Drawing.Size(108, 25);
             this.labelChute.TabIndex = 2;
             this.labelChute.Text = "Chute : ";
             // 
@@ -171,9 +171,9 @@
             // 
             this.labelReserve.AutoSize = true;
             this.labelReserve.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelReserve.Location = new System.Drawing.Point(3, 78);
+            this.labelReserve.Location = new System.Drawing.Point(3, 75);
             this.labelReserve.Name = "labelReserve";
-            this.labelReserve.Size = new System.Drawing.Size(108, 26);
+            this.labelReserve.Size = new System.Drawing.Size(108, 25);
             this.labelReserve.TabIndex = 3;
             this.labelReserve.Text = "Reserve : ";
             // 
@@ -181,9 +181,9 @@
             // 
             this.labelRotation.AutoSize = true;
             this.labelRotation.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelRotation.Location = new System.Drawing.Point(3, 104);
+            this.labelRotation.Location = new System.Drawing.Point(3, 100);
             this.labelRotation.Name = "labelRotation";
-            this.labelRotation.Size = new System.Drawing.Size(108, 26);
+            this.labelRotation.Size = new System.Drawing.Size(108, 28);
             this.labelRotation.TabIndex = 4;
             this.labelRotation.Text = "Rotation : ";
             // 
@@ -193,43 +193,47 @@
             this.textBoxToucheDroite.Location = new System.Drawing.Point(117, 3);
             this.textBoxToucheDroite.Name = "textBoxToucheDroite";
             this.textBoxToucheDroite.ReadOnly = true;
-            this.textBoxToucheDroite.Size = new System.Drawing.Size(167, 20);
+            this.textBoxToucheDroite.Size = new System.Drawing.Size(167, 22);
             this.textBoxToucheDroite.TabIndex = 5;
+            this.textBoxToucheDroite.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxToucheDroite_KeyDown);
             // 
             // textBoxToucheGauche
             // 
             this.textBoxToucheGauche.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxToucheGauche.Location = new System.Drawing.Point(117, 29);
+            this.textBoxToucheGauche.Location = new System.Drawing.Point(117, 28);
             this.textBoxToucheGauche.Name = "textBoxToucheGauche";
             this.textBoxToucheGauche.ReadOnly = true;
-            this.textBoxToucheGauche.Size = new System.Drawing.Size(167, 20);
+            this.textBoxToucheGauche.Size = new System.Drawing.Size(167, 22);
             this.textBoxToucheGauche.TabIndex = 6;
+            this.textBoxToucheGauche.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxToucheGauche_KeyDown);
             // 
             // textBoxToucheChute
             // 
             this.textBoxToucheChute.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxToucheChute.Location = new System.Drawing.Point(117, 55);
+            this.textBoxToucheChute.Location = new System.Drawing.Point(117, 53);
             this.textBoxToucheChute.Name = "textBoxToucheChute";
             this.textBoxToucheChute.ReadOnly = true;
-            this.textBoxToucheChute.Size = new System.Drawing.Size(167, 20);
+            this.textBoxToucheChute.Size = new System.Drawing.Size(167, 22);
             this.textBoxToucheChute.TabIndex = 7;
+            this.textBoxToucheChute.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxToucheChute_KeyDown);
             // 
             // textBoxToucheReserve
             // 
             this.textBoxToucheReserve.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxToucheReserve.Location = new System.Drawing.Point(117, 81);
+            this.textBoxToucheReserve.Location = new System.Drawing.Point(117, 78);
             this.textBoxToucheReserve.Name = "textBoxToucheReserve";
             this.textBoxToucheReserve.ReadOnly = true;
-            this.textBoxToucheReserve.Size = new System.Drawing.Size(167, 20);
+            this.textBoxToucheReserve.Size = new System.Drawing.Size(167, 22);
             this.textBoxToucheReserve.TabIndex = 8;
+            this.textBoxToucheReserve.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxToucheReserve_KeyDown);
             // 
             // textBoxToucheRotation
             // 
             this.textBoxToucheRotation.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxToucheRotation.Location = new System.Drawing.Point(117, 107);
+            this.textBoxToucheRotation.Location = new System.Drawing.Point(117, 103);
             this.textBoxToucheRotation.Name = "textBoxToucheRotation";
             this.textBoxToucheRotation.ReadOnly = true;
-            this.textBoxToucheRotation.Size = new System.Drawing.Size(167, 20);
+            this.textBoxToucheRotation.Size = new System.Drawing.Size(167, 22);
             this.textBoxToucheRotation.TabIndex = 9;
             this.textBoxToucheRotation.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxToucheRotation_KeyDown);
             // 
@@ -255,12 +259,12 @@
             this.tableLayoutPanelMusique.Controls.Add(this.checkBoxMusiqueOn, 0, 1);
             this.tableLayoutPanelMusique.Controls.Add(this.buttonFichierMusique, 2, 0);
             this.tableLayoutPanelMusique.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanelMusique.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanelMusique.Location = new System.Drawing.Point(3, 18);
             this.tableLayoutPanelMusique.Name = "tableLayoutPanelMusique";
             this.tableLayoutPanelMusique.RowCount = 2;
             this.tableLayoutPanelMusique.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanelMusique.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanelMusique.Size = new System.Drawing.Size(287, 76);
+            this.tableLayoutPanelMusique.Size = new System.Drawing.Size(287, 74);
             this.tableLayoutPanelMusique.TabIndex = 0;
             // 
             // labelMusique
@@ -269,7 +273,7 @@
             this.labelMusique.Location = new System.Drawing.Point(5, 5);
             this.labelMusique.Margin = new System.Windows.Forms.Padding(5, 5, 3, 0);
             this.labelMusique.Name = "labelMusique";
-            this.labelMusique.Size = new System.Drawing.Size(53, 13);
+            this.labelMusique.Size = new System.Drawing.Size(53, 32);
             this.labelMusique.TabIndex = 0;
             this.labelMusique.Text = "Musique: ";
             // 
@@ -278,18 +282,20 @@
             this.textBoxMusiqueNomFichier.Enabled = false;
             this.textBoxMusiqueNomFichier.Location = new System.Drawing.Point(64, 3);
             this.textBoxMusiqueNomFichier.Name = "textBoxMusiqueNomFichier";
-            this.textBoxMusiqueNomFichier.Size = new System.Drawing.Size(176, 20);
+            this.textBoxMusiqueNomFichier.Size = new System.Drawing.Size(176, 22);
             this.textBoxMusiqueNomFichier.TabIndex = 1;
+            this.textBoxMusiqueNomFichier.TextChanged += new System.EventHandler(this.textBoxMusiqueNomFichier_TextChanged);
             // 
             // checkBoxMusiqueOn
             // 
             this.checkBoxMusiqueOn.AutoSize = true;
-            this.checkBoxMusiqueOn.Location = new System.Drawing.Point(3, 41);
+            this.checkBoxMusiqueOn.Location = new System.Drawing.Point(3, 40);
             this.checkBoxMusiqueOn.Name = "checkBoxMusiqueOn";
-            this.checkBoxMusiqueOn.Size = new System.Drawing.Size(40, 17);
+            this.checkBoxMusiqueOn.Size = new System.Drawing.Size(49, 21);
             this.checkBoxMusiqueOn.TabIndex = 2;
             this.checkBoxMusiqueOn.Text = "On";
             this.checkBoxMusiqueOn.UseVisualStyleBackColor = true;
+            this.checkBoxMusiqueOn.CheckedChanged += new System.EventHandler(this.checkBoxMusiqueOn_CheckedChanged);
             // 
             // buttonFichierMusique
             // 
@@ -324,13 +330,13 @@
             this.tableLayoutPanelConfigurationJeu.Controls.Add(this.labelNbreLignes, 0, 0);
             this.tableLayoutPanelConfigurationJeu.Controls.Add(this.labelNbreColonnes, 0, 1);
             this.tableLayoutPanelConfigurationJeu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanelConfigurationJeu.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanelConfigurationJeu.Location = new System.Drawing.Point(3, 18);
             this.tableLayoutPanelConfigurationJeu.Name = "tableLayoutPanelConfigurationJeu";
             this.tableLayoutPanelConfigurationJeu.RowCount = 2;
             this.tableLayoutPanelConfigurationJeu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanelConfigurationJeu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanelConfigurationJeu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelConfigurationJeu.Size = new System.Drawing.Size(287, 130);
+            this.tableLayoutPanelConfigurationJeu.Size = new System.Drawing.Size(287, 128);
             this.tableLayoutPanelConfigurationJeu.TabIndex = 0;
             // 
             // numericUpDownNbreLignes
@@ -347,7 +353,7 @@
             0,
             0});
             this.numericUpDownNbreLignes.Name = "numericUpDownNbreLignes";
-            this.numericUpDownNbreLignes.Size = new System.Drawing.Size(42, 20);
+            this.numericUpDownNbreLignes.Size = new System.Drawing.Size(42, 22);
             this.numericUpDownNbreLignes.TabIndex = 0;
             this.numericUpDownNbreLignes.Value = new decimal(new int[] {
             22,
@@ -357,7 +363,7 @@
             // 
             // numericUpDownNbreColonnes
             // 
-            this.numericUpDownNbreColonnes.Location = new System.Drawing.Point(124, 68);
+            this.numericUpDownNbreColonnes.Location = new System.Drawing.Point(124, 67);
             this.numericUpDownNbreColonnes.Maximum = new decimal(new int[] {
             12,
             0,
@@ -369,7 +375,7 @@
             0,
             0});
             this.numericUpDownNbreColonnes.Name = "numericUpDownNbreColonnes";
-            this.numericUpDownNbreColonnes.Size = new System.Drawing.Size(42, 20);
+            this.numericUpDownNbreColonnes.Size = new System.Drawing.Size(42, 22);
             this.numericUpDownNbreColonnes.TabIndex = 1;
             this.numericUpDownNbreColonnes.Value = new decimal(new int[] {
             12,
@@ -383,17 +389,17 @@
             this.labelNbreLignes.Location = new System.Drawing.Point(3, 5);
             this.labelNbreLignes.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.labelNbreLignes.Name = "labelNbreLignes";
-            this.labelNbreLignes.Size = new System.Drawing.Size(95, 13);
+            this.labelNbreLignes.Size = new System.Drawing.Size(82, 34);
             this.labelNbreLignes.TabIndex = 2;
             this.labelNbreLignes.Text = "Nombre de lignes :";
             // 
             // labelNbreColonnes
             // 
             this.labelNbreColonnes.AutoSize = true;
-            this.labelNbreColonnes.Location = new System.Drawing.Point(3, 70);
+            this.labelNbreColonnes.Location = new System.Drawing.Point(3, 69);
             this.labelNbreColonnes.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.labelNbreColonnes.Name = "labelNbreColonnes";
-            this.labelNbreColonnes.Size = new System.Drawing.Size(111, 13);
+            this.labelNbreColonnes.Size = new System.Drawing.Size(82, 34);
             this.labelNbreColonnes.TabIndex = 3;
             this.labelNbreColonnes.Text = "Nombre de colonnes :";
             // 
@@ -418,12 +424,12 @@
             this.tableLayoutPanelPersonnaliserCouleursFond.Controls.Add(this.pictureBoxCouleurFond1, 1, 0);
             this.tableLayoutPanelPersonnaliserCouleursFond.Controls.Add(this.pictureBoxCouleurFond2, 1, 1);
             this.tableLayoutPanelPersonnaliserCouleursFond.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanelPersonnaliserCouleursFond.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanelPersonnaliserCouleursFond.Location = new System.Drawing.Point(3, 18);
             this.tableLayoutPanelPersonnaliserCouleursFond.Name = "tableLayoutPanelPersonnaliserCouleursFond";
             this.tableLayoutPanelPersonnaliserCouleursFond.RowCount = 2;
             this.tableLayoutPanelPersonnaliserCouleursFond.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanelPersonnaliserCouleursFond.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanelPersonnaliserCouleursFond.Size = new System.Drawing.Size(287, 76);
+            this.tableLayoutPanelPersonnaliserCouleursFond.Size = new System.Drawing.Size(287, 74);
             this.tableLayoutPanelPersonnaliserCouleursFond.TabIndex = 0;
             // 
             // labelCouleurFond1
@@ -432,17 +438,17 @@
             this.labelCouleurFond1.Location = new System.Drawing.Point(3, 5);
             this.labelCouleurFond1.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.labelCouleurFond1.Name = "labelCouleurFond1";
-            this.labelCouleurFond1.Size = new System.Drawing.Size(97, 13);
+            this.labelCouleurFond1.Size = new System.Drawing.Size(81, 32);
             this.labelCouleurFond1.TabIndex = 0;
             this.labelCouleurFond1.Text = "Couleur de fond 1: ";
             // 
             // labelCouleurFond2
             // 
             this.labelCouleurFond2.AutoSize = true;
-            this.labelCouleurFond2.Location = new System.Drawing.Point(3, 43);
+            this.labelCouleurFond2.Location = new System.Drawing.Point(3, 42);
             this.labelCouleurFond2.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.labelCouleurFond2.Name = "labelCouleurFond2";
-            this.labelCouleurFond2.Size = new System.Drawing.Size(97, 13);
+            this.labelCouleurFond2.Size = new System.Drawing.Size(81, 32);
             this.labelCouleurFond2.TabIndex = 1;
             this.labelCouleurFond2.Text = "Couleur de fond 2: ";
             // 
@@ -451,7 +457,7 @@
             this.pictureBoxCouleurFond1.BackColor = System.Drawing.Color.Beige;
             this.pictureBoxCouleurFond1.Location = new System.Drawing.Point(109, 3);
             this.pictureBoxCouleurFond1.Name = "pictureBoxCouleurFond1";
-            this.pictureBoxCouleurFond1.Size = new System.Drawing.Size(50, 32);
+            this.pictureBoxCouleurFond1.Size = new System.Drawing.Size(50, 31);
             this.pictureBoxCouleurFond1.TabIndex = 2;
             this.pictureBoxCouleurFond1.TabStop = false;
             this.pictureBoxCouleurFond1.Click += new System.EventHandler(this.pictureBoxCouleurFond1_Click);
@@ -459,9 +465,9 @@
             // pictureBoxCouleurFond2
             // 
             this.pictureBoxCouleurFond2.BackColor = System.Drawing.Color.DarkGray;
-            this.pictureBoxCouleurFond2.Location = new System.Drawing.Point(109, 41);
+            this.pictureBoxCouleurFond2.Location = new System.Drawing.Point(109, 40);
             this.pictureBoxCouleurFond2.Name = "pictureBoxCouleurFond2";
-            this.pictureBoxCouleurFond2.Size = new System.Drawing.Size(50, 32);
+            this.pictureBoxCouleurFond2.Size = new System.Drawing.Size(50, 31);
             this.pictureBoxCouleurFond2.TabIndex = 3;
             this.pictureBoxCouleurFond2.TabStop = false;
             this.pictureBoxCouleurFond2.Click += new System.EventHandler(this.pictureBoxCouleurFond2_Click);

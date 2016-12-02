@@ -9,12 +9,17 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WMPLib;
 
 namespace ProjetTetrisSession1Tp3
 {
     public partial class FormPrincipal : Form
     {
         #region Variables partagées
+        FrmOption frmOption = new FrmOption();
+        WindowsMediaPlayer musique = new WindowsMediaPlayer();
+        string musiqueChemin = "";
+        bool jouerMusique = false;
         int compteurDeCarre2 = 0;
         int compteurDeLigne2 = 0;
         int compteurDeT2 = 0;
@@ -1374,18 +1379,39 @@ namespace ProjetTetrisSession1Tp3
         //Simon
         void ConfigurerJeu()
         {
-            FrmOption frmOption = new FrmOption();
             frmOption.nbreColonnes = nbreColonnes;
             nbreLignes = frmOption.nbreLignes;
             frmOption.couleur1JeuArrierePlan = couleur1JeuArrierePlan;
             frmOption.couleur2JeuArrierePlan = couleur2JeuArrierePlan;
+            frmOption.keysBougerADroite = keysBougerADroite;
+            frmOption.keysBougerAGauche = keysBougerAGauche;
+            frmOption.keysChute = keysChute;
+            frmOption.keysReserve = keysMettreEnReserve;
+            frmOption.keysRotation = keysTournerSensAntihoraire;
+            frmOption.jouerMusique = jouerMusique;
+            frmOption.musiqueChemin = musiqueChemin;
             if (frmOption.ShowDialog() == DialogResult.OK)
             {
                 nbreColonnes = frmOption.nbreColonnes;
                 nbreLignes = frmOption.nbreLignes;
                 couleur1JeuArrierePlan = frmOption.couleur1JeuArrierePlan;
                 couleur2JeuArrierePlan = frmOption.couleur2JeuArrierePlan;
+                keysBougerADroite = frmOption.keysBougerADroite;
+                keysBougerAGauche = frmOption.keysBougerAGauche;
+                keysChute = frmOption.keysChute;
+                keysMettreEnReserve = frmOption.keysReserve;
+                keysTournerSensAntihoraire = frmOption.keysRotation;
                 InitialiserJeu();
+            }
+            musiqueChemin = frmOption.musiqueChemin;
+            jouerMusique = frmOption.jouerMusique;
+            if (jouerMusique)
+            {
+                JouerMusique();
+            }
+            else
+            {
+                ArreterMusique();
             }
             ReprendreLeJeu();
         }
@@ -1438,6 +1464,17 @@ namespace ProjetTetrisSession1Tp3
             }
             DessinerJeu();
             ReprendreLeJeu();
+        }
+
+        //Simon
+        void JouerMusique()
+        {
+            musique.URL = musiqueChemin;
+            musique.controls.play();
+        }
+        void ArreterMusique()
+        {
+            musique.controls.stop();
         }
     }
 }
