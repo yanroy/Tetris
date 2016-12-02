@@ -10,6 +10,8 @@ using System.Windows.Forms;
 
 namespace ProjetTetrisSession1Tp3
 {
+    // Yannick
+    // Variables publiques utilisées pour compter le nombre de blocs dans la partie.
     public partial class FinDePartie : Form
     {
         public int compteurDeCarre = 0;
@@ -22,16 +24,20 @@ namespace ProjetTetrisSession1Tp3
         public FinDePartie()
         {
             InitializeComponent();
-        }
-
-        private void buttonRejouer_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        }       
+        // Affichage des nombres de blocs par partie.
         private void FinDePartie_Load(object sender, EventArgs e)
         {
-            lableTest.Text = compteurDeL.ToString();
+            int total = compteurDeCarre + compteurDeLigne + compteurDeT + compteurDeL + compteurDeJ + compteurDeS + compteurDeZ;
+            float PcCarre = compteurDeCarre / total * 100;
+
+            labelCarre.Text = compteurDeCarre.ToString();
+            labelLigne.Text = compteurDeLigne.ToString();
+            labelT.Text     =     compteurDeT.ToString();
+            labelL.Text     =     compteurDeL.ToString();                                   
+            labelJ.Text     =     compteurDeJ.ToString();
+            labelS.Text     =     compteurDeS.ToString();
+            labelZ.Text     =     compteurDeZ.ToString();
         }
     }
 }
