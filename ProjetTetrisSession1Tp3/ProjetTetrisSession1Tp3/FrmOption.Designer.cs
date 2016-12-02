@@ -284,11 +284,14 @@
             this.textBoxMusiqueNomFichier.Name = "textBoxMusiqueNomFichier";
             this.textBoxMusiqueNomFichier.Size = new System.Drawing.Size(176, 22);
             this.textBoxMusiqueNomFichier.TabIndex = 1;
+            this.textBoxMusiqueNomFichier.Text = "Original Tetris theme (Tetris Soundtrack).mp3";
             this.textBoxMusiqueNomFichier.TextChanged += new System.EventHandler(this.textBoxMusiqueNomFichier_TextChanged);
             // 
             // checkBoxMusiqueOn
             // 
             this.checkBoxMusiqueOn.AutoSize = true;
+            this.checkBoxMusiqueOn.Checked = true;
+            this.checkBoxMusiqueOn.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxMusiqueOn.Location = new System.Drawing.Point(3, 40);
             this.checkBoxMusiqueOn.Name = "checkBoxMusiqueOn";
             this.checkBoxMusiqueOn.Size = new System.Drawing.Size(49, 21);

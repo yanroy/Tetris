@@ -18,8 +18,8 @@ namespace ProjetTetrisSession1Tp3
         #region Variables partagées
         FrmOption frmOption = new FrmOption();
         WindowsMediaPlayer musique = new WindowsMediaPlayer();
-        string musiqueChemin = "";
-        bool jouerMusique = false;
+        string musiqueChemin = "musique/Original Tetris theme (Tetris Soundtrack).mp3";
+        bool jouerMusique = true;
         int compteurDeCarre2 = 0;
         int compteurDeLigne2 = 0;
         int compteurDeT2 = 0;
@@ -27,6 +27,7 @@ namespace ProjetTetrisSession1Tp3
         int compteurDeJ2 = 0;
         int compteurDeS2 = 0;
         int compteurDeZ2 = 0;
+        int meilleurScore = 0;
         //Variables du score
         int score = 0;
         int nbreLignesCompletes = 0;
@@ -50,7 +51,7 @@ namespace ProjetTetrisSession1Tp3
 
         //Variables pour garder les informations des blocs
         TypeBloc[,] tableauDeBlocs;
-        int nbreLignes = 2;
+        int nbreLignes = 22;
         int nbreColonnes = 12;
         int[] blocActifIEnJeu;
         int[] blocActifJEnJeu;
@@ -81,6 +82,7 @@ namespace ProjetTetrisSession1Tp3
         {
             InitializeComponent();
             EnleverLignesCompletes_Test();
+            JouerMusique();
         }       
         //Simon
         private void FormPrincipal_Load(object sender, EventArgs e)
@@ -272,8 +274,10 @@ namespace ProjetTetrisSession1Tp3
         private void timerDescenteBloc_Tick(object sender, EventArgs e)
         {
             score++;
+            meilleurScore = meilleurScore < score ? score : meilleurScore;
             labelScoreNombre.Text = score.ToString();
             labelNiveauNombre.Text = niveau.ToString();
+            labelMeilleurScoreNombre.Text = meilleurScore.ToString();
             if (DeterminerSiLeBlocPeutBouger(Deplacement.Down))
             {
                 BougerBlocActif(Deplacement.Down);
@@ -1470,6 +1474,7 @@ namespace ProjetTetrisSession1Tp3
         //Simon
         void JouerMusique()
         {
+            frmOption.jouerMusique = true;
             musique.URL = musiqueChemin;
             musique.controls.play();
         }
