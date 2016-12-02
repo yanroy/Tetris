@@ -30,6 +30,8 @@ namespace ProjetTetrisSession1Tp3
         {
             int total = compteurDeCarre + compteurDeLigne + compteurDeT + compteurDeL + compteurDeJ + compteurDeS + compteurDeZ;
             float PcCarre = compteurDeCarre / total * 100;
+            float PcLigne = compteurDeLigne / total * 100;
+            float PcT = compteurDeT / total * 100;
 
             labelCarre.Text = compteurDeCarre.ToString();
             labelLigne.Text = compteurDeLigne.ToString();
