@@ -32,10 +32,11 @@ namespace ProjetTetrisSession1Tp3
         int score = 0;
         int nbreLignesCompletes = 0;
         int niveau = 0;
+        bool nbreDeLignesCompletesDejaAtteind = false;
         Random rnd = new Random();
         //Variables pour dessiner le jeu.
-        SolidBrush couleur1JeuArrierePlan = new SolidBrush(Color.Beige);
-        SolidBrush couleur2JeuArrierePlan = new SolidBrush(Color.DarkGray);
+        SolidBrush couleur1JeuArrierePlan = new SolidBrush(Color.FromArgb(158, 12, 19));
+        SolidBrush couleur2JeuArrierePlan = new SolidBrush(Color.Black);
         const int grosseurDesBlocs = 28;
         Bitmap imageJeu;
         Bitmap[] imageBlocs = new Bitmap[] {Properties.Resources.Gele, Properties.Resources.carre, Properties.Resources.ligne, Properties.Resources.T,
@@ -275,9 +276,6 @@ namespace ProjetTetrisSession1Tp3
         {
             score++;
             meilleurScore = meilleurScore < score ? score : meilleurScore;
-            labelScoreNombre.Text = score.ToString();
-            labelNiveauNombre.Text = niveau.ToString();
-            labelMeilleurScoreNombre.Text = meilleurScore.ToString();
             if (DeterminerSiLeBlocPeutBouger(Deplacement.Down))
             {
                 BougerBlocActif(Deplacement.Down);
@@ -361,9 +359,11 @@ namespace ProjetTetrisSession1Tp3
             DessinerFondJeu();
             DessinerLesBlocs();
             DessinerScoreTemporaire();
+            labelMeilleurScoreNombre.Text = meilleurScore.ToString();
+            labelNiveauNombre.Text = niveau.ToString();
+            labelScoreNombre.Text = score.ToString();
             //-----------------------------------------
             graphicsPanelJeu.DrawImage(imageJeu, 0, 0);
-            graphicsPanelJeu.Dispose();
         }
         //Simon
         void DessinerFondJeu()
@@ -385,7 +385,6 @@ namespace ProjetTetrisSession1Tp3
                     solidBrushUtilise = solidBrushUtilise == couleur1JeuArrierePlan ? couleur2JeuArrierePlan : couleur1JeuArrierePlan;
                 }
             }
-            graphicsImageJeu.Dispose();
         }
         //Simon
         void DessinerLesBlocs()
@@ -446,7 +445,6 @@ namespace ProjetTetrisSession1Tp3
                     }
                 }
             }
-            graphicsImageJeu.Dispose();
         }
         //Simon      
         void DessinerProchainBloc()
@@ -460,9 +458,6 @@ namespace ProjetTetrisSession1Tp3
                     graphicsProchainBlocImage.DrawImage(imageBlocs[(int)blocActifProchain - 1], grosseurDesBlocs * blocActifJProchain[i], grosseurDesBlocs * blocActifIProchain[i], grosseurDesBlocs, grosseurDesBlocs);
             }
             graphicsProchainBloc.DrawImage(prochainBlocImage,0,0);
-            graphicsProchainBloc.Dispose();
-            prochainBlocImage.Dispose();
-            graphicsProchainBlocImage.Dispose();
         }
         //Simon
         void DessinerBlocEnReserve()
@@ -480,9 +475,6 @@ namespace ProjetTetrisSession1Tp3
             }
            
             graphicsReserveBloc.DrawImage(reserveBlocImage, 0, 0);
-            graphicsReserveBloc.Dispose();
-            reserveBlocImage.Dispose();
-            graphicsReserveBlocImage.Dispose();
         }
         //Simon
         void DessinerScoreTemporaire()
@@ -1167,15 +1159,7 @@ namespace ProjetTetrisSession1Tp3
                 if (EstUneLigneComplete(i))
                 {
                     nbreLignesCompletes++;
-                    if (nbreLignesCompletes != 0 && nbreLignesCompletes % 3 == 0)
-                    {
-                        niveau++;
-                        vitesse = vitesse / 100 * 80;
-                        if (vitesse == 0)
-                        {
-                            vitesse = 1;
-                        }
-                    }
+                    nbreDeLignesCompletesDejaAtteind = false;
                     nbreLignesFaitesEnUnCoup++;
                     DecalerLignes(i);
                     bool ligneCompleteI = true;
@@ -1193,6 +1177,16 @@ namespace ProjetTetrisSession1Tp3
             {
                 scoreTemporaireEnleverLigne = (int)((int)Math.Pow(1.8, nbreLignesFaitesEnUnCoup) * (300 * (1 + (double)niveau/10)));
                 AttribuerScore(ChoisirPointAleatoireSurLignePredefinie(), scoreTemporaireEnleverLigne);
+            }
+            if (nbreLignesCompletes != 0 && nbreLignesCompletes % 4 == 0 && !nbreDeLignesCompletesDejaAtteind)
+            {
+                niveau++;
+                vitesse = vitesse / 100 * 80;
+                if (vitesse == 0)
+                {
+                    vitesse = 1;
+                }
+                nbreDeLignesCompletesDejaAtteind = true;
             }
         }
         //Simon
@@ -1463,7 +1457,7 @@ namespace ProjetTetrisSession1Tp3
         private void boutonPersonnaliseQuitter_Click(object sender, EventArgs e)
         {
             PauserLeJeu();
-            if(MessageBox.Show("Aucune donnée sera préservée, voulez-vous vraiment quitter le jeu.", "Quitter le jeu",MessageBoxButtons.OKCancel,MessageBoxIcon.Exclamation) == DialogResult.OK)
+            if(MessageBox.Show("Aucune donnée sera préservée, voulez-vous vraiment quitter le jeu?", "Quitter le jeu",MessageBoxButtons.OKCancel,MessageBoxIcon.Exclamation) == DialogResult.OK)
             {
                 Application.Exit();
             }

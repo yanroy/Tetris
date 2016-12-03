@@ -152,6 +152,9 @@
     <Content Include="musique\Original Tetris theme %28Tetris Soundtrack%29.mp3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\Jeu.png" />
+    <None Include="Resources\Titre.png" />
+    <None Include="Resources\Menu.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

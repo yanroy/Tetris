@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.timerDescenteBloc = new System.Windows.Forms.Timer(this.components);
+            this.labelTitre = new System.Windows.Forms.Label();
+            this.timerRotation = new System.Windows.Forms.Timer(this.components);
             this.panelConteneurPanelJeu = new System.Windows.Forms.Panel();
             this.panelJeu = new System.Windows.Forms.Panel();
             this.panelMenu = new System.Windows.Forms.Panel();
@@ -40,15 +42,13 @@
             this.labelProchain = new System.Windows.Forms.Label();
             this.panelProchainBloc = new System.Windows.Forms.Panel();
             this.panelStatistique = new System.Windows.Forms.Panel();
+            this.labelMeilleurScoreNombre = new System.Windows.Forms.Label();
+            this.labelMeilleurScoreMots = new System.Windows.Forms.Label();
             this.labelNiveauNombre = new System.Windows.Forms.Label();
             this.labelNiveauMot = new System.Windows.Forms.Label();
             this.labelScoreNombre = new System.Windows.Forms.Label();
             this.labelScoreMot = new System.Windows.Forms.Label();
             this.pictureBoxEntete = new System.Windows.Forms.PictureBox();
-            this.labelTitre = new System.Windows.Forms.Label();
-            this.timerRotation = new System.Windows.Forms.Timer(this.components);
-            this.labelMeilleurScoreMots = new System.Windows.Forms.Label();
-            this.labelMeilleurScoreNombre = new System.Windows.Forms.Label();
             this.boutonPersonnaliseQuitter = new ProjetTetrisSession1Tp3.BoutonPersonnalise();
             this.boutonPersonnaliseOption = new ProjetTetrisSession1Tp3.BoutonPersonnalise();
             this.boutonPersonnaliseNouvellePartie = new ProjetTetrisSession1Tp3.BoutonPersonnalise();
@@ -66,21 +66,40 @@
             this.timerDescenteBloc.Interval = 500;
             this.timerDescenteBloc.Tick += new System.EventHandler(this.timerDescenteBloc_Tick);
             // 
+            // labelTitre
+            // 
+            this.labelTitre.AutoSize = true;
+            this.labelTitre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(158)))), ((int)(((byte)(12)))), ((int)(((byte)(19)))));
+            this.labelTitre.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelTitre.Font = new System.Drawing.Font("Perpetua Titling MT", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTitre.Location = new System.Drawing.Point(30, 32);
+            this.labelTitre.Name = "labelTitre";
+            this.labelTitre.Size = new System.Drawing.Size(577, 58);
+            this.labelTitre.TabIndex = 4;
+            this.labelTitre.Text = "TETRIS SIM AND YAN";
+            this.labelTitre.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // timerRotation
+            // 
+            this.timerRotation.Enabled = true;
+            this.timerRotation.Interval = 10;
+            this.timerRotation.Tick += new System.EventHandler(this.timerRotation_Tick);
+            // 
             // panelConteneurPanelJeu
             // 
             this.panelConteneurPanelJeu.BackColor = System.Drawing.Color.Transparent;
-            this.panelConteneurPanelJeu.BackgroundImage = global::ProjetTetrisSession1Tp3.Properties.Resources.ImageDeFond;
+            this.panelConteneurPanelJeu.BackgroundImage = global::ProjetTetrisSession1Tp3.Properties.Resources.Jeu;
             this.panelConteneurPanelJeu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panelConteneurPanelJeu.Controls.Add(this.panelJeu);
-            this.panelConteneurPanelJeu.Location = new System.Drawing.Point(220, 128);
+            this.panelConteneurPanelJeu.Location = new System.Drawing.Point(248, 129);
             this.panelConteneurPanelJeu.Name = "panelConteneurPanelJeu";
-            this.panelConteneurPanelJeu.Size = new System.Drawing.Size(402, 621);
+            this.panelConteneurPanelJeu.Size = new System.Drawing.Size(352, 632);
             this.panelConteneurPanelJeu.TabIndex = 3;
             // 
             // panelJeu
             // 
-            this.panelJeu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(51)))), ((int)(((byte)(159)))));
-            this.panelJeu.Location = new System.Drawing.Point(33, 2);
+            this.panelJeu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(158)))), ((int)(((byte)(12)))), ((int)(((byte)(19)))));
+            this.panelJeu.Location = new System.Drawing.Point(7, 8);
             this.panelJeu.Name = "panelJeu";
             this.panelJeu.Size = new System.Drawing.Size(336, 616);
             this.panelJeu.TabIndex = 0;
@@ -89,7 +108,7 @@
             // panelMenu
             // 
             this.panelMenu.BackColor = System.Drawing.Color.Transparent;
-            this.panelMenu.BackgroundImage = global::ProjetTetrisSession1Tp3.Properties.Resources.ImageDeFond;
+            this.panelMenu.BackgroundImage = global::ProjetTetrisSession1Tp3.Properties.Resources.Menu;
             this.panelMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panelMenu.Controls.Add(this.panelConteneurBlocReserve);
             this.panelMenu.Controls.Add(this.panelConteneurProchain);
@@ -97,7 +116,7 @@
             this.panelMenu.Controls.Add(this.boutonPersonnaliseQuitter);
             this.panelMenu.Controls.Add(this.boutonPersonnaliseOption);
             this.panelMenu.Controls.Add(this.boutonPersonnaliseNouvellePartie);
-            this.panelMenu.Location = new System.Drawing.Point(15, 131);
+            this.panelMenu.Location = new System.Drawing.Point(15, 130);
             this.panelMenu.Name = "panelMenu";
             this.panelMenu.Size = new System.Drawing.Size(199, 616);
             this.panelMenu.TabIndex = 2;
@@ -123,7 +142,7 @@
             // 
             // panelBlocReserve
             // 
-            this.panelBlocReserve.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(51)))), ((int)(((byte)(159)))));
+            this.panelBlocReserve.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(158)))), ((int)(((byte)(12)))), ((int)(((byte)(19)))));
             this.panelBlocReserve.Location = new System.Drawing.Point(0, 30);
             this.panelBlocReserve.Name = "panelBlocReserve";
             this.panelBlocReserve.Size = new System.Drawing.Size(112, 56);
@@ -150,7 +169,7 @@
             // 
             // panelProchainBloc
             // 
-            this.panelProchainBloc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(51)))), ((int)(((byte)(159)))));
+            this.panelProchainBloc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(158)))), ((int)(((byte)(12)))), ((int)(((byte)(19)))));
             this.panelProchainBloc.Location = new System.Drawing.Point(0, 30);
             this.panelProchainBloc.Name = "panelProchainBloc";
             this.panelProchainBloc.Size = new System.Drawing.Size(112, 56);
@@ -159,7 +178,7 @@
             // 
             // panelStatistique
             // 
-            this.panelStatistique.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(51)))), ((int)(((byte)(159)))));
+            this.panelStatistique.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(158)))), ((int)(((byte)(12)))), ((int)(((byte)(19)))));
             this.panelStatistique.Controls.Add(this.labelMeilleurScoreNombre);
             this.panelStatistique.Controls.Add(this.labelMeilleurScoreMots);
             this.panelStatistique.Controls.Add(this.labelNiveauNombre);
@@ -171,13 +190,34 @@
             this.panelStatistique.Size = new System.Drawing.Size(146, 145);
             this.panelStatistique.TabIndex = 4;
             // 
+            // labelMeilleurScoreNombre
+            // 
+            this.labelMeilleurScoreNombre.AutoSize = true;
+            this.labelMeilleurScoreNombre.Font = new System.Drawing.Font("Perpetua Titling MT", 12F);
+            this.labelMeilleurScoreNombre.Location = new System.Drawing.Point(81, 91);
+            this.labelMeilleurScoreNombre.Name = "labelMeilleurScoreNombre";
+            this.labelMeilleurScoreNombre.Size = new System.Drawing.Size(20, 19);
+            this.labelMeilleurScoreNombre.TabIndex = 5;
+            this.labelMeilleurScoreNombre.Text = "0";
+            this.labelMeilleurScoreNombre.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // labelMeilleurScoreMots
+            // 
+            this.labelMeilleurScoreMots.AutoSize = true;
+            this.labelMeilleurScoreMots.Font = new System.Drawing.Font("Perpetua Titling MT", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelMeilleurScoreMots.Location = new System.Drawing.Point(3, 68);
+            this.labelMeilleurScoreMots.Name = "labelMeilleurScoreMots";
+            this.labelMeilleurScoreMots.Size = new System.Drawing.Size(122, 16);
+            this.labelMeilleurScoreMots.TabIndex = 4;
+            this.labelMeilleurScoreMots.Text = "Meilleur Score";
+            // 
             // labelNiveauNombre
             // 
             this.labelNiveauNombre.AutoSize = true;
             this.labelNiveauNombre.Font = new System.Drawing.Font("Perpetua Titling MT", 12F);
             this.labelNiveauNombre.Location = new System.Drawing.Point(81, 12);
             this.labelNiveauNombre.Name = "labelNiveauNombre";
-            this.labelNiveauNombre.Size = new System.Drawing.Size(23, 23);
+            this.labelNiveauNombre.Size = new System.Drawing.Size(20, 19);
             this.labelNiveauNombre.TabIndex = 3;
             this.labelNiveauNombre.Text = "0";
             this.labelNiveauNombre.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -188,7 +228,7 @@
             this.labelNiveauMot.Font = new System.Drawing.Font("Perpetua Titling MT", 12F);
             this.labelNiveauMot.Location = new System.Drawing.Point(10, 10);
             this.labelNiveauMot.Name = "labelNiveauMot";
-            this.labelNiveauMot.Size = new System.Drawing.Size(103, 23);
+            this.labelNiveauMot.Size = new System.Drawing.Size(81, 19);
             this.labelNiveauMot.TabIndex = 2;
             this.labelNiveauMot.Text = "Niveau : ";
             // 
@@ -198,7 +238,7 @@
             this.labelScoreNombre.Font = new System.Drawing.Font("Perpetua Titling MT", 12F);
             this.labelScoreNombre.Location = new System.Drawing.Point(81, 42);
             this.labelScoreNombre.Name = "labelScoreNombre";
-            this.labelScoreNombre.Size = new System.Drawing.Size(23, 23);
+            this.labelScoreNombre.Size = new System.Drawing.Size(20, 19);
             this.labelScoreNombre.TabIndex = 1;
             this.labelScoreNombre.Text = "0";
             this.labelScoreNombre.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -216,53 +256,13 @@
             // pictureBoxEntete
             // 
             this.pictureBoxEntete.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBoxEntete.BackgroundImage = global::ProjetTetrisSession1Tp3.Properties.Resources.ImageDeFondEnTete;
+            this.pictureBoxEntete.BackgroundImage = global::ProjetTetrisSession1Tp3.Properties.Resources.Titre;
             this.pictureBoxEntete.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBoxEntete.Location = new System.Drawing.Point(15, 3);
             this.pictureBoxEntete.Name = "pictureBoxEntete";
             this.pictureBoxEntete.Size = new System.Drawing.Size(607, 119);
             this.pictureBoxEntete.TabIndex = 1;
             this.pictureBoxEntete.TabStop = false;
-            // 
-            // labelTitre
-            // 
-            this.labelTitre.AutoSize = true;
-            this.labelTitre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(51)))), ((int)(((byte)(159)))));
-            this.labelTitre.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelTitre.Font = new System.Drawing.Font("Perpetua Titling MT", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTitre.Location = new System.Drawing.Point(30, 32);
-            this.labelTitre.Name = "labelTitre";
-            this.labelTitre.Size = new System.Drawing.Size(720, 72);
-            this.labelTitre.TabIndex = 4;
-            this.labelTitre.Text = "TETRIS SIM AND YAN";
-            this.labelTitre.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // timerRotation
-            // 
-            this.timerRotation.Enabled = true;
-            this.timerRotation.Interval = 10;
-            this.timerRotation.Tick += new System.EventHandler(this.timerRotation_Tick);
-            // 
-            // labelMeilleurScoreMots
-            // 
-            this.labelMeilleurScoreMots.AutoSize = true;
-            this.labelMeilleurScoreMots.Font = new System.Drawing.Font("Perpetua Titling MT", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelMeilleurScoreMots.Location = new System.Drawing.Point(3, 68);
-            this.labelMeilleurScoreMots.Name = "labelMeilleurScoreMots";
-            this.labelMeilleurScoreMots.Size = new System.Drawing.Size(150, 20);
-            this.labelMeilleurScoreMots.TabIndex = 4;
-            this.labelMeilleurScoreMots.Text = "Meilleur Score";
-            // 
-            // labelMeilleurScoreNombre
-            // 
-            this.labelMeilleurScoreNombre.AutoSize = true;
-            this.labelMeilleurScoreNombre.Font = new System.Drawing.Font("Perpetua Titling MT", 12F);
-            this.labelMeilleurScoreNombre.Location = new System.Drawing.Point(81, 91);
-            this.labelMeilleurScoreNombre.Name = "labelMeilleurScoreNombre";
-            this.labelMeilleurScoreNombre.Size = new System.Drawing.Size(23, 23);
-            this.labelMeilleurScoreNombre.TabIndex = 5;
-            this.labelMeilleurScoreNombre.Text = "0";
-            this.labelMeilleurScoreNombre.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // boutonPersonnaliseQuitter
             // 
@@ -317,8 +317,9 @@
             // FormPrincipal
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.BackColor = System.Drawing.Color.DarkRed;
+            this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(634, 761);
+            this.ControlBox = false;
             this.Controls.Add(this.labelTitre);
             this.Controls.Add(this.panelConteneurPanelJeu);
             this.Controls.Add(this.panelMenu);
