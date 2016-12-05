@@ -49,6 +49,8 @@
             this.labelScoreNombre = new System.Windows.Forms.Label();
             this.labelScoreMot = new System.Windows.Forms.Label();
             this.pictureBoxEntete = new System.Windows.Forms.PictureBox();
+            this.labelVitesseMot = new System.Windows.Forms.Label();
+            this.labelVitessePourcentage = new System.Windows.Forms.Label();
             this.boutonPersonnaliseQuitter = new ProjetTetrisSession1Tp3.BoutonPersonnalise();
             this.boutonPersonnaliseOption = new ProjetTetrisSession1Tp3.BoutonPersonnalise();
             this.boutonPersonnaliseNouvellePartie = new ProjetTetrisSession1Tp3.BoutonPersonnalise();
@@ -179,6 +181,8 @@
             // panelStatistique
             // 
             this.panelStatistique.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(158)))), ((int)(((byte)(12)))), ((int)(((byte)(19)))));
+            this.panelStatistique.Controls.Add(this.labelVitessePourcentage);
+            this.panelStatistique.Controls.Add(this.labelVitesseMot);
             this.panelStatistique.Controls.Add(this.labelMeilleurScoreNombre);
             this.panelStatistique.Controls.Add(this.labelMeilleurScoreMots);
             this.panelStatistique.Controls.Add(this.labelNiveauNombre);
@@ -194,7 +198,7 @@
             // 
             this.labelMeilleurScoreNombre.AutoSize = true;
             this.labelMeilleurScoreNombre.Font = new System.Drawing.Font("Perpetua Titling MT", 12F);
-            this.labelMeilleurScoreNombre.Location = new System.Drawing.Point(81, 91);
+            this.labelMeilleurScoreNombre.Location = new System.Drawing.Point(75, 121);
             this.labelMeilleurScoreNombre.Name = "labelMeilleurScoreNombre";
             this.labelMeilleurScoreNombre.Size = new System.Drawing.Size(20, 19);
             this.labelMeilleurScoreNombre.TabIndex = 5;
@@ -205,7 +209,7 @@
             // 
             this.labelMeilleurScoreMots.AutoSize = true;
             this.labelMeilleurScoreMots.Font = new System.Drawing.Font("Perpetua Titling MT", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelMeilleurScoreMots.Location = new System.Drawing.Point(3, 68);
+            this.labelMeilleurScoreMots.Location = new System.Drawing.Point(3, 97);
             this.labelMeilleurScoreMots.Name = "labelMeilleurScoreMots";
             this.labelMeilleurScoreMots.Size = new System.Drawing.Size(122, 16);
             this.labelMeilleurScoreMots.TabIndex = 4;
@@ -215,7 +219,7 @@
             // 
             this.labelNiveauNombre.AutoSize = true;
             this.labelNiveauNombre.Font = new System.Drawing.Font("Perpetua Titling MT", 12F);
-            this.labelNiveauNombre.Location = new System.Drawing.Point(81, 12);
+            this.labelNiveauNombre.Location = new System.Drawing.Point(75, 12);
             this.labelNiveauNombre.Name = "labelNiveauNombre";
             this.labelNiveauNombre.Size = new System.Drawing.Size(20, 19);
             this.labelNiveauNombre.TabIndex = 3;
@@ -226,7 +230,7 @@
             // 
             this.labelNiveauMot.AutoSize = true;
             this.labelNiveauMot.Font = new System.Drawing.Font("Perpetua Titling MT", 12F);
-            this.labelNiveauMot.Location = new System.Drawing.Point(10, 10);
+            this.labelNiveauMot.Location = new System.Drawing.Point(3, 10);
             this.labelNiveauMot.Name = "labelNiveauMot";
             this.labelNiveauMot.Size = new System.Drawing.Size(81, 19);
             this.labelNiveauMot.TabIndex = 2;
@@ -236,7 +240,7 @@
             // 
             this.labelScoreNombre.AutoSize = true;
             this.labelScoreNombre.Font = new System.Drawing.Font("Perpetua Titling MT", 12F);
-            this.labelScoreNombre.Location = new System.Drawing.Point(81, 42);
+            this.labelScoreNombre.Location = new System.Drawing.Point(75, 41);
             this.labelScoreNombre.Name = "labelScoreNombre";
             this.labelScoreNombre.Size = new System.Drawing.Size(20, 19);
             this.labelScoreNombre.TabIndex = 1;
@@ -246,7 +250,7 @@
             // labelScoreMot
             // 
             this.labelScoreMot.Font = new System.Drawing.Font("Perpetua Titling MT", 12F);
-            this.labelScoreMot.Location = new System.Drawing.Point(10, 41);
+            this.labelScoreMot.Location = new System.Drawing.Point(3, 39);
             this.labelScoreMot.Name = "labelScoreMot";
             this.labelScoreMot.Size = new System.Drawing.Size(81, 19);
             this.labelScoreMot.TabIndex = 0;
@@ -263,6 +267,27 @@
             this.pictureBoxEntete.Size = new System.Drawing.Size(607, 119);
             this.pictureBoxEntete.TabIndex = 1;
             this.pictureBoxEntete.TabStop = false;
+            // 
+            // labelVitesseMot
+            // 
+            this.labelVitesseMot.Font = new System.Drawing.Font("Perpetua Titling MT", 12F);
+            this.labelVitesseMot.Location = new System.Drawing.Point(3, 68);
+            this.labelVitesseMot.Name = "labelVitesseMot";
+            this.labelVitesseMot.Size = new System.Drawing.Size(81, 19);
+            this.labelVitesseMot.TabIndex = 6;
+            this.labelVitesseMot.Text = "Vitesse : ";
+            this.labelVitesseMot.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // labelVitessePourcentage
+            // 
+            this.labelVitessePourcentage.AutoSize = true;
+            this.labelVitessePourcentage.Font = new System.Drawing.Font("Perpetua Titling MT", 12F);
+            this.labelVitessePourcentage.Location = new System.Drawing.Point(75, 68);
+            this.labelVitessePourcentage.Name = "labelVitessePourcentage";
+            this.labelVitessePourcentage.Size = new System.Drawing.Size(20, 19);
+            this.labelVitessePourcentage.TabIndex = 7;
+            this.labelVitessePourcentage.Text = "0";
+            this.labelVitessePourcentage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // boutonPersonnaliseQuitter
             // 
@@ -365,6 +390,8 @@
         private System.Windows.Forms.Label labelNiveauMot;
         private System.Windows.Forms.Label labelMeilleurScoreMots;
         private System.Windows.Forms.Label labelMeilleurScoreNombre;
+        private System.Windows.Forms.Label labelVitessePourcentage;
+        private System.Windows.Forms.Label labelVitesseMot;
     }
 }
 

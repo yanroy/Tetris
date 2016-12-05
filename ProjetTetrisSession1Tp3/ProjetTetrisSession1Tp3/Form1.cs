@@ -362,6 +362,14 @@ namespace ProjetTetrisSession1Tp3
             labelMeilleurScoreNombre.Text = meilleurScore.ToString();
             labelNiveauNombre.Text = niveau.ToString();
             labelScoreNombre.Text = score.ToString();
+            if (vitesse == 1)
+            {
+                labelVitessePourcentage.Text = 1.ToString("p");
+            }
+            else
+            {
+                labelVitessePourcentage.Text = ((1 - ((double)vitesse / vitesseAuDebut))).ToString("p");
+            }
             //-----------------------------------------
             graphicsPanelJeu.DrawImage(imageJeu, 0, 0);
         }
@@ -484,7 +492,7 @@ namespace ProjetTetrisSession1Tp3
                 if(scoreTemporaire[i] != 0)
                 {
                     Graphics graphicsScoreTemporaire = Graphics.FromImage(imageJeu);
-                    graphicsScoreTemporaire.DrawString("+"+scoreTemporaire[i].ToString(), labelProchain.Font, new SolidBrush(Color.Black), scoreTemporaireLocation[i]);
+                    graphicsScoreTemporaire.DrawString("+"+scoreTemporaire[i].ToString(), labelProchain.Font, new SolidBrush(Color.FromArgb(237, 28, 36)), scoreTemporaireLocation[i]);
                 }
             }
         }
@@ -1178,10 +1186,10 @@ namespace ProjetTetrisSession1Tp3
                 scoreTemporaireEnleverLigne = (int)((int)Math.Pow(1.8, nbreLignesFaitesEnUnCoup) * (300 * (1 + (double)niveau/10)));
                 AttribuerScore(ChoisirPointAleatoireSurLignePredefinie(), scoreTemporaireEnleverLigne);
             }
-            if (nbreLignesCompletes != 0 && nbreLignesCompletes % 4 == 0 && !nbreDeLignesCompletesDejaAtteind)
+            if (nbreLignesCompletes != 0 && nbreLignesCompletes % 1 == 0 && !nbreDeLignesCompletesDejaAtteind)
             {
                 niveau++;
-                vitesse = vitesse / 100 * 80;
+                vitesse = vitesse / 100 * 90;
                 if (vitesse == 0)
                 {
                     vitesse = 1;
