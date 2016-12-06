@@ -1671,7 +1671,9 @@ namespace ProjetTetrisSession1Tp3
         }
 
         // Yannick
-
+        /// <summary>
+        /// Tester la rotation des blocs.
+        /// </summary>
         void Tester_BougerBlocAntiHoraire()
         {
             // Rotation d’un bloc seul placé au centre de la surface de jeu.
@@ -1802,6 +1804,9 @@ namespace ProjetTetrisSession1Tp3
         }
 
         // Yannick 
+        /// <summary>
+        /// Tester la détection de fin de partie.
+        /// </summary>
         void Tester_InformerFinDePartie()
         {
             // Détection de la fin de la partie (partie terminée)
@@ -1839,7 +1844,7 @@ namespace ProjetTetrisSession1Tp3
             // Appel de la fonction et vérification
             Debug.Assert(VerifierSiTransformerProchainBlocEnActifPossible() == false,"Erreur dans la detection de fin de partie (partie terminée)");
 
-            // Détection de la fin de la partie (partie terminée)
+            // Détection de la fin de la partie (partie non terminée)
 
             // Initialisation des variables.
             tempsDebutDeJeu = DateTime.Now;
