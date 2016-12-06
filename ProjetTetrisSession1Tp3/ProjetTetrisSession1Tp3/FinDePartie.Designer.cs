@@ -52,6 +52,7 @@
             this.labelCarre = new System.Windows.Forms.Label();
             this.tableLayoutPanelStats = new System.Windows.Forms.TableLayoutPanel();
             this.buttonRejouer = new System.Windows.Forms.Button();
+            this.labelTempsDeJeu = new System.Windows.Forms.Label();
             this.groupBoxDesCompteurs.SuspendLayout();
             this.tableLayoutPanelStats.SuspendLayout();
             this.SuspendLayout();
@@ -282,6 +283,7 @@
             this.tableLayoutPanelStats.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.10471F));
             this.tableLayoutPanelStats.Controls.Add(this.groupBoxDesCompteurs, 0, 0);
             this.tableLayoutPanelStats.Controls.Add(this.buttonRejouer, 0, 1);
+            this.tableLayoutPanelStats.Controls.Add(this.labelTempsDeJeu, 1, 0);
             this.tableLayoutPanelStats.Location = new System.Drawing.Point(12, 12);
             this.tableLayoutPanelStats.Name = "tableLayoutPanelStats";
             this.tableLayoutPanelStats.RowCount = 2;
@@ -300,6 +302,15 @@
             this.buttonRejouer.Text = "Rejouer";
             this.buttonRejouer.UseVisualStyleBackColor = true;
             // 
+            // labelTempsDeJeu
+            // 
+            this.labelTempsDeJeu.AutoSize = true;
+            this.labelTempsDeJeu.Location = new System.Drawing.Point(269, 0);
+            this.labelTempsDeJeu.Name = "labelTempsDeJeu";
+            this.labelTempsDeJeu.Size = new System.Drawing.Size(74, 13);
+            this.labelTempsDeJeu.TabIndex = 9;
+            this.labelTempsDeJeu.Text = "Temps de Jeu";
+            // 
             // FinDePartie
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -312,6 +323,7 @@
             this.groupBoxDesCompteurs.ResumeLayout(false);
             this.groupBoxDesCompteurs.PerformLayout();
             this.tableLayoutPanelStats.ResumeLayout(false);
+            this.tableLayoutPanelStats.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -342,5 +354,6 @@
         private System.Windows.Forms.Label labelPcLigne;
         private System.Windows.Forms.Label labelPcCarre;
         private System.Windows.Forms.Button buttonRejouer;
+        private System.Windows.Forms.Label labelTempsDeJeu;
     }
 }
