@@ -97,6 +97,8 @@ namespace ProjetTetrisSession1Tp3
         {
             InitializeComponent();
             EnleverLignesCompletes_Test();
+            Tester_BougerBlocAntiHoraire();
+            Tester_InformerFinDePartie();
             threadMusique = new Thread(new ThreadStart(gererMusique));
             threadMusique.Start();
         }       
@@ -1667,36 +1669,194 @@ namespace ProjetTetrisSession1Tp3
                 Thread.Sleep(100);
             }
         }
+
+        // Yannick
+
         void Tester_BougerBlocAntiHoraire()
         {
+            // Rotation d’un bloc seul placé au centre de la surface de jeu.
+
+            // Initialisation des variables.
+            tempsDebutDeJeu = DateTime.Now;
+            imageJeu = new Bitmap(panelJeu.Size.Width, panelJeu.Size.Height);
+            tableauDeBlocs = new TypeBloc[nbreLignes, nbreColonnes];
+            blocActifIEnJeu = new int[4];
+            blocActifJEnJeu = new int[4];
+            blocActifIProchain = new int[4];
+            blocActifJProchain = new int[4];
+            operateurRotationI = new int[4];
+            operateurRotationJ = new int[4];
+            blocActifEnJeu = TypeBloc.Ligne;
             status = 0;
-            tableauDeBlocs = new TypeBloc[22, 12];
-            operateurRotationI[0] = 0;
-            operateurRotationI[1] = 0;
-            operateurRotationI[2] = 0;
-            operateurRotationI[3] = 0;
 
-            operateurRotationJ[0] = 0;
-            operateurRotationJ[1] = 0;
-            operateurRotationJ[2] = 0;
-            operateurRotationJ[3] = 0;
+            blocActifIEnJeu[0] = 10;
+            blocActifIEnJeu[1] = 10;
+            blocActifIEnJeu[2] = 10;
+            blocActifIEnJeu[3] = 10;
 
-            tableauDeBlocs[10, 4] = TypeBloc.Ligne;
-            tableauDeBlocs[10, 5] = TypeBloc.Ligne;
-            tableauDeBlocs[10, 6] = TypeBloc.Ligne;
-            tableauDeBlocs[10, 7] = TypeBloc.Ligne;
+            blocActifJEnJeu[0] = 4;
+            blocActifJEnJeu[1] = 5;
+            blocActifJEnJeu[2] = 6;
+            blocActifJEnJeu[3] = 7;
 
+            for (int i = 0; i < blocActifIEnJeu.Length; i++)
+            {
+                tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.Ligne;
+            }
+
+            // Appel de la fonction.
+            BougerBlocAntiHoraire();
+
+            // Vérification
             Debug.Assert(
-            operateurRotationI[0] == 1 &&
-            operateurRotationI[1] == 0 &&
-            operateurRotationI[2] == -1 &&
-            operateurRotationI[3] == -2 &&
+                tableauDeBlocs[11, 05] == TypeBloc.Ligne &&
+                tableauDeBlocs[10, 05] == TypeBloc.Ligne &&
+                tableauDeBlocs[09, 05] == TypeBloc.Ligne &&
+                tableauDeBlocs[08, 05] == TypeBloc.Ligne
+                , "erreur de rotation d'une ligne au milieu du tableau.");
 
-            operateurRotationJ[0] == 1 &&
-            operateurRotationJ[1] == 0 &&
-            operateurRotationJ[2] == -1 &&
-            operateurRotationJ[3] == -2,
-            "Erreur avec la rotation d'une ligne au milieu du tableau.");
+            // Rotation d’un bloc seul placé à gauche de la surface de jeu.
+
+            // Initialisation des variables.
+            tempsDebutDeJeu = DateTime.Now;
+            imageJeu = new Bitmap(panelJeu.Size.Width, panelJeu.Size.Height);
+            tableauDeBlocs = new TypeBloc[nbreLignes, nbreColonnes];
+            blocActifIEnJeu = new int[4];
+            blocActifJEnJeu = new int[4];
+            blocActifIProchain = new int[4];
+            blocActifJProchain = new int[4];
+            operateurRotationI = new int[4];
+            operateurRotationJ = new int[4];
+            blocActifEnJeu = TypeBloc.Ligne;
+            blocActifProchain = TypeBloc.Ligne;
+            status = 0;
+
+            blocActifIEnJeu[0] = 10;
+            blocActifIEnJeu[1] = 10;
+            blocActifIEnJeu[2] = 10;
+            blocActifIEnJeu[3] = 10;
+
+            blocActifJEnJeu[0] = 0;
+            blocActifJEnJeu[1] = 1;
+            blocActifJEnJeu[2] = 2;
+            blocActifJEnJeu[3] = 3;
+
+            for (int i = 0; i < blocActifIEnJeu.Length; i++)
+            {
+                tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.Ligne;
+            }
+
+            // Appel de la fonction.
+            BougerBlocAntiHoraire();
+
+            // Vérification
+            Debug.Assert(
+                tableauDeBlocs[11, 01] == TypeBloc.Ligne &&
+                tableauDeBlocs[10, 01] == TypeBloc.Ligne &&
+                tableauDeBlocs[09, 01] == TypeBloc.Ligne &&
+                tableauDeBlocs[08, 01] == TypeBloc.Ligne
+                , "erreur de rotation d'une ligne à la gauche du tableau.");
+
+            // Rotation d’un bloc seul placé à droite de la surface de jeu.
+
+            // Initialisation des variables.
+            tempsDebutDeJeu = DateTime.Now;
+            imageJeu = new Bitmap(panelJeu.Size.Width, panelJeu.Size.Height);
+            tableauDeBlocs = new TypeBloc[nbreLignes, nbreColonnes];
+            blocActifIEnJeu = new int[4];
+            blocActifJEnJeu = new int[4];
+            blocActifIProchain = new int[4];
+            blocActifJProchain = new int[4];
+            operateurRotationI = new int[4];
+            operateurRotationJ = new int[4];
+            blocActifEnJeu = TypeBloc.Ligne;
+            blocActifProchain = TypeBloc.Ligne;
+            status = 0;
+
+            blocActifIEnJeu[0] = 10;
+            blocActifIEnJeu[1] = 10;
+            blocActifIEnJeu[2] = 10;
+            blocActifIEnJeu[3] = 10;
+
+            blocActifJEnJeu[0] = 8;
+            blocActifJEnJeu[1] = 9;
+            blocActifJEnJeu[2] = 10;
+            blocActifJEnJeu[3] = 11;
+
+            for (int i = 0; i < blocActifIEnJeu.Length; i++)
+            {
+                tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.Ligne;
+            }
+
+            // Appel de la fonction.
+            BougerBlocAntiHoraire();
+
+            // Vérification
+            Debug.Assert(
+                tableauDeBlocs[11, 09] == TypeBloc.Ligne &&
+                tableauDeBlocs[10, 09] == TypeBloc.Ligne &&
+                tableauDeBlocs[09, 09] == TypeBloc.Ligne &&
+                tableauDeBlocs[08, 09] == TypeBloc.Ligne
+                , "erreur de rotation d'une ligne à la droite du tableau.");
+
+        }
+
+        // Yannick 
+        void Tester_InformerFinDePartie()
+        {
+            // Détection de la fin de la partie (partie terminée)
+
+            // Initialisation des variables.
+            tempsDebutDeJeu = DateTime.Now;
+            imageJeu = new Bitmap(panelJeu.Size.Width, panelJeu.Size.Height);
+            tableauDeBlocs = new TypeBloc[nbreLignes, nbreColonnes];
+            blocActifIEnJeu = new int[4];
+            blocActifJEnJeu = new int[4];
+            blocActifIProchain = new int[4];
+            blocActifJProchain = new int[4];
+            operateurRotationI = new int[4];
+            operateurRotationJ = new int[4];
+            blocActifEnJeu = TypeBloc.Ligne;
+            blocActifProchain = GenererBloc(TypeBloc.Carre, blocActifIProchain, blocActifJProchain);
+            status = 0;
+
+            blocActifIEnJeu[0] = 0;
+            blocActifIEnJeu[1] = 0;
+            blocActifIEnJeu[2] = 0;
+            blocActifIEnJeu[3] = 0;
+
+            blocActifJEnJeu[0] = 4;
+            blocActifJEnJeu[1] = 5;
+            blocActifJEnJeu[2] = 6;
+            blocActifJEnJeu[3] = 7;
+
+            for (int i = 0; i < blocActifIEnJeu.Length; i++)
+            {
+                tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = TypeBloc.GeleLigne;
+            }
+
+            
+            // Appel de la fonction et vérification
+            Debug.Assert(VerifierSiTransformerProchainBlocEnActifPossible() == false,"Erreur dans la detection de fin de partie (partie terminée)");
+
+            // Détection de la fin de la partie (partie terminée)
+
+            // Initialisation des variables.
+            tempsDebutDeJeu = DateTime.Now;
+            imageJeu = new Bitmap(panelJeu.Size.Width, panelJeu.Size.Height);
+            tableauDeBlocs = new TypeBloc[nbreLignes, nbreColonnes];
+            blocActifIEnJeu = new int[4];
+            blocActifJEnJeu = new int[4];
+            blocActifIProchain = new int[4];
+            blocActifJProchain = new int[4];
+            operateurRotationI = new int[4];
+            operateurRotationJ = new int[4];
+            blocActifEnJeu = TypeBloc.Ligne;
+            blocActifProchain = GenererBloc(TypeBloc.Carre, blocActifIProchain, blocActifJProchain);
+            status = 0;
+
+            // Appel de la fonction et vérification
+            Debug.Assert(VerifierSiTransformerProchainBlocEnActifPossible(), "Erreur dans la detection de fin de partie (partie terminée)");
         }
     }   
 }
