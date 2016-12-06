@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Rôle: Jeu tetris qui fait des rotations anti horaire et accélérère à chaque 4 lignes complètées.
+//Auteur : Simon Robidas et Yannick Roy-Fontaine
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -1665,7 +1667,7 @@ namespace ProjetTetrisSession1Tp3
                 Thread.Sleep(100);
             }
         }
-void Tester_BougerBlocAntiHoraire()
+        void Tester_BougerBlocAntiHoraire()
         {
             status = 0;
             tableauDeBlocs = new TypeBloc[22, 12];
@@ -1697,5 +1699,4 @@ void Tester_BougerBlocAntiHoraire()
             "Erreur avec la rotation d'une ligne au milieu du tableau.");
         }
     }   
-    }
 }
