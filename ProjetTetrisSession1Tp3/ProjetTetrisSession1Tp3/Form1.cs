@@ -95,6 +95,7 @@ namespace ProjetTetrisSession1Tp3
         {
             InitializeComponent();
             EnleverLignesCompletes_Test();
+            
         }       
         //Simon
         /// <summary>
@@ -1549,9 +1550,36 @@ namespace ProjetTetrisSession1Tp3
             musique.controls.stop();
         }
 
-        void Tester_BougerBlocAntiHoraire()
+        void Tester_BougerBlocAntiHorairre()
         {
+            status = 0;
+            tableauDeBlocs = new TypeBloc[22, 12];
+            operateurRotationI[0] = 0;
+            operateurRotationI[1] = 0;
+            operateurRotationI[2] = 0;
+            operateurRotationI[3] = 0;
 
+            operateurRotationJ[0] = 0;
+            operateurRotationJ[1] = 0;
+            operateurRotationJ[2] = 0;
+            operateurRotationJ[3] = 0;
+
+            tableauDeBlocs[10, 4] = TypeBloc.Ligne;
+            tableauDeBlocs[10, 5] = TypeBloc.Ligne;
+            tableauDeBlocs[10, 6] = TypeBloc.Ligne;
+            tableauDeBlocs[10, 7] = TypeBloc.Ligne;
+
+            Debug.Assert(
+            operateurRotationI[0] == 1 &&
+            operateurRotationI[1] == 0 &&
+            operateurRotationI[2] == -1 &&
+            operateurRotationI[3] == -2 &&
+
+            operateurRotationJ[0] == 1 &&
+            operateurRotationJ[1] == 0 &&
+            operateurRotationJ[2] == -1 &&
+            operateurRotationJ[3] == -2,
+            "Erreur avec la rotation d'une ligne au milieu du tableau.");
         }
     }   
 }
