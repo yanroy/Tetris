@@ -17,9 +17,13 @@ namespace ProjetTetrisSession1Tp3
     {
         #region Variables partagées
         FrmOption frmOption = new FrmOption();
+
+        //Variables de la musique
         WindowsMediaPlayer musique = new WindowsMediaPlayer();
         string musiqueChemin = "musique/Original Tetris theme (Tetris Soundtrack).mp3";
         bool jouerMusique = true;
+
+        //Variables de compteur
         int compteurDeCarre2 = 0;
         int compteurDeLigne2 = 0;
         int compteurDeT2 = 0;
@@ -28,6 +32,7 @@ namespace ProjetTetrisSession1Tp3
         int compteurDeS2 = 0;
         int compteurDeZ2 = 0;
         int meilleurScore = 0;
+
         //Variables du score
         int score = 0;
         int nbreLignesCompletes = 0;
@@ -39,6 +44,7 @@ namespace ProjetTetrisSession1Tp3
         SolidBrush couleur2JeuArrierePlan = new SolidBrush(Color.Black);
         const int grosseurDesBlocs = 28;
         Bitmap imageJeu;
+        //Pour avoir la bonne image à partir du type, faire - 1. Il n'a pas d'image pour le type none.
         Bitmap[] imageBlocs = new Bitmap[] {Properties.Resources.Gele, Properties.Resources.carre, Properties.Resources.ligne, Properties.Resources.T,
                                             Properties.Resources.L, Properties.Resources.J, Properties.Resources.S, Properties.Resources.Z, };
         //Variables pour le déplacement
@@ -63,34 +69,48 @@ namespace ProjetTetrisSession1Tp3
         TypeBloc blocActifEnJeu = TypeBloc.None;
         TypeBloc blocActifProchain = TypeBloc.None;
         TypeBloc blocActifReserve = TypeBloc.None;
+
         //Variables du jeu en pause
         bool jeuSurPause = false;
         const string pauseText = "Pause";
+
         //Rotation antihorraire
         int status = 0;
         int[] operateurRotationI;
         int[] operateurRotationJ;
+
         //Vitesse du timer
         const int vitesseAuDebut = 500;
         int vitesse = vitesseAuDebut;
+
         //Score Temporaire
         public Point[] scoreTemporaireLocation;
         public int[] scoreTemporaire;
         int lignePredefiniePoint = 2;
         #endregion
-
+        /// <summary>
+        /// Initialisation des contrôles/Test unitaire.
+        /// </summary>
         public FormPrincipal()
         {
             InitializeComponent();
             EnleverLignesCompletes_Test();
-            JouerMusique();
         }       
         //Simon
+        /// <summary>
+        /// Initialiser le jeu.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FormPrincipal_Load(object sender, EventArgs e)
         {
             InitialiserJeu();
+            JouerMusique();
         }
         //Simon
+        /// <summary>
+        /// Méthode pour initialiser/reinitialiser le jeu.
+        /// </summary>
         void InitialiserJeu()
         {
             imageJeu = new Bitmap(panelJeu.Size.Width, panelJeu.Size.Height);
@@ -105,23 +125,25 @@ namespace ProjetTetrisSession1Tp3
             operateurRotationJ = new int[4];
             scoreTemporaire = new int[3];
             scoreTemporaireLocation = new Point[3];
+            blocActifReserve = TypeBloc.None;
             score = 0;
             niveau = 0;
             nbreLignesCompletes = 0;
             vitesse = vitesseAuDebut;
-            for (int i = 0; i < tableauDeBlocs.GetLength(0); i++)
-            {
-                for (int j = 0; j < tableauDeBlocs.GetLength(1); j++)
-                {
-                    Debug.Assert(tableauDeBlocs[i, j] == TypeBloc.None, "Le bloc en position " + i + "," + j + " n'est pas vide.");
-                }
-            }
             blocActifProchain = GenererBloc(ChoisirBlocAleatoirement(), blocActifIProchain, blocActifJProchain);
-            TransformerProchainBlocEnActif();
+            TransformerProchainBlocEnActifEnJeu();
             blocActifProchain = GenererBloc(ChoisirBlocAleatoirement(), blocActifIProchain, blocActifJProchain);
             DessinerJeu();
+            JouerMusique();
         }
         //Simon
+        /// <summary>
+        /// Generer un tetriminos dans les tableaux spécifiés.
+        /// </summary>
+        /// <param name="blocAGenerer">Le type de bloc à générer Carre/J/Ligne/L/S/T/Z</param>
+        /// <param name="blocActifIVariable">Les coordonnées en i où le bloc va être généré</param>
+        /// <param name="blocActifJVariable">Les coordonnées en j où le bloc va être généré</param>
+        /// <returns>Retourne le type du bloc généré</returns>
         TypeBloc GenererBloc(TypeBloc blocAGenerer, int[] blocActifIVariable, int[] blocActifJVariable)
         {
             status = 0;
@@ -223,12 +245,19 @@ namespace ProjetTetrisSession1Tp3
             return blocActifVariable;
         }
         //Simon
+        /// <summary>
+        /// Determine un tetriminos valide soit du Carre au Z.
+        /// </summary>
+        /// <returns>Retourne le bloc choisi.</returns>
         TypeBloc ChoisirBlocAleatoirement()
         {
-            return (TypeBloc)rnd.Next(2, (int)TypeBloc.Z + 1);
+            return (TypeBloc)rnd.Next((int)TypeBloc.Carre, (int)TypeBloc.Z + 1);
         }
-        //Simon
-        void TransformerProchainBlocEnActif()
+        //Simon et Yannick
+        /// <summary>
+        /// Transforme le bloc prochain actif en bloc actif en jeu.
+        /// </summary>
+        void TransformerProchainBlocEnActifEnJeu()
         {
             blocActifEnJeu = blocActifProchain;
             // Yannick
@@ -272,6 +301,11 @@ namespace ProjetTetrisSession1Tp3
         }
 
         //Simon
+        /// <summary>
+        /// Timer principal du jeu. Gère la descente du bloc actif, la génération de nouveau bloc, l'affichage du jeu/stats et la fin de partie.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void timerDescenteBloc_Tick(object sender, EventArgs e)
         {
             score++;
@@ -290,7 +324,7 @@ namespace ProjetTetrisSession1Tp3
                 timerDescenteBloc.Interval = vitesse;
                 if (VerifierSiTransformerProchainBlocEnActifPossible() == true)
                 {
-                    TransformerProchainBlocEnActif();
+                    TransformerProchainBlocEnActifEnJeu();
                     blocActifProchain = GenererBloc(ChoisirBlocAleatoirement(), blocActifIProchain, blocActifJProchain);
                 }
                 else
@@ -301,13 +335,13 @@ namespace ProjetTetrisSession1Tp3
                 blocDejaMisEnReserve = false;
             }
             DessinerJeu();
-            DessinerProchainBloc();
-            if(blocActifReserve != TypeBloc.None)
-            {
-                DessinerBlocEnReserve();
-            }
         }
-        //Simon (pour lire les touches du clavier même si le panel n'a pas le focus)
+        //Simon 
+        /// <summary>
+        /// Lecture de touches au clavier pour que le form et non les boutons les lise. (Key down et key up)
+        /// </summary>
+        /// <param name="keyData"></param>
+        /// <returns></returns>
         protected override bool ProcessDialogKey(Keys keyData)
         {
             if(jeuSurPause)
@@ -351,6 +385,9 @@ namespace ProjetTetrisSession1Tp3
         }
 
         //Simon
+        /// <summary>
+        /// Dessine tout ce qu'il y a à dessiner
+        /// </summary>
         void DessinerJeu()
         {
             Graphics graphicsPanelJeu = panelJeu.CreateGraphics();
@@ -358,6 +395,8 @@ namespace ProjetTetrisSession1Tp3
             //Faire le dessinage du jeu ici-----------
             DessinerFondJeu();
             DessinerLesBlocs();
+            DessinerProchainBloc();
+            DessinerBlocEnReserve();
             DessinerScoreTemporaire();
             labelMeilleurScoreNombre.Text = meilleurScore.ToString();
             labelNiveauNombre.Text = niveau.ToString();
@@ -374,6 +413,9 @@ namespace ProjetTetrisSession1Tp3
             graphicsPanelJeu.DrawImage(imageJeu, 0, 0);
         }
         //Simon
+        /// <summary>
+        /// Dessine l'arrière de la planche de jeu
+        /// </summary>
         void DessinerFondJeu()
         {
             Graphics graphicsImageJeu = Graphics.FromImage(imageJeu);
@@ -395,6 +437,9 @@ namespace ProjetTetrisSession1Tp3
             }
         }
         //Simon
+        /// <summary>
+        /// Dessine les blocs du tableau de blocs actifs
+        /// </summary>
         void DessinerLesBlocs()
         {
             Graphics graphicsImageJeu = Graphics.FromImage(imageJeu);
@@ -454,7 +499,10 @@ namespace ProjetTetrisSession1Tp3
                 }
             }
         }
-        //Simon      
+        //Simon
+        /// <summary>
+        /// Dessine le prochain bloc sur son panel
+        /// </summary>
         void DessinerProchainBloc()
         {
             Graphics graphicsProchainBloc = panelProchainBloc.CreateGraphics();
@@ -468,12 +516,16 @@ namespace ProjetTetrisSession1Tp3
             graphicsProchainBloc.DrawImage(prochainBlocImage,0,0);
         }
         //Simon
+        /// <summary>
+        /// Dessine le bloc en reserve sur son panel
+        /// </summary>
         void DessinerBlocEnReserve()
         {
             Graphics graphicsReserveBloc = panelBlocReserve.CreateGraphics();
             Bitmap reserveBlocImage = new Bitmap(panelBlocReserve.Size.Width, panelBlocReserve.Size.Height);
             Graphics graphicsReserveBlocImage = Graphics.FromImage(reserveBlocImage);
             graphicsReserveBlocImage.FillRectangle(new SolidBrush(panelBlocReserve.BackColor), 0, 0, panelBlocReserve.Width, panelBlocReserve.Height);
+            //Il n'a pas d'image pour le TypeBloc.None
             if(blocActifReserve != TypeBloc.None)
             {
                 for (int i = 0; i < blocActifIReserve.Length; i++)
@@ -481,10 +533,12 @@ namespace ProjetTetrisSession1Tp3
                     graphicsReserveBlocImage.DrawImage(imageBlocs[(int)blocActifReserve - 1], grosseurDesBlocs * blocActifJReserve[i], grosseurDesBlocs * blocActifIReserve[i], grosseurDesBlocs, grosseurDesBlocs);
                 }
             }
-           
             graphicsReserveBloc.DrawImage(reserveBlocImage, 0, 0);
         }
         //Simon
+        /// <summary>
+        /// Dessine les scores temporaires situés dans le tableau pour ça.
+        /// </summary>
         void DessinerScoreTemporaire()
         {
             for(int i =0; i < scoreTemporaire.Length; i++)
@@ -1109,7 +1163,7 @@ namespace ProjetTetrisSession1Tp3
             {
                 blocActifReserve = GenererBloc(blocActifEnJeu, blocActifIReserve, blocActifJReserve);
                 EffacerBlocActif();
-                TransformerProchainBlocEnActif();
+                TransformerProchainBlocEnActifEnJeu();
                 blocActifProchain = GenererBloc(ChoisirBlocAleatoirement(), blocActifIProchain, blocActifJProchain);
                 blocDejaMisEnReserve = true;
             }
@@ -1180,21 +1234,22 @@ namespace ProjetTetrisSession1Tp3
                     }
                     Debug.Assert(!ligneCompleteI, "La ligne " + i + " ne devrait pas être complète.");
                 }
+                if (nbreLignesCompletes != 0 && nbreLignesCompletes % 4 == 0 && !nbreDeLignesCompletesDejaAtteind)
+                {
+                    niveau++;
+
+                    nbreDeLignesCompletesDejaAtteind = true;
+                }
             }
             if(nbreLignesFaitesEnUnCoup != 0)
             {
                 scoreTemporaireEnleverLigne = (int)((int)Math.Pow(1.8, nbreLignesFaitesEnUnCoup) * (300 * (1 + (double)niveau/10)));
                 AttribuerScore(ChoisirPointAleatoireSurLignePredefinie(), scoreTemporaireEnleverLigne);
             }
-            if (nbreLignesCompletes != 0 && nbreLignesCompletes % 1 == 0 && !nbreDeLignesCompletesDejaAtteind)
+            vitesse = vitesseAuDebut - (vitesseAuDebut/10)*niveau;
+            if (vitesse <= 0)
             {
-                niveau++;
-                vitesse = vitesse / 100 * 90;
-                if (vitesse == 0)
-                {
-                    vitesse = 1;
-                }
-                nbreDeLignesCompletesDejaAtteind = true;
+                vitesse = 1;
             }
         }
         //Simon
@@ -1480,6 +1535,7 @@ namespace ProjetTetrisSession1Tp3
             musique.URL = musiqueChemin;
             musique.controls.play();
         }
+        //Simon
         void ArreterMusique()
         {
             musique.controls.stop();

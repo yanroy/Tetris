@@ -42,18 +42,18 @@
             this.labelProchain = new System.Windows.Forms.Label();
             this.panelProchainBloc = new System.Windows.Forms.Panel();
             this.panelStatistique = new System.Windows.Forms.Panel();
+            this.labelVitessePourcentage = new System.Windows.Forms.Label();
+            this.labelVitesseMot = new System.Windows.Forms.Label();
             this.labelMeilleurScoreNombre = new System.Windows.Forms.Label();
             this.labelMeilleurScoreMots = new System.Windows.Forms.Label();
             this.labelNiveauNombre = new System.Windows.Forms.Label();
             this.labelNiveauMot = new System.Windows.Forms.Label();
             this.labelScoreNombre = new System.Windows.Forms.Label();
             this.labelScoreMot = new System.Windows.Forms.Label();
-            this.pictureBoxEntete = new System.Windows.Forms.PictureBox();
-            this.labelVitesseMot = new System.Windows.Forms.Label();
-            this.labelVitessePourcentage = new System.Windows.Forms.Label();
             this.boutonPersonnaliseQuitter = new ProjetTetrisSession1Tp3.BoutonPersonnalise();
             this.boutonPersonnaliseOption = new ProjetTetrisSession1Tp3.BoutonPersonnalise();
             this.boutonPersonnaliseNouvellePartie = new ProjetTetrisSession1Tp3.BoutonPersonnalise();
+            this.pictureBoxEntete = new System.Windows.Forms.PictureBox();
             this.panelConteneurPanelJeu.SuspendLayout();
             this.panelMenu.SuspendLayout();
             this.panelConteneurBlocReserve.SuspendLayout();
@@ -76,7 +76,7 @@
             this.labelTitre.Font = new System.Drawing.Font("Perpetua Titling MT", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTitre.Location = new System.Drawing.Point(30, 32);
             this.labelTitre.Name = "labelTitre";
-            this.labelTitre.Size = new System.Drawing.Size(577, 58);
+            this.labelTitre.Size = new System.Drawing.Size(720, 72);
             this.labelTitre.TabIndex = 4;
             this.labelTitre.Text = "TETRIS SIM AND YAN";
             this.labelTitre.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -84,7 +84,7 @@
             // timerRotation
             // 
             this.timerRotation.Enabled = true;
-            this.timerRotation.Interval = 10;
+            this.timerRotation.Interval = 1;
             this.timerRotation.Tick += new System.EventHandler(this.timerRotation_Tick);
             // 
             // panelConteneurPanelJeu
@@ -194,13 +194,34 @@
             this.panelStatistique.Size = new System.Drawing.Size(146, 145);
             this.panelStatistique.TabIndex = 4;
             // 
+            // labelVitessePourcentage
+            // 
+            this.labelVitessePourcentage.AutoSize = true;
+            this.labelVitessePourcentage.Font = new System.Drawing.Font("Perpetua Titling MT", 12F);
+            this.labelVitessePourcentage.Location = new System.Drawing.Point(75, 68);
+            this.labelVitessePourcentage.Name = "labelVitessePourcentage";
+            this.labelVitessePourcentage.Size = new System.Drawing.Size(23, 23);
+            this.labelVitessePourcentage.TabIndex = 7;
+            this.labelVitessePourcentage.Text = "0";
+            this.labelVitessePourcentage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // labelVitesseMot
+            // 
+            this.labelVitesseMot.Font = new System.Drawing.Font("Perpetua Titling MT", 12F);
+            this.labelVitesseMot.Location = new System.Drawing.Point(3, 68);
+            this.labelVitesseMot.Name = "labelVitesseMot";
+            this.labelVitesseMot.Size = new System.Drawing.Size(81, 19);
+            this.labelVitesseMot.TabIndex = 6;
+            this.labelVitesseMot.Text = "Vitesse : ";
+            this.labelVitesseMot.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // labelMeilleurScoreNombre
             // 
             this.labelMeilleurScoreNombre.AutoSize = true;
             this.labelMeilleurScoreNombre.Font = new System.Drawing.Font("Perpetua Titling MT", 12F);
             this.labelMeilleurScoreNombre.Location = new System.Drawing.Point(75, 121);
             this.labelMeilleurScoreNombre.Name = "labelMeilleurScoreNombre";
-            this.labelMeilleurScoreNombre.Size = new System.Drawing.Size(20, 19);
+            this.labelMeilleurScoreNombre.Size = new System.Drawing.Size(23, 23);
             this.labelMeilleurScoreNombre.TabIndex = 5;
             this.labelMeilleurScoreNombre.Text = "0";
             this.labelMeilleurScoreNombre.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -211,7 +232,7 @@
             this.labelMeilleurScoreMots.Font = new System.Drawing.Font("Perpetua Titling MT", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelMeilleurScoreMots.Location = new System.Drawing.Point(3, 97);
             this.labelMeilleurScoreMots.Name = "labelMeilleurScoreMots";
-            this.labelMeilleurScoreMots.Size = new System.Drawing.Size(122, 16);
+            this.labelMeilleurScoreMots.Size = new System.Drawing.Size(150, 20);
             this.labelMeilleurScoreMots.TabIndex = 4;
             this.labelMeilleurScoreMots.Text = "Meilleur Score";
             // 
@@ -221,7 +242,7 @@
             this.labelNiveauNombre.Font = new System.Drawing.Font("Perpetua Titling MT", 12F);
             this.labelNiveauNombre.Location = new System.Drawing.Point(75, 12);
             this.labelNiveauNombre.Name = "labelNiveauNombre";
-            this.labelNiveauNombre.Size = new System.Drawing.Size(20, 19);
+            this.labelNiveauNombre.Size = new System.Drawing.Size(23, 23);
             this.labelNiveauNombre.TabIndex = 3;
             this.labelNiveauNombre.Text = "0";
             this.labelNiveauNombre.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -232,7 +253,7 @@
             this.labelNiveauMot.Font = new System.Drawing.Font("Perpetua Titling MT", 12F);
             this.labelNiveauMot.Location = new System.Drawing.Point(3, 10);
             this.labelNiveauMot.Name = "labelNiveauMot";
-            this.labelNiveauMot.Size = new System.Drawing.Size(81, 19);
+            this.labelNiveauMot.Size = new System.Drawing.Size(103, 23);
             this.labelNiveauMot.TabIndex = 2;
             this.labelNiveauMot.Text = "Niveau : ";
             // 
@@ -242,7 +263,7 @@
             this.labelScoreNombre.Font = new System.Drawing.Font("Perpetua Titling MT", 12F);
             this.labelScoreNombre.Location = new System.Drawing.Point(75, 41);
             this.labelScoreNombre.Name = "labelScoreNombre";
-            this.labelScoreNombre.Size = new System.Drawing.Size(20, 19);
+            this.labelScoreNombre.Size = new System.Drawing.Size(23, 23);
             this.labelScoreNombre.TabIndex = 1;
             this.labelScoreNombre.Text = "0";
             this.labelScoreNombre.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -256,38 +277,6 @@
             this.labelScoreMot.TabIndex = 0;
             this.labelScoreMot.Text = "Score : ";
             this.labelScoreMot.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // pictureBoxEntete
-            // 
-            this.pictureBoxEntete.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBoxEntete.BackgroundImage = global::ProjetTetrisSession1Tp3.Properties.Resources.Titre;
-            this.pictureBoxEntete.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBoxEntete.Location = new System.Drawing.Point(15, 3);
-            this.pictureBoxEntete.Name = "pictureBoxEntete";
-            this.pictureBoxEntete.Size = new System.Drawing.Size(607, 119);
-            this.pictureBoxEntete.TabIndex = 1;
-            this.pictureBoxEntete.TabStop = false;
-            // 
-            // labelVitesseMot
-            // 
-            this.labelVitesseMot.Font = new System.Drawing.Font("Perpetua Titling MT", 12F);
-            this.labelVitesseMot.Location = new System.Drawing.Point(3, 68);
-            this.labelVitesseMot.Name = "labelVitesseMot";
-            this.labelVitesseMot.Size = new System.Drawing.Size(81, 19);
-            this.labelVitesseMot.TabIndex = 6;
-            this.labelVitesseMot.Text = "Vitesse : ";
-            this.labelVitesseMot.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // labelVitessePourcentage
-            // 
-            this.labelVitessePourcentage.AutoSize = true;
-            this.labelVitessePourcentage.Font = new System.Drawing.Font("Perpetua Titling MT", 12F);
-            this.labelVitessePourcentage.Location = new System.Drawing.Point(75, 68);
-            this.labelVitessePourcentage.Name = "labelVitessePourcentage";
-            this.labelVitessePourcentage.Size = new System.Drawing.Size(20, 19);
-            this.labelVitessePourcentage.TabIndex = 7;
-            this.labelVitessePourcentage.Text = "0";
-            this.labelVitessePourcentage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // boutonPersonnaliseQuitter
             // 
@@ -338,6 +327,17 @@
             this.boutonPersonnaliseNouvellePartie.TabStop = false;
             this.boutonPersonnaliseNouvellePartie.UseVisualStyleBackColor = false;
             this.boutonPersonnaliseNouvellePartie.Click += new System.EventHandler(this.boutonPersonnaliseNouvellePartie_Click);
+            // 
+            // pictureBoxEntete
+            // 
+            this.pictureBoxEntete.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBoxEntete.BackgroundImage = global::ProjetTetrisSession1Tp3.Properties.Resources.Titre;
+            this.pictureBoxEntete.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBoxEntete.Location = new System.Drawing.Point(15, 3);
+            this.pictureBoxEntete.Name = "pictureBoxEntete";
+            this.pictureBoxEntete.Size = new System.Drawing.Size(607, 119);
+            this.pictureBoxEntete.TabIndex = 1;
+            this.pictureBoxEntete.TabStop = false;
             // 
             // FormPrincipal
             // 
