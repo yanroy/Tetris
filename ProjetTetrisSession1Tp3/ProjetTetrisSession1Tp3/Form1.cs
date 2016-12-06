@@ -22,7 +22,7 @@ namespace ProjetTetrisSession1Tp3
         WindowsMediaPlayer musique = new WindowsMediaPlayer();
         string musiqueChemin = "musique/Original Tetris theme (Tetris Soundtrack).mp3";
         bool jouerMusique = true;
-
+        Thread threadMusique;
         public DateTime tempsDebutDeJeu; 
         int compteurDeCarre2 = 0;
         int compteurDeLigne2 = 0;
@@ -95,7 +95,8 @@ namespace ProjetTetrisSession1Tp3
         {
             InitializeComponent();
             EnleverLignesCompletes_Test();
-            
+            threadMusique = new Thread(new ThreadStart(gererMusique));
+            threadMusique.Start();
         }       
         //Simon
         /// <summary>
@@ -106,7 +107,6 @@ namespace ProjetTetrisSession1Tp3
         private void FormPrincipal_Load(object sender, EventArgs e)
         {
             InitialiserJeu();
-            JouerMusique();
         }
         //Simon
         /// <summary>
@@ -368,13 +368,13 @@ namespace ProjetTetrisSession1Tp3
             else if (keyData == keysTournerSensAntihoraire)
             {
                 // Yannick
-                deplacement = Deplacement.AntiHorraire;
+                deplacement = Deplacement.AntiHoraire;
                 timerDescenteBloc.Interval = vitesse;
                 return true;
             }
             else if(keyData == keysMettreEnReserve)
             {
-                MettreBlocActifEnReserve();
+                MettreBlocActifEnJeuEnReserve();
                 DessinerJeu();
                 timerDescenteBloc.Interval = vitesse;
                 return true;
@@ -539,7 +539,7 @@ namespace ProjetTetrisSession1Tp3
         }
         //Simon
         /// <summary>
-        /// Dessine les scores temporaires situés dans le tableau pour ça.
+        /// Dessine les scores temporaires situés dans le tableau créé à cette usure.
         /// </summary>
         void DessinerScoreTemporaire()
         {
@@ -553,7 +553,10 @@ namespace ProjetTetrisSession1Tp3
             }
         }
         //Simon
-        void EffacerBlocActif()
+        /// <summary>
+        /// Efface les blocs actifs en jeu.
+        /// </summary>
+        void EffacerBlocActifEnJeu()
         {
             for(int i = 0; i < blocActifIEnJeu.Length;i++)
             {
@@ -561,11 +564,21 @@ namespace ProjetTetrisSession1Tp3
             }
         }        
         //Simon
+        /// <summary>
+        /// Dessine le jeu lors que le panel est dessiné.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void panelJeu_Paint(object sender, PaintEventArgs e)
         {
             DessinerJeu();
         }
         //Simon
+        /// <summary>
+        /// Dessine le prochain bloc lorsque le panel est dessiné. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void panelProchainBloc_Paint(object sender, PaintEventArgs e)
         {
             DessinerProchainBloc();
@@ -573,6 +586,11 @@ namespace ProjetTetrisSession1Tp3
 
 
         //Simon et Yannick
+        /// <summary>
+        /// Détermine si le bloc peut faire le mouvement paramètré. Seul les mouvements Down, AntiHoraire, Right et Left sont pris en charge.
+        /// </summary>
+        /// <param name="direction"></param>
+        /// <returns>Retourne true si le bloc peut bouger.</returns>
         bool DeterminerSiLeBlocPeutBouger(Deplacement direction)
         {
             bool deplacementTester = false;
@@ -610,7 +628,7 @@ namespace ProjetTetrisSession1Tp3
                 deplacementTester = true;
             }
             //Yannick
-            else if (direction == Deplacement.AntiHorraire)
+            else if (direction == Deplacement.AntiHoraire)
             {
                 for (int i = 0; i < operateurRotationI.Length; i++)
                 {
@@ -629,6 +647,10 @@ namespace ProjetTetrisSession1Tp3
             return true;
         }
         //Simon
+        /// <summary>
+        /// Bouge le bloc selon le deplacement entré en paramètre. Seul les mouvements Down, AntiHoraire, Right et Left sont pris en charge.
+        /// </summary>
+        /// <param name="direction"></param>
         void BougerBlocActif(Deplacement direction)
         {
             if(direction == Deplacement.Down)
@@ -667,30 +689,39 @@ namespace ProjetTetrisSession1Tp3
                     tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = blocActifEnJeu;
                 }
             }
-            else if (direction == Deplacement.AntiHorraire)
+
+            else if (direction == Deplacement.AntiHoraire)
             {
-                BougerBlocAntiHorraire();
-                //RotaterHorrairement();
+                BougerBlocAntiHoraire();
+                //FairePivoterLeBlocHorairement();
             }
 
         }  
         //Simon (pour eviter le easy spin)
+        /// <summary>
+        /// Timer de la rotation afin d'empêcher une rotation répétée trop rapide.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void timerRotation_Tick(object sender, EventArgs e)
         {
             switch(deplacement)
             {
-                case Deplacement.AntiHorraire:
-                    BougerBlocActif(Deplacement.AntiHorraire);
+
+                case Deplacement.AntiHoraire:
+                    BougerBlocActif(Deplacement.AntiHoraire);
                     break;
             }
             DessinerJeu();
             deplacement = Deplacement.None;
         }
         //Yannick 
+
         /// <summary>
         /// Faire pivoter les blocs de manière anti horaire.
         /// </summary>
-        void BougerBlocAntiHorraire()
+
+        void BougerBlocAntiHoraire()
         {
             switch (blocActifEnJeu)
             {
@@ -1097,7 +1128,8 @@ namespace ProjetTetrisSession1Tp3
                     break;
 
             }
-            if (DeterminerSiLeBlocPeutBouger(Deplacement.AntiHorraire))
+
+            if (DeterminerSiLeBlocPeutBouger(Deplacement.AntiHoraire))
             {
                 if(status == 3)
                 {
@@ -1119,12 +1151,17 @@ namespace ProjetTetrisSession1Tp3
                 tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = blocActifEnJeu;
             }
         }
-        //Simon (Méthode non utilisée ni optimisée)
-        void RotaterHorrairement()
+
+        //Simon 
+        /// <summary>
+        /// Faire pivoter le bloc horairement. (Méthode non utilisée ni optimisée)
+        /// </summary>
+        void FairePivoterLeBlocHorairement()
         {
             if(blocActifEnJeu != TypeBloc.Carre)
             {
-                EffacerBlocActif();
+
+                EffacerBlocActifEnJeu();
                 int[] nvBlocX = new int[4];
                 int[] nvBlocY = new int[4];
                 int centreX = 0;
@@ -1162,12 +1199,15 @@ namespace ProjetTetrisSession1Tp3
             }
         }
         //Simon
-        void MettreBlocActifEnReserve()
+        /// <summary>
+        /// Mettre le bloc actif en jeu en reserve.
+        /// </summary>
+        void MettreBlocActifEnJeuEnReserve()
         {
             if (blocDejaMisEnReserve == false && blocActifReserve == TypeBloc.None)
             {
                 blocActifReserve = GenererBloc(blocActifEnJeu, blocActifIReserve, blocActifJReserve);
-                EffacerBlocActif();
+                EffacerBlocActifEnJeu();
                 TransformerProchainBlocEnActifEnJeu();
                 blocActifProchain = GenererBloc(ChoisirBlocAleatoirement(), blocActifIProchain, blocActifJProchain);
                 blocDejaMisEnReserve = true;
@@ -1176,7 +1216,8 @@ namespace ProjetTetrisSession1Tp3
             {
                 TypeBloc temporaire = blocActifReserve;
                 blocActifReserve = GenererBloc(blocActifEnJeu, blocActifIReserve, blocActifJReserve);
-                EffacerBlocActif();
+
+                EffacerBlocActifEnJeu();
                 blocActifEnJeu = GenererBloc(temporaire, blocActifIEnJeu, blocActifJEnJeu);
                 for(int i =0; i < blocActifJEnJeu.Length;i++)
                 {
@@ -1188,6 +1229,11 @@ namespace ProjetTetrisSession1Tp3
         }
 
         //Simon
+        /// <summary>
+        /// Assigne un pointage et une position dans les tableaux pour les scores temporaires.
+        /// </summary>
+        /// <param name="locationScore"></param>
+        /// <param name="score"></param>
         void AttribuerScore(Point locationScore, int score)
         {
             int positionScore = -1;
@@ -1210,13 +1256,19 @@ namespace ProjetTetrisSession1Tp3
             }
         }
         //Simon
+        /// <summary>
+        /// Choisie une position en J aléatoire dans un intervalle défini et une position en I prédéfinie.
+        /// </summary>
+        /// <returns>Retourne la position choisie.</returns>
         Point ChoisirPointAleatoireSurLignePredefinie()
         {
-            //                                                                          (Pour éviter le dépacement)
             return new Point(rnd.Next(0, tableauDeBlocs.GetLength(1) * grosseurDesBlocs - (3 * grosseurDesBlocs)), lignePredefiniePoint * grosseurDesBlocs );
         }
 
         //Simon
+        /// <summary>
+        /// Enleve les lignees complètées.
+        /// </summary>
         void EnleverLignesCompletes()
         {
             int scoreTemporaireEnleverLigne = 0;
@@ -1258,6 +1310,11 @@ namespace ProjetTetrisSession1Tp3
             }
         }
         //Simon
+        /// <summary>
+        /// Determine si la ligne entrée en paramètre est complète.
+        /// </summary>
+        /// <param name="ligne"></param>
+        /// <returns></returns>
         bool EstUneLigneComplete(int ligne)
         {
             int compteurBlocsGeles = 0;
@@ -1271,6 +1328,10 @@ namespace ProjetTetrisSession1Tp3
             return compteurBlocsGeles == tableauDeBlocs.GetLength(1) ? true : false;
         }
         //Simon
+        /// <summary>
+        /// Décale les lignes à partir de la ligne de départ paramètrée. (Supprime la ligne de départ)
+        /// </summary>
+        /// <param name="ligneDeDepart"></param>
         void DecalerLignes(int ligneDeDepart)
         {
             for(int i = ligneDeDepart; i > 1;i--)
@@ -1282,6 +1343,9 @@ namespace ProjetTetrisSession1Tp3
             }
         }
         //Simon
+        /// <summary>
+        /// Test unitaire de la méthode EnleverLignesCompletes 
+        /// </summary>
         void EnleverLignesCompletes_Test()
         {
             // Retrait d’une ligne complète seule dans la surface de jeu.
@@ -1423,7 +1487,6 @@ namespace ProjetTetrisSession1Tp3
             return possible;
         }
         
-        // Yannick
         /// <summary>
         /// Informer le joueur que la partie est terminée, puis ouvrir le formulaire de statistiques.
         /// </summary>
@@ -1448,6 +1511,9 @@ namespace ProjetTetrisSession1Tp3
         }
 
         //Simon
+        /// <summary>
+        /// Ouvre le formulaire de configuration et gère l'échange d'information entre les deux formulaires.
+        /// </summary>
         void ConfigurerJeu()
         {
             frmOption.nbreColonnes = nbreColonnes;
@@ -1476,17 +1542,13 @@ namespace ProjetTetrisSession1Tp3
             }
             musiqueChemin = frmOption.musiqueChemin;
             jouerMusique = frmOption.jouerMusique;
-            if (jouerMusique)
-            {
-                JouerMusique();
-            }
-            else
-            {
-                ArreterMusique();
-            }
+
             ReprendreLeJeu();
         }
         //Simon
+        /// <summary>
+        /// Pause le jeu.
+        /// </summary>
         void PauserLeJeu()
         {
             jeuSurPause = true;
@@ -1499,14 +1561,23 @@ namespace ProjetTetrisSession1Tp3
             graphicsPauseJeu.Dispose();
         }
         //Simon
+        /// <summary>
+        /// Reprend le jeu.
+        /// </summary>
         void ReprendreLeJeu()
         {
+            DessinerJeu();
             jeuSurPause = false;
             timerDescenteBloc.Enabled = true;
             timerRotation.Enabled = true;
         }
 
         //Simon
+        /// <summary>
+        /// Fait la configuration du jeu lorsque le bouton option est clické.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void boutonPersonnaliseOption_Click(object sender, EventArgs e)
         {
             PauserLeJeu();
@@ -1514,6 +1585,11 @@ namespace ProjetTetrisSession1Tp3
             DessinerJeu();
         }
         //Simon
+        /// <summary>
+        /// Fait une nouvelle partie lorsque le bouton nouvelle partie est clické.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void boutonPersonnaliseNouvellePartie_Click(object sender, EventArgs e)
         {
             PauserLeJeu();
@@ -1526,31 +1602,70 @@ namespace ProjetTetrisSession1Tp3
             DessinerJeu();
         }
         //Simon
+        /// <summary>
+        /// Quitte le jeu.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void boutonPersonnaliseQuitter_Click(object sender, EventArgs e)
         {
+
             PauserLeJeu();
             if(MessageBox.Show("Aucune donnée sera préservée, voulez-vous vraiment quitter le jeu?", "Quitter le jeu",MessageBoxButtons.OKCancel,MessageBoxIcon.Exclamation) == DialogResult.OK)
             {
+                ArreterMusique();
+                threadMusique.Abort();
                 Application.Exit();
             }
-            DessinerJeu();
             ReprendreLeJeu();
         }
 
         //Simon
+        /// <summary>
+        /// Faire jouer la musique.
+        /// </summary>
         void JouerMusique()
         {
-            frmOption.jouerMusique = true;
+            jouerMusique = true;
             musique.URL = musiqueChemin;
             musique.controls.play();
         }
         //Simon
+        /// <summary>
+        /// Arrête la musique.
+        /// </summary>
         void ArreterMusique()
         {
+            jouerMusique = false;
             musique.controls.stop();
         }
+        //Simon
+        /// <summary>
+        /// Gère la musique.
+        /// </summary>
+        void gererMusique()
+        {
+            while(true)
+            {
+                try
+                {
+                    if(jouerMusique && musique.playState == WMPPlayState.wmppsStopped)
+                    {
+                        JouerMusique();
+                    }
+                    else if (musique.playState == WMPPlayState.wmppsPlaying && !jouerMusique)
+                    {
+                        ArreterMusique();
+                    }
+                }
+                catch
+                {
 
-        void Tester_BougerBlocAntiHorairre()
+                }
+                Thread.Sleep(100);
+            }
+        }
+void Tester_BougerBlocAntiHoraire()
         {
             status = 0;
             tableauDeBlocs = new TypeBloc[22, 12];
@@ -1582,4 +1697,5 @@ namespace ProjetTetrisSession1Tp3
             "Erreur avec la rotation d'une ligne au milieu du tableau.");
         }
     }   
+    }
 }
