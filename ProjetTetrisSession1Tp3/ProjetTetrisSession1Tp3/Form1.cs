@@ -23,7 +23,7 @@ namespace ProjetTetrisSession1Tp3
         string musiqueChemin = "musique/Original Tetris theme (Tetris Soundtrack).mp3";
         bool jouerMusique = true;
         Thread threadMusique;
-        //Variables de compteur
+        public DateTime tempsDebutDeJeu; 
         int compteurDeCarre2 = 0;
         int compteurDeLigne2 = 0;
         int compteurDeT2 = 0;
@@ -114,6 +114,7 @@ namespace ProjetTetrisSession1Tp3
         /// </summary>
         void InitialiserJeu()
         {
+            tempsDebutDeJeu = DateTime.Now;
             imageJeu = new Bitmap(panelJeu.Size.Width, panelJeu.Size.Height);
             tableauDeBlocs = new TypeBloc[nbreLignes, nbreColonnes];
             blocActifIEnJeu = new int[4];
@@ -331,7 +332,7 @@ namespace ProjetTetrisSession1Tp3
                 else
                 {
                     timerDescenteBloc.Stop();                    
-                    FaireFinDePartie();
+                    InformerFinDePartie();
                 }
                 blocDejaMisEnReserve = false;
             }
@@ -705,6 +706,7 @@ namespace ProjetTetrisSession1Tp3
         {
             switch(deplacement)
             {
+
                 case Deplacement.AntiHoraire:
                     BougerBlocActif(Deplacement.AntiHoraire);
                     break;
@@ -713,6 +715,10 @@ namespace ProjetTetrisSession1Tp3
             deplacement = Deplacement.None;
         }
         //Yannick 
+
+        /// <summary>
+        /// Faire pivoter les blocs de manière anti horaire.
+        /// </summary>
         void BougerBlocAntiHoraire()
         {
             switch (blocActifEnJeu)
@@ -1142,6 +1148,7 @@ namespace ProjetTetrisSession1Tp3
                 tableauDeBlocs[blocActifIEnJeu[i], blocActifJEnJeu[i]] = blocActifEnJeu;
             }
         }
+
         //Simon 
         /// <summary>
         /// Faire pivoter le bloc horairement. (Méthode non utilisée ni optimisée)
@@ -1150,6 +1157,7 @@ namespace ProjetTetrisSession1Tp3
         {
             if(blocActifEnJeu != TypeBloc.Carre)
             {
+
                 EffacerBlocActifEnJeu();
                 int[] nvBlocX = new int[4];
                 int[] nvBlocY = new int[4];
@@ -1205,6 +1213,7 @@ namespace ProjetTetrisSession1Tp3
             {
                 TypeBloc temporaire = blocActifReserve;
                 blocActifReserve = GenererBloc(blocActifEnJeu, blocActifIReserve, blocActifJReserve);
+
                 EffacerBlocActifEnJeu();
                 blocActifEnJeu = GenererBloc(temporaire, blocActifIEnJeu, blocActifJEnJeu);
                 for(int i =0; i < blocActifJEnJeu.Length;i++)
@@ -1458,6 +1467,10 @@ namespace ProjetTetrisSession1Tp3
         }
 
         // Yannick
+        /// <summary>
+        /// Vérifier si transformer le prochain bloc aftif est possible ou non.
+        /// </summary>
+        /// <returns> Un booléen qui détermine si c'est possible (true) ou non (false). </returns>
         bool VerifierSiTransformerProchainBlocEnActifPossible()
         {
             bool possible = true;
@@ -1470,15 +1483,16 @@ namespace ProjetTetrisSession1Tp3
             }
             return possible;
         }
-        // Yannick
-        void FaireFinDePartie()
-        {
-            InformerFinDePartie();
-        }
-        // Yannick
+        
+
+
+        /// <summary>
+        /// Informer le joueur que la partie est terminée, puis ouvrir le formulaire de statistiques.
+        /// </summary>
         void InformerFinDePartie()
         {
             FinDePartie frmFinDePartie = new FinDePartie();
+            frmFinDePartie.tempsDebutDeJeu = tempsDebutDeJeu;
             frmFinDePartie.compteurDeCarre = compteurDeCarre2;
             frmFinDePartie.compteurDeJ = compteurDeJ2;
             frmFinDePartie.compteurDeL = compteurDeL2;
@@ -1527,6 +1541,7 @@ namespace ProjetTetrisSession1Tp3
             }
             musiqueChemin = frmOption.musiqueChemin;
             jouerMusique = frmOption.jouerMusique;
+
             ReprendreLeJeu();
         }
         //Simon
@@ -1649,5 +1664,10 @@ namespace ProjetTetrisSession1Tp3
                 Thread.Sleep(100);
             }
         }
+void Tester_BougerBlocAntiHoraire()
+        {
+
+        }
+    }   
     }
 }

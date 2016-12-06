@@ -14,6 +14,9 @@ namespace ProjetTetrisSession1Tp3
     // Variables publiques utilisées pour compter le nombre de blocs dans la partie.
     public partial class FinDePartie : Form
     {
+        public DateTime tempsFinDeJeu;
+        public DateTime tempsDebutDeJeu;
+        TimeSpan tempsDeJeu;
         public int compteurDeCarre = 0;
         public int compteurDeLigne = 0;
         public int compteurDeT = 0;
@@ -25,9 +28,15 @@ namespace ProjetTetrisSession1Tp3
         {
             InitializeComponent();
         }       
-        
+        /// <summary>
+        /// Calculer et afficher les statistiques du jeu.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FinDePartie_Load(object sender, EventArgs e)
         {
+            tempsFinDeJeu = DateTime.Now;
+            tempsDeJeu = tempsFinDeJeu - tempsDebutDeJeu;
             // Calculs pour le pourcentage.
             float total = compteurDeCarre + compteurDeLigne + compteurDeT + compteurDeL + compteurDeJ + compteurDeS + compteurDeZ;
             float PcCarre = compteurDeCarre / total;
@@ -39,6 +48,10 @@ namespace ProjetTetrisSession1Tp3
             float PcZ = compteurDeZ / total;
 
             // Affichage des données.
+
+            // Temps de jeu
+            labelTempsDeJeu.Text = "Temps de Jeu: " + tempsDeJeu.ToString(@"\:mm\:ss"); 
+            
 
             // Nombre de blocs.
             labelCarre.Text = compteurDeCarre.ToString();
