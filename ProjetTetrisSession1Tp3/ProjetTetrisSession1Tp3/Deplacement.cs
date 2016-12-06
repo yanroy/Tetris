@@ -12,8 +12,8 @@ namespace ProjetTetrisSession1Tp3
         Up,
         Right,
         Left,
-        Horraire,
-        AntiHorraire,
+        Horaire,
+        AntiHoraire,
         None
     }
 }
